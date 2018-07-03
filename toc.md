@@ -76,11 +76,10 @@
 
 ### Übung
 
-- Container über docker netzwerk verbinden
-- DB Verbindung über docker dns
-- (streber) Internes Netzwerk
+- Füge deiner docker-compose.yml ein "seprates" Netzwerk hinzu!
+- Richte nun die Verbindung von gitea und mariaDB über das neuerstellte Netzwerk ein.
 
-# Eigene Awendung in Docker
+# Docker Images verstehen und erstellen
 
 ## Anforderungen an die Anwendung
 
@@ -93,26 +92,31 @@
 - COPY
 - CMD
 
-TODO: Registry vorbereiten
+### Übung: Service in Docker Einbetten
 
-### Übung: Service in Docker einbetten
+- Kopiere das Binary (tbd) in den Dockercontainer!
+- Stelle sicher, dass der Port 8080 exponiert wird.
+- Starte den Container und verbinde dich über localhost:8080
 
 ## Exkurs
 
+- docker registry erklären vorstellen 
+- docker hub vorstellen
 - docker tags
 - docker push
 - docker pull
 
 ### Übung
 
-- service von jmd anderem pullen und starten
+- Beziehe aus der schulungs-registry einen Container von einem anderem Schulungsmitglied!
+- Starte den Container neben deinem bestehenden Dockercontainer auf Port 8081.
 
 ## Layer und Storage Driver (theorie only)
 
 - Was ist dasa eigentlich?
 - Wo sehe ich das?
 
-## Dockerfile Layer TODO: Split/Reihenfolge
+## Dockerfile Layer
 
 - EXPOSE
 - USER
@@ -121,7 +125,9 @@ TODO: Registry vorbereiten
 
 ### Übung
 
-- Dockerfile erweitern
+- Erweitere deine Dockerfile so, dass die Anwendung nicht mehr unter dem default User und Gruppe läuft!
+  - Stelle mit RUN sicher, dass der User berechtigungen hat das Binary zu starten und im Verzeichnis (/app) zu schreiben.
+- Konfiguriere die Anwendung über ENV variablen, stelle sicher dass alle Ports exponiert werden.
 
 ## Advanced Layer
 
@@ -133,7 +139,7 @@ TODO: Registry vorbereiten
 
 ### Übung
 
-- Dockerfile erweitern
+- Versuche den RUN Befehl durch WORKDIR und COPY --chown zu erstezen.
 
 ### Multistagebuilds
 
@@ -144,6 +150,10 @@ TODO: Registry vorbereiten
 
 ### Übung
 
+- Baue in einem vorrangestellen Dockercontainer dein Java Jar zusammen, nenne diesen "build"!
+  - benutze hierfür Gradle
+- Kopiere das erfolgreich gebaute Jar vom ersten Container in den zweiten Container.
+  - Nutze hierfür die Docker "Multistage Build"-Funktionalität (COPY --from=build)
 - Java Service bauen mit multistage (service tut das gleiche (wie go service) ist in aber in Java geschrieben)
 
 ## Zusammenfassung Layer praxis Beispiel
