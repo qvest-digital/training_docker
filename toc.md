@@ -16,7 +16,7 @@
  docker logs
  docker stop/start/restart/rm
 
-### Übung
+### Übung gitea starten
 
  - Starte "gitea" vom Docker-Image "gitea/gitea" und exponiere den internen Port 3000 auf den externen Port 80!
  - Zeige alle laufenden Docker-Prozesse an und erkenne, ob der Port 3000 exponiert ist!
@@ -36,19 +36,23 @@
  TODO: mysql image vorbereiten
  TODO: registry vorbereiten
 
-### Übung
+### Übung MariaDB starten und einrichten
 
-- DB starten und in lokalem directory dateien sichten ./volumes/db
-- Umgebungsvariablen richtig setzten:
-  - root passwort
-  - default db
-  - etc.
+ - Starte einen [mariaDB](https://hub.docker.com/_/mariadb/) Docker-Container mit:
+   - vorgeingestelltem "root"-Passwort (Umbgebungsvariable MYSQL_ROOT_PASSWORD)
+   - einer automatisch erstellten Datenbank mit dediziertem Benutzeraccount (Umgebungsvariablen MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORT) 
+ - Sorge dafür, dass das Datenverzeichnis der Datenbank (/var/lib/mysql) auf ein lokales Volume (./volumes/db) gemappt ist!
+ 
 
 ## Container verknüpfen
 
 - beide container starten und gitea die sql verbindung geben
 
-- tu es
+### Übung Gitea mit MariaDB verbinden
+
+- Stoppe und lösche nun deinen Gitea Container. 
+- Konfiguriere den Container so, dass Gitea seine Konfiguration in der lokalen MariaDB speichert
+  - Benutze dafür die vorher erstellte Datenbank!
 
 ## docker-compose (v3)
 
@@ -56,8 +60,10 @@
 
 ### Übung
 
-- gitea mit mysql in docker-compose
-- beide mit volume
+- Stoppe und lösche deine vorrangegangen Container ohne Nutzdatemverlust.
+- Erstelle eine docker-compose.yml in der [gitea](https://hub.docker.com/r/gitea/gitea/) und mariadb als Services beschrieben sind.
+  - Stelle sicher das alle Volumes und Ports erhalten bleiben.
+- Lagere das Daten-Verzeichnis von gitea auf deinen Computer aus.
 
 ## Docker Netzwerke
 
