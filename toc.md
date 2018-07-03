@@ -40,9 +40,9 @@
 
  - Starte einen [mariaDB](https://hub.docker.com/_/mariadb/) Docker-Container mit:
    - vorgeingestelltem "root"-Passwort (Umbgebungsvariable MYSQL_ROOT_PASSWORD)
-   - einer automatisch erstellten Datenbank mit dediziertem Benutzeraccount (Umgebungsvariablen MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORT) 
+   - einer automatisch erstellten Datenbank mit dediziertem Benutzeraccount (Umgebungsvariablen MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORT)
  - Sorge dafür, dass das Datenverzeichnis der Datenbank (/var/lib/mysql) auf ein lokales Volume (./volumes/db) gemappt ist!
- 
+
 
 ## Container verknüpfen
 
@@ -50,7 +50,7 @@
 
 ### Übung Gitea mit MariaDB verbinden
 
-- Stoppe und lösche nun deinen Gitea Container. 
+- Stoppe und lösche nun deinen Gitea Container.
 - Konfiguriere den Container so, dass Gitea seine Konfiguration in der lokalen MariaDB speichert
   - Benutze dafür die vorher erstellte Datenbank!
 
@@ -100,7 +100,7 @@
 
 ## Exkurs
 
-- docker registry erklären vorstellen 
+- docker registry erklären vorstellen
 - docker hub vorstellen
 - docker tags
 - docker push
