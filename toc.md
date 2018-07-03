@@ -184,3 +184,4 @@
 - reagiert auf SIGTERM oder definiert ein STOPSIGNAL
 - Sinnvolle(tm) Exit-Codes
  (siehe --init)
+- Nutze die Health Resource im HEALTHCHECK
