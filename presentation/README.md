@@ -1,4 +1,4 @@
-copied from https://github.com/hakimel/reveal.js
+Copied from https://github.com/hakimel/reveal.js for the docker training presentation.
 
 To start the presentation run:
 ```
