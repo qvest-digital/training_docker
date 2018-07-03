@@ -1,9 +1,7 @@
 
-# Docker CLI
+# Docker Einstieg
 
-## Docker Einstieg
-
-### Container vs. Virtual Machine
+## Container vs. Virtual Machine
 
  Docker ist ein Taskrunner, ein "besseres systemd"
 
@@ -11,7 +9,7 @@
 
  docker run hello-world
 
-### Docker CLI (gitea als Beispiel)
+## Docker CLI (gitea als Beispiel)
 
  docker run -d -p 3000:3000 gitea/gitea
  docker ps
@@ -20,7 +18,12 @@
 
 ### Übung
 
-- Befehle selber ausprobieren
+ - Starte "gitea" vom Docker-Image "gitea/gitea" und exponiere den internen Port 3000 auf den externen Port 80!
+ - Zeige alle laufenden Docker-Prozesse an und erkenne, ob der Port 3000 exponiert ist!
+ - Gibt es noch andere Ports in dem gitea-Container die nicht exponiert sind? Wenn ja, exponiere auch diesen Port!
+ - Betrachte die Log-Ausgabe des gitea-Containers in Echtzeit!
+ - Beende den gitea-Container, ohne ihn zu löschen und starte ihn wieder!
+ - Lösche den gitea-Container!
 
 ## Ports, Volumes und Environment Variablen
 
@@ -28,9 +31,10 @@
   (random vs fixed)
  docker -v
   (anonymous, named vs path) rw ro etc.
-  docker -e root_password
+ docker -e root_password
 
  TODO: mysql image vorbereiten
+ TODO: registry vorbereiten
 
 ### Übung
 
