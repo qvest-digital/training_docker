@@ -3,20 +3,35 @@ revealOptions:
   transition: fade
 ---
 
-
-# Docker Einstieg
+# Containerisierung mit Docker
 
 ---
 
 ## Container vs. Virtual Machine
 
- Docker ist ein Taskrunner, ein "besseres systemd"
+----
+
+### Betriebssystemvirtualisierung
+
+* VirtualBox, Hyper-V Server, QEMU
+Note: Bild einfügen
+
+----
+
+### Containervirtualisierung 
+
+* Taskrunner (ähnlich systemd/init)
+* Isolieren von Anwendungen und deren Abhängigkeiten durch eigenes Dateisystem 
 
 ---
 
 ## Erste Schritte
 
- docker run hello-world
+```bash
+docker run hello-world
+```
+
+<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
  
 ----
 

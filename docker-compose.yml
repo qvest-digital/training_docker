@@ -1,0 +1,21 @@
+version: "2.2"
+
+services:
+
+  reveal:
+    build: .
+    ports:
+      - "8123:1948"
+    volumes:
+      - ${PWD}/presentation:/reveal
+    init: true
+
+  shellinabox1:
+    image: sspreitzer/shellinabox
+    environment:
+      - SIAB_SSL=false
+      - SIAB_SUDO=true
+      - SIAB_USER=trainer
+      - SIAB_PASSWORD=trainer 
+    ports:
+      - "4200:4200"    
