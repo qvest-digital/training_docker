@@ -18,10 +18,10 @@ Note: Bild einfügen
 
 ----
 
-### Containervirtualisierung 
+### Containervirtualisierung
 
 * Taskrunner (ähnlich systemd/init)
-* Isolieren von Anwendungen und deren Abhängigkeiten durch eigenes Dateisystem 
+* Isolieren von Anwendungen und deren Abhängigkeiten durch eigenes Dateisystem
 
 ---
 
@@ -31,8 +31,12 @@ Note: Bild einfügen
 docker run hello-world
 ```
 
+----
+
+## Erste Schritte
+
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
- 
+
 ----
 
 ## Docker CLI (gitea als Beispiel)
