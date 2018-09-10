@@ -5,17 +5,22 @@ services:
   reveal:
     build: .
     ports:
-      - "8123:1948"
+      - "127.0.0.1:8123:1948"
     volumes:
       - ${PWD}/presentation:/reveal
     init: true
 
   shellinabox1:
-    image: sspreitzer/shellinabox
-    environment:
-      - SIAB_SSL=false
-      - SIAB_SUDO=true
-      - SIAB_USER=trainer
-      - SIAB_PASSWORD=trainer 
+    build: shells/shellinabox1
     ports:
-      - "4200:4200"    
+      - "127.0.0.1:4200:4200"
+    privileged: true
+    environment:
+      - DOCKER_TLS_VERIFY="1"                                                           ✓  4869  16:01:14
+      - DOCKER_HOST="tcp://192.168.99.101:2376"
+      - DOCKER_CERT_PATH="/root/.docker/machine/machines/vbox-test"
+      - DOCKER_MACHINE_NAME="vbox-test"
+
+    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+      - ${HOME}/.docker/machine/machines/vbox-test:/root/.docker/machine/machines/vbox-test:ro
