@@ -62,22 +62,24 @@ Es ist möglich container zu
 ## Docker CLI
 
 ```shell
-docker run -p -d 3000:3000 gitea/gitea
+docker run -d -p 8080:80 wordpress
 docker ps
 docker logs <container>
 ```
+Note: https://hub.docker.com/_/wordpress/
 
 ----
 
-### Übung gitea starten
+### Übung gitea
 
- - Starte "gitea" vom Docker-Image "gitea/gitea" und exponiere den internen Port 3000 auf den externen Port 80!
- - Zeige alle laufenden Docker-Prozesse an und erkenne, ob der Port 3000 exponiert ist!
- - Gibt es noch andere Ports in dem gitea-Container die nicht exponiert sind? Wenn ja, exponiere auch diesen Port!
- - Betrachte die Log-Ausgabe des gitea-Containers in Echtzeit!
- - Beende den gitea-Container, ohne ihn zu löschen und starte ihn wieder!
- - Lösche den gitea-Container!
+- Starte "gitea" vom Docker-Image "gitea/gitea" und exponiere den internen Port 3000 auf den externen Port 80!
+- Zeige alle laufenden Docker-Prozesse an und erkenne, ob der Port 3000 exponiert ist!
+- Gibt es noch andere Ports in dem gitea-Container die nicht exponiert sind? Wenn ja, exponiere auch diesen Port!
+- Betrachte die Log-Ausgabe des gitea-Containers in Echtzeit!
+- Beende den gitea-Container, ohne ihn zu löschen und starte ihn wieder!
+- Lösche den gitea-Container!
 
+----
 
 ### Zusammenfassung
 
@@ -91,21 +93,6 @@ Grundlegendes starten stoppen von containern mit `docker start && docker stop`
 Übersicht mit `docker ps` und ausgabe von logs `docker logs`
 
 ---
-
-## Docker Architektur
-
-Layers: Top Buttom
-
-* Client
-  * Manages:
-    * container
-    * images
-    * networks
-    * data volumes
-* Rest API
-* docker daeomon (server)
-
-----
 
 ## Ports, Volumes und Environment Variablen
 
@@ -130,11 +117,14 @@ docker run -d -p 3306:3306 mysql
    - einer automatisch erstellten Datenbank mit dediziertem Benutzeraccount (Umgebungsvariablen MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORT)
  - Sorge dafür, dass das Datenverzeichnis der Datenbank (/var/lib/mysql) auf ein lokales Volume (./volumes/db) gemappt ist!
 
----
+----
 
 ## Container verknüpfen
 
-- beide container starten und gitea die sql verbindung geben
+- beide container starten und gitea mit sql verbindung geben
+
+** Beispiel: Link
+** Beispiel docker-compose
 
 ----
 
@@ -146,10 +136,33 @@ docker run -d -p 3306:3306 mysql
 
 ---
 
+## Docker Architektur
+
+Layers: Top Buttom
+
+* Client
+  * Manages:
+    * container
+    * images
+    * networks
+    * data volumes
+* Rest API
+* docker daeomon (server)
+
+---
+
 ## docker-compose (v3)
 
-- motivation, syntax, cli
+TODO: motivation, syntax, cli
 
+Ziel: vereinfachung von docker cli
+
+Tool zu benutzung von docker swarm
+
+
+## docker-compose (v3)
+
+Example: wordpress
 ----
 
 ### Übung
