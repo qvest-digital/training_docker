@@ -41,10 +41,30 @@ docker run hello-world
 
 ## Docker CLI
 
-Docker CLI ist ein komandozeilen tool mit dem sich auf einfachste weise der docker daemon kontrollieren lösst.
+Docker CLI ist ein Komandozeilen-Tool mit dem sich auf einfachste weise der docker daemon kontrollieren lösst.
+
+Dies ist vergleichar mit systemd.
+
+Es ist möglich container zu
+* starten
+* stoppen
+* überwachen
+* erstellen
+
+----
+
+## Docker CLI
+
+<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+
+----
+
+## Docker CLI
 
 ```shell
-docker run gitea/gitea
+docker run -p -d 3000:3000 gitea/gitea
+docker ps
+docker logs <container>
 ```
 
 ----
@@ -61,12 +81,15 @@ docker run gitea/gitea
 
 ### Zusammenfassung
 
-```shell
-docker run -d -p 3000:3000 gitea/gitea
-docker ps
-docker logs
-docker stop/start/restart/rm
+Docker CLI
+
 ```
+docker help
+```
+
+Grundlegendes starten stoppen von containern mit `docker start && docker stop`
+Übersicht mit `docker ps` und ausgabe von logs `docker logs`
+
 ---
 
 ## Docker Architektur
@@ -86,8 +109,11 @@ Layers: Top Buttom
 
 ## Ports, Volumes und Environment Variablen
 
- docker run -d -p mysql und so weiter
-  (random vs fixed)
+(random vs fixed)
+docker run -d -p 3306 mysql
+
+docker run -d -p 3306:3306 mysql
+
  docker -v
   (anonymous, named vs path) rw ro etc.
  docker -e root_password
@@ -163,6 +189,15 @@ Layers: Top Buttom
 - glusterfs Gegenbeispiel
 
 ---
+
+## Docker CLI commit
+
+Unterschied container zu image
+
+```shell
+docker run -d gitea/gitea
+docker exec -it bash <container id>
+```
 
 ## Dockerfile an Beispiel eines gegebenen Services
 
