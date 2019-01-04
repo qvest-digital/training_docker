@@ -215,7 +215,18 @@ docker exec -it bash <container id>
 
 ---
 
-## Exkurs
+### Docker registry
+
+docker pull tomcat:8
+docker run -d -p 8080 tomcat:8
+
+(install git in container)
+docker stop tomcat container
+docker run -d -p 8080 tomcat:8
+
+same again, for stop docker commit container
+
+Difference container image
 
 - docker registry erklären vorstellen
 - docker hub vorstellen
