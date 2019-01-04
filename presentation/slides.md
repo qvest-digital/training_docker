@@ -215,7 +215,7 @@ docker exec -it bash <container id>
 
 ---
 
-### Docker registry
+## Docker registry
 
 docker pull tomcat:8
 docker run -d -p 8080 tomcat:8
@@ -227,6 +227,8 @@ docker run -d -p 8080 tomcat:8
 same again, for stop docker commit container
 
 Difference container image
+
+----
 
 - docker registry erklären vorstellen
 - docker hub vorstellen
@@ -242,6 +244,8 @@ Difference container image
 - Starte den Container neben deinem bestehenden Dockercontainer auf Port 8081.
 
 ---
+
+## Dockerfile & docker build
 
 ## Layer und Storage Driver (theorie only)
 
