@@ -39,12 +39,13 @@ docker run hello-world
 
 ----
 
-## Docker CLI (gitea als Beispiel)
+## Docker CLI
 
- docker run -d -p 3000:3000 gitea/gitea
- docker ps
- docker logs
- docker stop/start/restart/rm
+Docker CLI ist ein komandozeilen tool mit dem sich auf einfachste weise der docker daemon kontrollieren lösst.
+
+```shell
+docker run gitea/gitea
+```
 
 ----
 
@@ -57,7 +58,31 @@ docker run hello-world
  - Beende den gitea-Container, ohne ihn zu löschen und starte ihn wieder!
  - Lösche den gitea-Container!
 
+
+### Zusammenfassung
+
+```shell
+docker run -d -p 3000:3000 gitea/gitea
+docker ps
+docker logs
+docker stop/start/restart/rm
+```
 ---
+
+## Docker Architektur
+
+Layers: Top Buttom
+
+* Client
+  * Manages:
+    * container
+    * images
+    * networks
+    * data volumes
+* Rest API
+* docker daeomon (server)
+
+----
 
 ## Ports, Volumes und Environment Variablen
 
