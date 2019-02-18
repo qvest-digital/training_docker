@@ -400,7 +400,9 @@ Difference container image
 
 ---
 
-## Multistagebuilds Optional
+## Advanced and Optional
+
+### Multistagebuilds
 
 - Konzept vorstellen
   - beispiel an Go Service
@@ -409,7 +411,7 @@ Difference container image
 
 ----
 
-### Übung
+#### Übung
 
 - Baue in einem vorrangestellen Dockercontainer dein Java Jar zusammen, nenne diesen "build"!
   - benutze hierfür Gradle
@@ -419,7 +421,7 @@ Difference container image
 
 ---
 
-## Zusammenfassung Layer, Praxisbeispiel
+### Zusammenfassung Layer, Praxisbeispiel
 
 - Dockerfiles vergleichen
 - Layer Vergleichen
@@ -427,7 +429,7 @@ Difference container image
 
 ---
 
-### Ziel:
+#### Ziel:
 
 - Es existieren zwei Dockerfiles die beide Funktionieren
 - ein Go Service ein Java Service
@@ -435,7 +437,7 @@ Difference container image
 
 ---
 
-## Best practice
+### Best practice
 
 - Konfiguration über Umgebungsvariablen
 - Logging über STDOUT
@@ -445,7 +447,7 @@ Difference container image
 
 ----
 
-### Übung:
+#### Übung:
 
 - start.sh
   - mit debug help etc
@@ -458,10 +460,10 @@ Difference container image
 
 ---
 
-## Dynamisches routing labels mit traefik -- optional
+### Dynamisches routing labels mit traefik -- optional
 
 Traefik beispiel zeigen
 
 ----
 
-## Übung alles in traefik einbauen
+#### Übung alles in traefik einbauen
