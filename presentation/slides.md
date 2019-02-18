@@ -24,6 +24,8 @@ Note: https://de.wikipedia.org/wiki/Kernel-based_Virtual_Machine#/media/File:Ker
 * Taskrunner (ähnlich systemd/init)
 * Isolieren von Anwendungen und deren Abhängigkeiten durch eigenes Dateisystem
 
+Note: https://auctores.de/software/verwendete-software-architektur/docker-und-container/
+
 ---
 
 ## Erste Schritte
