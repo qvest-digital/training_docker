@@ -122,6 +122,13 @@ Note: Zwei unterschiedliche container! Binden auf zwei unterschiedliche ports
 
 ### Docker Volumes
 
+```shell
+docker -v /var/run/docker.sock:/var/run/docker.sock 9000:9000 portainer/portainer
+```
+
+----
+
+### Docker Volumes Detail
  docker -v
   (anonymous, named vs path) rw ro etc.
  docker -e root_password
@@ -247,16 +254,41 @@ Example: wordpress mit mariadb und portainer in 2 netzen
 
 ---
 
-## Docker CLI commit
+## Docker CLI
 
-Unterschied container zu image
+### docker exec
 
-```shell
-docker run -d gitea/gitea
-docker exec -it bash <container id>
-```
+docker run -it worpress:latest-alpine bash
+  apk add git
+  exit
+docker run -it wordpress:latest-alpine bash
+  git --version
 
-## Dockerfile an Beispiel eines gegebenen Services
+----
+
+### docker commit
+Docker commit erklären
+
+----
+
+### Docker Image version Container
+
+Note: vorstellen wie man einen Docker container baut.
+Note: verweis auf die dokumentation
+Note: docker build -t
+
+----
+
+### Docker Versionirung
+
+Note: tag erklären
+
+---
+
+## Dockerfile am Beispiel von caddy
+
+Note: Da wir noch nicht soweit sind nehmen wir caddy (kann man kompilert runterladen)
+Note: git vorbereiten (reverse Proxy einrichten?)
 
 - FROM
 - COPY
@@ -264,11 +296,35 @@ docker exec -it bash <container id>
 
 ----
 
+### Docker Base Images
+
+scratch vs alpine vs ubuntu vs debian vs microsoft
+
+Note: welcher ist der richtige?
+Note: Was sind die vor und nachteile?
+Note: Best Practice
+
+----
+
 ### Übung: Service in Docker Einbetten
 
 - Kopiere das Binary (tbd) in den Dockercontainer!
+  - nehme hierfür einen von scratch container
 - Stelle sicher, dass der Port 8080 exponiert wird.
 - Starte den Container und verbinde dich über localhost:8080
+- Erweiterung
+  - Lade eine caddyfile in deinen container und stelle sicher das diese geladen wird
+  - füge die certificate aus dem gegeben git hinzu
+  - Nutze eine andere base
+
+----
+
+### Übung: Nacharbeitung
+
+- dockerfile
+  - unterschiedliche FROMs
+  - docker image größen beispiel mit und ohne cache
+  - docker layer
 
 ---
 
@@ -344,7 +400,7 @@ Difference container image
 
 ---
 
-## Multistagebuilds
+## Multistagebuilds Optional
 
 - Konzept vorstellen
   - beispiel an Go Service
@@ -398,3 +454,14 @@ Difference container image
 - Sinnvolle(tm) Exit-Codes
  (siehe --init)
 - Nutze die Health Resource im HEALTHCHECK
+
+
+---
+
+## Dynamisches routing labels mit traefik -- optional
+
+Traefik beispiel zeigen
+
+----
+
+## Übung alles in traefik einbauen
