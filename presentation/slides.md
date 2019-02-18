@@ -15,6 +15,7 @@ revealOptions:
 
 * VirtualBox, Hyper-V Server, QEMU
 Note: Bild einfügen
+Note: https://de.wikipedia.org/wiki/Kernel-based_Virtual_Machine#/media/File:Kernel-based_Virtual_Machine.svg
 
 ----
 
