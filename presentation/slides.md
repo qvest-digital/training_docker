@@ -30,7 +30,7 @@ Note: Bild einfügen
 ```bash
 docker run hello-world
 ```
-
+Note: Ziel: Erster gehversuch mit docker, docker Umgebung funktioniert.
 ----
 
 ## Erste Schritte
@@ -51,6 +51,7 @@ Es ist möglich container zu
 * überwachen
 * erstellen
 
+Note: Ziel: Docker CLI grundlagen verstehen
 ----
 
 ## Docker CLI
@@ -67,6 +68,7 @@ docker ps
 docker logs <container>
 ```
 Note: https://hub.docker.com/_/wordpress/
+Note: Ziel ist es zu erkennen wie einfach die instalation ist.
 
 ----
 
@@ -90,7 +92,7 @@ docker help
 ```
 
 Grundlegendes starten stoppen von containern mit `docker start && docker stop`
-Übersicht mit `docker ps` und ausgabe von logs `docker logs`
+Übersicht mit `docker ps` und Ausgabe von Logs `docker logs`
 
 ---
 
@@ -105,8 +107,8 @@ docker run -d -p 3306:3306 mysql
   (anonymous, named vs path) rw ro etc.
  docker -e root_password
 
- TODO: mysql image vorbereiten
- TODO: registry vorbereiten
+Note: TODO: mysql image vorbereiten
+Note: TODO: registry vorbereiten
 
 ----
 
