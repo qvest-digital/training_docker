@@ -310,38 +310,113 @@ Verbinden von Containern
 
 ---
 
-## Docker CLI vs. docker-compose
+## Container und Images
 
-Note: Todo docker cli command aufzeigen, im vergleich zu docker-compose
+- Was ist ein Image und was ist ein Container
 
-## Docker Architektur
+Note: Ein Image ist nicht lauffähig, es wir verwendet um ein Container zu erzeugen
+Note: Ein Container ist eine Instanz von einem Image und kann zur Laufzeit verändert werden
+Note: Beispiel: docker run -it ubuntu -> apt-get update; apt-get install git -y; exit
+Note:           docker run -it ubuntu git --version
+Note: Das Selbe nochmal mit commit
+Note: docker image ls
 
-Layers: Top Buttom
+<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+---
 
-* Client
-  * Manages:
-    * container
-    * images
-    * networks
-    * data volumes
-* Rest API
-* docker daeomon (server)
+## Zusammenfassung
+
+- Unterschied Container und Images
+- docker commit
+- docker images
+  - docker image ls
+ 
+
+# Docker Images erstellen
 
 ---
 
-## docker-compose (v2 und v3)
+## Docker CLI
+
+### docker exec
+
+docker run --name mynginx-container -it nginx bash
+  echo "<h1>Hello World</h1>" > /usr/share/nginx/html/index.html
+  exit 
+docker commit mynginx-container mynginx-image
+  
+Note: Docker commit erklären mit Überleitung zu Dockerfile
+
+----
+
+## Image aus Dockerfile erstellen
+
+
+Dockerfile
+```
+FROM nginx
+RUN echo "<h1>Hello World from Dockerfile</h1>" > /usr/share/nginx/html/index.html 
+```
+
+```bash
+docker build -t mynginx-image:2
+docker run -d -p 8081:80 mynginx-image
+docker run -d -p 8082:80 mynginx-image:2
+```
+
+---
+
+### Übung
+
+- Baue ein docker Image das auf nginx basiert
+- Dieses soll eine modifizierte index.html haben
+- Tagge den Container als mynginx
+- Baue einen zweiten nginx container der den "COPY"-Befehl nutzt.
+- Tagge den Container als mynginx in Version 2
+- Bonus: Nutze Nginx mit alpine anstatt ubuntu
+- Bonus vergleiche die Image größen
+
+Link zu Dokumentation
+
+----
+
+### Docker Base Images
+
+Welche "base" Images gibt es?
+Was sind die Unterschiede?
+
+Note: Alpine ist der bevorzugte, da er wesentlich kleiner ist als alle anderen.
+
+----
+
+### Zusammenfassung
+
+- Dockerfile
+  - FROM
+  - COPY
+  - RUN
+  - CMD
+- Docker CLI
+  - docker build -t tag:version .
+  - docker commit image tag:version
+- Docker Hub
+
+---
+
+## Advanced Optional
+
+---
+
+## docker-compose
 
 TODO: motivation, syntax, cli
 
-Ziel: vereinfachung von docker cli
+Ziel: Vereinfachung von docker cli
 
 Tool zur Vereinfachung von docker (v2)
 Tool zu benutzung von docker swarm (v3)
 
-
-## docker-compose (v3)
-
-Example: wordpress mit mariadb und portainer in 2 netzen
+Note: Example: wordpress mit postgresql
 
 ----
 
@@ -360,8 +435,7 @@ Example: wordpress mit mariadb und portainer in 2 netzen
 - docker-compose naming (netzwerke und container)
 - docker-compose -p
 - docker network rm
-- docker inspect (auch volumes etc.)
-- unterschied docker-compose stop/down
+- Unterschied docker-compose stop/down
 
 ----
 
@@ -371,123 +445,6 @@ Example: wordpress mit mariadb und portainer in 2 netzen
 - Richte nun die Verbindung von gitea und mariaDB über das neuerstellte Netzwerk ein.
 
 ---
-
-# Docker Images verstehen und erstellen
-
----
-
-## Anforderungen an die Anwendung
-
-- alles läuft als Docker-Container
-- glusterfs Gegenbeispiel
-
----
-
-## Docker CLI
-
-### docker exec
-
-docker run -it worpress:latest-alpine bash
-  apk add git
-  exit
-docker run -it wordpress:latest-alpine bash
-  git --version
-
-----
-
-### docker commit
-Docker commit erklären
-
-----
-
-### Docker Image version Container
-
-Note: vorstellen wie man einen Docker container baut.
-Note: verweis auf die dokumentation
-Note: docker build -t
-
-----
-
-### Docker Versionirung
-
-Note: tag erklären
-
----
-
-## Dockerfile am Beispiel von caddy
-
-Note: Da wir noch nicht soweit sind nehmen wir caddy (kann man kompilert runterladen)
-Note: git vorbereiten (reverse Proxy einrichten?)
-
-- FROM
-- COPY
-- CMD
-
-----
-
-### Docker Base Images
-
-scratch vs alpine vs ubuntu vs debian vs microsoft
-
-Note: welcher ist der richtige?
-Note: Was sind die vor und nachteile?
-Note: Best Practice
-
-----
-
-### Übung: Service in Docker Einbetten
-
-- Kopiere das Binary (tbd) in den Dockercontainer!
-  - nehme hierfür einen von scratch container
-- Stelle sicher, dass der Port 8080 exponiert wird.
-- Starte den Container und verbinde dich über localhost:8080
-- Erweiterung
-  - Lade eine caddyfile in deinen container und stelle sicher das diese geladen wird
-  - füge die certificate aus dem gegeben git hinzu
-  - Nutze eine andere base
-
-----
-
-### Übung: Nacharbeitung
-
-- dockerfile
-  - unterschiedliche FROMs
-  - docker image größen beispiel mit und ohne cache
-  - docker layer
-
----
-
-## Docker registry
-
-docker pull tomcat:8
-docker run -d -p 8080 tomcat:8
-
-(install git in container)
-docker stop tomcat container
-docker run -d -p 8080 tomcat:8
-
-same again, for stop docker commit container
-
-Difference container image
-
-----
-
-- docker registry erklären vorstellen
-- docker hub vorstellen
-- docker tags
-- docker push
-- docker pull
-
-----
-
-### Übung
-
-- Beziehe aus der schulungs-registry einen Container von einem anderem Schulungsmitglied!
-- Starte den Container neben deinem bestehenden Dockercontainer auf Port 8081.
-
----
-
-## Dockerfile & docker build
 
 ## Layer und Storage Driver (theorie only)
 
@@ -528,8 +485,6 @@ Difference container image
 - Versuche den RUN Befehl durch WORKDIR und COPY --chown zu erstezen.
 
 ---
-
-## Advanced and Optional
 
 ### Multistagebuilds
 
@@ -589,11 +544,11 @@ Difference container image
 
 ---
 
-### Dynamisches routing labels mit traefik -- optional
+## Dynamisches routing labels mit traefik -- optional
 
 Traefik beispiel zeigen
 
 ----
 
-#### Übung alles in traefik einbauen
+### Übung alles in traefik einbauen
 
