@@ -65,7 +65,7 @@ Note: Ziel: Docker CLI grundlagen verstehen
 ```shell
 docker run -d -p 8080:80 wordpress
 docker ps
-docker logs <container>
+docker logs <containerID>
 ```
 Note: https://hub.docker.com/_/wordpress/
 Note: Ziel ist es zu erkennen wie einfach die instalation ist.
@@ -98,14 +98,41 @@ Grundlegendes starten stoppen von containern mit `docker start && docker stop`
 
 ## Ports, Volumes und Environment Variablen
 
-(random vs fixed)
-docker run -d -p 3306 mysql
+----
 
-docker run -d -p 3306:3306 mysql
+### Docker Ports
+
+Docker kann Container Ports an Hostports binden.
+
+Altes beispiel docker run -p 8080:80 wordpress
+
+docker run -d -p 80 wordpress
+docker run -d -p 80:8081 wordpress
+docker ps
+
+Note: Zwei unterschiedliche container! Binden auf zwei unterschiedliche ports
+
+----
+
+### Docker Ports
+
+<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+
+---
+
+### Docker Variables
+
+docker run -d -p
+
+---
+
+### Docker Volumes
 
  docker -v
   (anonymous, named vs path) rw ro etc.
  docker -e root_password
+
+### Docker Volumes
 
 Note: TODO: mysql image vorbereiten
 Note: TODO: registry vorbereiten
