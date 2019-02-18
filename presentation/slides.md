@@ -96,7 +96,7 @@ Grundlegendes starten stoppen von containern mit `docker start && docker stop`
 
 ---
 
-## Ports, Volumes und Environment Variablen
+## Docker Ports & Volumes
 
 ----
 
@@ -120,24 +120,42 @@ Note: Zwei unterschiedliche container! Binden auf zwei unterschiedliche ports
 
 ---
 
-### Docker Variables
-
-docker run -d -p
-
----
-
 ### Docker Volumes
 
  docker -v
   (anonymous, named vs path) rw ro etc.
  docker -e root_password
 
-### Docker Volumes
+----
 
-Note: TODO: mysql image vorbereiten
-Note: TODO: registry vorbereiten
+### Übung Volumes and Ports
+
+- Starte gitea und schaffe eine persistens der gitconfiguration
+- Expose den openssh Port und das Webinterface
+
+---
+
+
+## Docker communikation und Environment Variablen
+
+- wordpress container starten
+- reverese proxy starten
+
+Note: Ziel: Interne Kommunikation zwischen containern
+Note: Todo: NGINX vorbereiten mit einer konfig (ein git?) das als volume gemounted wird.
+Note: Todo: Self signed Cert
 
 ----
+
+## Docker communikation und Environment Variablen
+
+Note: Todo: Iframe einbinden
+
+----
+
+### Docker Environment variablen
+
+Note: Beispiel environment variablen an MariaDB zeigen.
 
 ### Übung MariaDB starten und einrichten
 
@@ -148,15 +166,6 @@ Note: TODO: registry vorbereiten
 
 ----
 
-## Container verknüpfen
-
-- beide container starten und gitea mit sql verbindung geben
-
-** Beispiel: Link
-** Beispiel docker-compose
-
-----
-
 ### Übung Gitea mit MariaDB verbinden
 
 - Stoppe und lösche nun deinen Gitea Container.
@@ -164,6 +173,10 @@ Note: TODO: registry vorbereiten
   - Benutze dafür die vorher erstellte Datenbank!
 
 ---
+
+## Docker CLI wird zu docker-compose
+
+Note: Todo docker cli command aufzeigen, im vergleich zu docker-compose
 
 ## Docker Architektur
 
@@ -180,18 +193,20 @@ Layers: Top Buttom
 
 ---
 
-## docker-compose (v3)
+## docker-compose (v2 und v3)
 
 TODO: motivation, syntax, cli
 
 Ziel: vereinfachung von docker cli
 
-Tool zu benutzung von docker swarm
+Tool zur Vereinfachung von docker (v2)
+Tool zu benutzung von docker swarm (v3)
 
 
 ## docker-compose (v3)
 
-Example: wordpress
+Example: wordpress mit mariadb und portainer in 2 netzen
+
 ----
 
 ### Übung
