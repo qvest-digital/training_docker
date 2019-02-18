@@ -7,6 +7,14 @@ revealOptions:
 
 ---
 
+## Was ist Docker
+
+- Motivation
+- Seit wann gibt es Docker
+- cgroups
+
+----
+
 ## Container vs. Virtual Machine
 
 ----
@@ -14,7 +22,7 @@ revealOptions:
 ### Betriebssystemvirtualisierung
 
 * VirtualBox, Hyper-V Server, QEMU
-Note: Bild einfügen
+Note: Bild übernehmen/einfügen (TODO)
 Note: https://de.wikipedia.org/wiki/Kernel-based_Virtual_Machine#/media/File:Kernel-based_Virtual_Machine.svg
 
 ----
@@ -24,6 +32,7 @@ Note: https://de.wikipedia.org/wiki/Kernel-based_Virtual_Machine#/media/File:Ker
 * Taskrunner (ähnlich systemd/init)
 * Isolieren von Anwendungen und deren Abhängigkeiten durch eigenes Dateisystem
 
+Note: Bild übernehmen/einfügen (TODO)
 Note: https://auctores.de/software/verwendete-software-architektur/docker-und-container/
 
 ---
@@ -33,28 +42,29 @@ Note: https://auctores.de/software/verwendete-software-architektur/docker-und-co
 ```bash
 docker run hello-world
 ```
-Note: Ziel: Erster gehversuch mit docker, docker Umgebung funktioniert.
+Note: Ziel: Erster Gehversuch mit Docker, Docker Umgebung funktioniert.
 ----
 
 ## Erste Schritte
 
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
+Note: docker run hello-world
+
 ----
 
 ## Docker CLI
 
-Docker CLI ist ein Komandozeilen-Tool mit dem sich auf einfachste weise der docker daemon kontrollieren lösst.
+Docker CLI ist ein Kommandozeilen-Tool mit dem sich auf einfachste Weise der Docker-Daemon kontrollieren lässt.
 
-Dies ist vergleichar mit systemd.
+Einfache Anwendungsfälle von Docker CLI:
+- Container erstellen
+- Container starten
+- laufende Container anzeigen
+- Container stoppen
 
-Es ist möglich container zu
-* starten
-* stoppen
-* überwachen
-* erstellen
-
-Note: Ziel: Docker CLI grundlagen verstehen
+Note: Ziel: Docker CLI Grundlagen verstehen
+Note: Systemd-Analogie ansprechen
 ----
 
 ## Docker CLI
@@ -71,31 +81,73 @@ docker ps
 docker logs <containerID>
 ```
 Note: https://hub.docker.com/_/wordpress/
-Note: Ziel ist es zu erkennen wie einfach die instalation ist.
+Note: Ziel ist es zu erkennen, wie einfach die Instalation ist.
 
 ----
 
 ### Übung gitea
 
-- Starte "gitea" vom Docker-Image "gitea/gitea" und exponiere den internen Port 3000 auf den externen Port 80!
-- Zeige alle laufenden Docker-Prozesse an und erkenne, ob der Port 3000 exponiert ist!
-- Gibt es noch andere Ports in dem gitea-Container die nicht exponiert sind? Wenn ja, exponiere auch diesen Port!
-- Betrachte die Log-Ausgabe des gitea-Containers in Echtzeit!
-- Beende den gitea-Container, ohne ihn zu löschen und starte ihn wieder!
-- Lösche den gitea-Container!
+- Starte "gitea" vom Docker-Image "gitea/gitea" im Hintergund und exponiere den Container-Port 3000 auf den Host-Port 8080!
+- Zeige alle laufenden Docker-Prozesse an und erkenne, ob der Port 3000 auf Port 8080 exponiert ist!
+- Bonus: Betrachte die Log-Ausgabe des gitea-Containers in Echtzeit!
+
+Note: split view (TODO)
+Note: Bonus bonus: Gibt es noch andere Ports im gitea-Container, die nicht exponiert sind? Wenn ja, exponiere auch diesen Port!
+
+<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+
+Note: docker run -d -p 3000:3000 gitea/gitea
 
 ----
 
 ### Zusammenfassung
 
-Docker CLI
+- Erstellen eines Containers mit exponiertem Port 
+  - `docker run`
+- Containerübersicht
+  - `docker ps`
+- Ausgabe von Logs
+  - `docker logs`
+- Docker CLI Hilfe
+  - `docker help`
+  - `docker help <subcommand>`
 
-```
-docker help
-```
+Note: split view (TODO)
+<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
-Grundlegendes starten stoppen von containern mit `docker start && docker stop`
-Übersicht mit `docker ps` und Ausgabe von Logs `docker logs`
+---
+
+## Container-Lifecycle
+
+TODO: Einfaches Bild zum Lifecycle
+
+----
+
+- Created
+  - Container ist erstellt aber nicht gestartet
+- Running
+  - Container ist gestartet 
+- Stopped
+  - Container ist noch vorhanden aber gestoppt 
+- Paused
+  - Container ist angehalten
+- Deleted
+  - Container ist gelöscht
+
+----
+
+<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+
+Note: docker ps -a
+Note: docker stop
+Note: docker rm
+
+----
+
+### Übung Lifecycle
+
+- Alle laufenden Container sollen beendet und gelöscht werden. 
+- Wie stelle ich fest, dass alle Container gelöscht sind?
 
 ---
 
@@ -103,88 +155,162 @@ Grundlegendes starten stoppen von containern mit `docker start && docker stop`
 
 ----
 
-### Docker Ports
+### Docker Portfreigaben
 
-Docker kann Container Ports an Hostports binden.
+Docker kann Container Ports an Hostports binden (exponieren).
 
-Altes beispiel docker run -p 8080:80 wordpress
-
-docker run -d -p 80 wordpress
+```
 docker run -d -p 80:8081 wordpress
+docker run -d -p 80 wordpress
 docker ps
+```
 
-Note: Zwei unterschiedliche container! Binden auf zwei unterschiedliche ports
-
-----
-
-### Docker Ports
-
+Note: split view (TODO)
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
----
+Note: Zwei unterschiedliche Container, binden auf zwei unterschiedlichen Ports.
+Note: Random-Ports erklären
+
 
 ### Docker Volumes
 
 ```shell
-docker -v /var/run/docker.sock:/var/run/docker.sock 9000:9000 portainer/portainer
+docker run -v /some/content:/usr/share/nginx/html:ro -d nginx
 ```
+
+Note: split view (TODO)
+<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+
+Note: Kurzer Hinweis auf Anonymous und Named-Volumes
+Note: ro,rw etc.
 
 ----
 
 ### Docker Volumes Detail
- docker -v
-  (anonymous, named vs path) rw ro etc.
- docker -e root_password
+
+- Default: read/write
+  - docker run -v /local/folder:/container/folder imageName
+  - docker run -v /local/folder:/container/folder:rw imageName
+- Read only
+  - docker run -v /local/folder:/container/folder:ro imageName
 
 ----
 
 ### Übung Volumes and Ports
 
-- Starte gitea und schaffe eine persistens der gitconfiguration
-- Expose den openssh Port und das Webinterface
+- Starte gitea mit folgenden Optionen:
+  - Persistenz der Git-Konfiguration (Container-Pfad /data)
+  - Exponiere das Webinterface 
+    - Containerport 3000 auf lokalen Port 3000
+  - Exponiere SSH
+    - Containerport 22 auf lokalen Port 3022
+- Richte gitea über das Webinterface ein (http://localhost:3000)
+  - Default-Settings lassen
+- Container stoppen und löschen
+  - Bonus: Gibt es einen Befehl der Stoppen und Löschen vereint?
+- Container mit den selben Optionen wieder erstellen
+- Was passiert mit der Konfiguration und den Nutzdaten von gitea?
 
+<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+
+Note: docker run -v $(pwd)/gitea-data:/data -p 3000:3000 -p 22:3022
+Note: docker stop `containterid`
+Note: docker rm `containerid` 
+Note: docker rm -f `containerid`
+  
+----
+
+### Zusammenfassung  
+
+- Exponieren von beliebigen Ports
+  - Random Ports
+  - Fixed Ports
+- Einbinden von Volumes
+  - Schreib/Lesezugriff
+  - Schreibgeschützt (ro) 
+- Stoppen und löschen von Containern
+  - docker stop
+  - docker rm  
+  - docker rm -f 
+  
+<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->  
+
+Note: docker run -p 3000:3000 -p 3022:22 -v $(pwd)/giteatest:/data gitea/gitea
+  
 ---
 
-
-## Docker communikation und Environment Variablen
-
-- wordpress container starten
-- reverese proxy starten
-
-Note: Ziel: Interne Kommunikation zwischen containern
-Note: Todo: NGINX vorbereiten mit einer konfig (ein git?) das als volume gemounted wird.
-Note: Todo: Self signed Cert
-
-----
-
-## Docker communikation und Environment Variablen
-
-Note: Todo: Iframe einbinden
-
-----
-
-### Docker Environment variablen
+## Environment-Variablen
 
 Note: Beispiel environment variablen an MariaDB zeigen.
 
-### Übung MariaDB starten und einrichten
+```
+docker run -d \
+           -e MYSQL_ROOT_PASSWORD=supersicher \
+           -e MYSQL_USER=wordpress \
+           -e MYSQL_PASSWORD=wordpress \
+           -e MYSQL_DATABASE=wordpress \
+           -v $(pwd)/mariadb-data:/var/lib/mysql \
+           --name wordpress-database \
+           mariadb
 
- - Starte einen [mariaDB](https://hub.docker.com/_/mariadb/) Docker-Container mit:
-   - vorgeingestelltem "root"-Passwort (Umbgebungsvariable MYSQL_ROOT_PASSWORD)
-   - einer automatisch erstellten Datenbank mit dediziertem Benutzeraccount (Umgebungsvariablen MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORT)
- - Sorge dafür, dass das Datenverzeichnis der Datenbank (/var/lib/mysql) auf ein lokales Volume (./volumes/db) gemappt ist!
+docker inspect wordpress-database
+```
 
 ----
 
-### Übung Gitea mit MariaDB verbinden
+### Übung PostgresDB starten
 
-- Stoppe und lösche nun deinen Gitea Container.
-- Konfiguriere den Container so, dass Gitea seine Konfiguration in der lokalen MariaDB speichert
-  - Benutze dafür die vorher erstellte Datenbank!
+ - Starte einen [postgreSQL](https://hub.docker.com/_/postgres/) Docker-Container mit:
+   - einer automatisch erstellten Datenbank mit dediziertem Benutzeraccount 
+   - Umgebungsvariablen POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB
+ - Sorge dafür, dass das Datenverzeichnis der Datenbank (/var/lib/postgresql/data) auf ein lokales 
+   Volume ($(pwd)/volumes/db) gemappt ist!
+   
+Note: docker run -d --name=gitea-database -e POSTGRES_USER=gitea -e POSTGRES_PASSWORD=gitea -e POSTGRES_DB=gitea -v $(pwd)/postgesql-data:/var/lib/postgresql/data postgres
+
+----
+
+### Zusammenfassung
+
+- Container Namen geben (--name)
+- Environment-Variablen an Container übergeben (-e)
+- docker inspect
 
 ---
 
-## Docker CLI wird zu docker-compose
+## Kommunikation zwischen Containern
+
+Kommunikation über die "Docker default bridge"
+Namensauflösung per Docker-DNS
+
+Note: Wordpress-Container starten, mit mysql verknüpfen
+Note: Ziel: Interne Kommunikation zwischen Containern
+Note: docker run --link=wordpress-database -e WORDPRESS_DB_HOST=wordpress-database -e WORDPRESS_DB_USER=wordpress -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_NAME=wordpress wordpress
+
+<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+
+----
+
+### Übung: Gitea mit PostgreSQL verbinden
+
+- Stoppe und lösche nun deinen Gitea Container!
+- Konfiguriere den Container so, dass Gitea seine Konfiguration in der lokalen PostgreSQL speichert!
+  - Benutze dafür die vorher erstellte Datenbank!
+  
+Note: docker run -d --name=gitea-database -e POSTGRES_USER=gitea -e POSTGRES_PASSWORD=gitea -e POSTGRES_DB=gitea -v $(pwd)/postgesql-data:/var/lib/postgresql/data postgres
+Note: docker run -p 3000:3000 -v $(pwd)/gitea/data:/data -p 3000:3000 -p 3022:22 --link=gitea-database gitea/gitea
+
+----
+
+### Zusammenfassung
+
+Verbinden von Containern
+  - --link
+  - Namensauflösung per Docker DNS
+
+---
+
+## Docker CLI vs. docker-compose
 
 Note: Todo docker cli command aufzeigen, im vergleich zu docker-compose
 
@@ -470,3 +596,4 @@ Traefik beispiel zeigen
 ----
 
 #### Übung alles in traefik einbauen
+
