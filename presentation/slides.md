@@ -395,14 +395,17 @@ Ein Image wird statisch gebaut.
 
 ----
 
+# Container und Images
+
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 Was ist ein Image und was ist ein Container
-Beispiel: docker run -it ubuntu -> apt-get update; apt-get install git -y; exit
-docker run -it ubuntu git --version
+Beispiel: git commit
+- docker run -it ubuntu -> apt-get update; apt-get install git -y; exit
+- docker run -it ubuntu git --version
 Das Selbe nochmal mit commit
-docker image ls
+- docker image ls
 
 ----
 
@@ -410,8 +413,9 @@ docker image ls
 
 - Unterschied Container und Images
 - docker commit
+  - Erstellen eines Images aus einem Container
 - docker images
-  - docker image ls
+  - Anzeigen von Images
 
 ---
 
