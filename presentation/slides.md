@@ -425,9 +425,18 @@ Das Selbe nochmal mit commit
 - Docker Hub
 - Tags und Versionierung
 
+
+Note:
+- docker pull
+  - Dient zum herunterladen von Images
+  - Default regirsty ist docker Hub
+  - Tags dienen zur Versionierung
+  - Tags dienen auch zur identifizierung der Container Registry
+    - default docker hub
+
 ----
 
-## docker pull
+## Docker Tags
 
 ```bash
 docker pull nginx
@@ -437,6 +446,9 @@ docker images
 ```
 
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+
+Note:
+Wie lade ich Images herunter?
 
 ----
 
@@ -455,6 +467,21 @@ Dockerfiles können (meist) eingesehen werden (link zu Github)
 ----
 
 ## Docker Registry
+
+- Simple eigene Registry erstellen
+  - https://hub.docker.com/_/registry
+- Docker Tag verweist auf die registry
+- Docker push
+
+TODO IFRAME
+
+Note:
+- Pullen eines containers
+- retaggen für eigene registry
+  - docker pull nginx:latest
+  - docker image tag nginx localhost:5000/myimage
+  - docker push localhost:5000/myimage
+- Eigene Registy pushen
 
 ---
 
