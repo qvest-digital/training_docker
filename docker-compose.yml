@@ -15,8 +15,6 @@ services:
     ports:
       - "127.0.0.1:4200:4200"
     privileged: true
-    environment:
-      - DOCKER_HOST=tcp://docker:2375
     volumes:
       - ${HOME}/.docker/machine/machines/vbox-test:/root/.docker/machine/machines/vbox-test:ro
 

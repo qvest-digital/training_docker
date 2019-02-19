@@ -1,0 +1,34 @@
+#vt100 {
+    font-size: 1.4em;
+}
+
+#vt100 #cursor.bright {
+    background-color: white;
+    color:            black;
+}
+
+#vt100 #scrollable {
+    color:            #ffffff;
+    background-color: #000000;
+}
+
+#vt100 #scrollable.inverted {
+    color:            #000000;
+    background-color: #ffffff;
+}
+
+#vt100 .bgAnsiDef {
+    background-color: #000;
+}
+
+#vt100 .ansiDef {
+    color: #fff;
+}
+
+#vt100 .ansi15 {
+    color: #000;
+}
+
+#vt100 .bgAnsi0 {
+    background-color: #fff;
+}

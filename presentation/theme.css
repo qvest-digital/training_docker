@@ -52,13 +52,13 @@ body {
   word-wrap: break-word; }
 
 .reveal h1 {
-  font-size: 3.77em; }
+  font-size: 2.5em; }
 
 .reveal h2 {
-  font-size: 2.11em; }
+  font-size: 1.75em; }
 
 .reveal h3 {
-  font-size: 1.55em; }
+  font-size: 1.25em; }
 
 .reveal h4 {
   font-size: 1em; }
@@ -129,7 +129,7 @@ body {
 .reveal blockquote {
   display: block;
   position: relative;
-  width: 70%;
+  width: 90%;
   margin: 20px auto;
   padding: 5px;
   font-style: italic;
@@ -282,4 +282,9 @@ body {
 .divided img {
     width: 60%;
     clip-path: circle(130px at center);
+}
+
+iframe {
+    width: 90%; 
+    height: 350px;
 }

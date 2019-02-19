@@ -5,7 +5,12 @@ RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/ap
     && apk add --no-cache docker bash shellinabox@testing
 
 RUN echo 'export PS1="\w \$ "' >> /root/.bashrc
+RUN echo 'export DOCKER_HOST=tcp://docker:2375' >> /root/.bashrc
+# docker ps -a --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}\t{{.Names}}"
+
+ADD styles.css /data/
 
 EXPOSE 4200
 
-CMD ["shellinaboxd", "-s", "/:0:0:/root:/bin/bash", "--disable-ssl"]
+CMD ["shellinaboxd", "--css", "/data/styles.css", "-s", "/:0:0:/root:/bin/bash", "--disable-ssl"]
+

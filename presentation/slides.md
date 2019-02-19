@@ -24,25 +24,20 @@ revealOptions:
 ----
 
 - Überblick
-- Erste Schritte mit dem Docker CLI
+- Docker CLI
 - Container-Lifecycle
 - Portfreigaben
 - Volumes
+- Environment-Variablen
 - Eigene Images erstellen
 
 ---
 
-## Einstieg in Docker
+# Überblick
 
-### Inhalt
 * Was ist Docker?
 * Klassische Virtualisierung
 * Container Virtualisierung
-
-### Ziele
-
-* Kleiner einblick in Docker Virtualisierung
-* Unterschiede in der Virtualiserung
 
 ----
 
@@ -72,15 +67,10 @@ Note: https://auctores.de/software/verwendete-software-architektur/docker-und-co
 
 ---
 
-## Docker CLI
+# Docker CLI
 
-### Inhalt
 * Einstieg in Docker CLI
 * Grundlagen zur Container Verwaltung
-
-### Ziele
-* Starten und Stoppen von Containern
-* Grundverständinss der CLI
 
 ----
 
@@ -90,7 +80,7 @@ Note: https://auctores.de/software/verwendete-software-architektur/docker-und-co
 docker run hello-world
 ```
 
-<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note: docker run hello-world
 Note: Erster Gehversuch mit Docker, Docker Umgebung funktioniert.
@@ -159,7 +149,11 @@ Note: split view (TODO)
 
 ---
 
-## Container-Lifecycle
+# Container-Lifecycle
+
+- TODO
+
+----
 
 TODO: Einfaches Bild zum Lifecycle
 
@@ -186,18 +180,22 @@ Note: docker rm
 
 ----
 
-### Übung Lifecycle
+## Übung Lifecycle
 
 - Alle laufenden Container sollen beendet und gelöscht werden.
 - Wie stelle ich fest, dass alle Container gelöscht sind?
 
----
-
-## Docker Ports & Volumes
-
 ----
 
-### Docker Portfreigaben
+## Zusammenfassung
+
+TODO
+
+---
+
+# Portfreigaben
+
+----
 
 Docker kann Container Ports an Hostports binden (exponieren).
 
@@ -213,8 +211,15 @@ Note: split view (TODO)
 Note: Zwei unterschiedliche Container, binden auf zwei unterschiedlichen Ports.
 Note: Random-Ports erklären
 
+----
 
-### Docker Volumes
+## Zusammenfassung
+
+TODO
+
+---
+
+# Volumes
 
 ```shell
 docker run -v /some/content:/usr/share/nginx/html:ro -d nginx
@@ -238,7 +243,7 @@ Note: ro,rw etc.
 
 ----
 
-### Übung Volumes and Ports
+## Übung Volumes and Ports
 
 - Starte gitea mit folgenden Optionen:
   - Persistenz der Git-Konfiguration (Container-Pfad /data)
@@ -262,7 +267,7 @@ Note: docker rm -f `containerid`
 
 ----
 
-### Zusammenfassung
+## Zusammenfassung
 
 - Exponieren von beliebigen Ports
   - Random Ports
@@ -281,7 +286,7 @@ Note: docker run -p 3000:3000 -p 3022:22 -v $(pwd)/giteatest:/data gitea/gitea
 
 ---
 
-## Environment-Variablen
+# Environment-Variablen
 
 Note: Beispiel environment variablen an MariaDB zeigen.
 
@@ -300,7 +305,7 @@ docker inspect wordpress-database
 
 ----
 
-### Übung PostgresDB starten
+## Übung PostgresDB starten
 
  - Starte einen [postgreSQL](https://hub.docker.com/_/postgres/) Docker-Container mit:
    - einer automatisch erstellten Datenbank mit dediziertem Benutzeraccount
@@ -312,7 +317,7 @@ Note: docker run -d --name=gitea-database -e POSTGRES_USER=gitea -e POSTGRES_PAS
 
 ----
 
-### Zusammenfassung
+## Zusammenfassung
 
 - Container Namen geben (--name)
 - Environment-Variablen an Container übergeben (-e)
@@ -320,7 +325,12 @@ Note: docker run -d --name=gitea-database -e POSTGRES_USER=gitea -e POSTGRES_PAS
 
 ---
 
-## Kommunikation zwischen Containern
+# Kommunikation zwischen Containern
+
+- Netzwerkzugriff zwischen Containern
+- Docker DNS
+
+----
 
 Kommunikation über die "Docker default bridge"
 Namensauflösung per Docker-DNS
@@ -352,9 +362,13 @@ Verbinden von Containern
 
 ---
 
-## Container und Images
+# Container und Images
 
-- Was ist ein Image und was ist ein Container
+- Begriffsklärung
+
+----
+
+Note: Was ist ein Image und was ist ein Container
 
 Note: Ein Image ist nicht lauffähig, es wir verwendet um ein Container zu erzeugen
 Note: Ein Container ist eine Instanz von einem Image und kann zur Laufzeit verändert werden
@@ -364,7 +378,8 @@ Note: Das Selbe nochmal mit commit
 Note: docker image ls
 
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
----
+
+----
 
 ## Zusammenfassung
 
@@ -373,19 +388,42 @@ Note: docker image ls
 - docker images
   - docker image ls
 
+---
 
-# Docker Images erstellen
+# Docker Hub und Registry
+
+- `docker pull`
+- Docker Hub
 
 ---
 
-## Docker CLI
+# Images erstellen
 
-### docker exec
+- Image mit dem CLI erstellen
+- Image aus Dockerfile erstellen
+- Tags und Versionierung 
 
+----
+
+## Image mit dem CLI erstellen
+
+### Beispiel: nginx mit eigener index.html
+
+```bash
+# bash im nginx Container starten
 docker run --name mynginx-container -it nginx bash
-  echo "<h1>Hello World</h1>" > /usr/share/nginx/html/index.html
-  exit
+```
+
+```bash
+# im Container
+echo "<h1>Hello World</h1>" > /usr/share/nginx/html/index.html
+exit
+```
+
+```bash
+# Neues Image mit Änderungen erstellen
 docker commit mynginx-container mynginx-image
+```
 
 Note: Docker commit erklären mit Überleitung zu Dockerfile
 
@@ -393,22 +431,27 @@ Note: Docker commit erklären mit Überleitung zu Dockerfile
 
 ## Image aus Dockerfile erstellen
 
-
-Dockerfile
 ```
+# Dockerfile
 FROM nginx
-RUN echo "<h1>Hello World from Dockerfile</h1>" > /usr/share/nginx/html/index.html
+RUN echo "<h1>Hello World from Dockerfile</h1>" > \
+    /usr/share/nginx/html/index.html
 ```
 
 ```bash
-docker build -t mynginx-image:2
+# Image bauen
+docker build -t mynginx-image:2 .
+
+# Container aus Image (mit CLI erstellt) starten
 docker run -d -p 8081:80 mynginx-image
+
+# Container aus Image (mit Dockerfile erstellt) starten
 docker run -d -p 8082:80 mynginx-image:2
 ```
 
----
+----
 
-### Übung
+## Übung
 
 - Baue ein docker Image das auf nginx basiert
 - Dieses soll eine modifizierte index.html haben
@@ -418,11 +461,11 @@ docker run -d -p 8082:80 mynginx-image:2
 - Bonus: Nutze Nginx mit alpine anstatt ubuntu
 - Bonus vergleiche die Image größen
 
-Link zu Dokumentation
+TODO: Link zu Dokumentation
 
 ----
 
-### Docker Base Images
+## Docker Base Images
 
 Welche "base" Images gibt es?
 Was sind die Unterschiede?
