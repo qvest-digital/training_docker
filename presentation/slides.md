@@ -10,7 +10,7 @@ revealOptions:
 <div class="divided">
   <h4>Volker Schmitz</h4>
   <img src="./images/saltyblu.png">
-  <h5>DevOps Engineer</h5> 
+  <h5>DevOps Engineer</h5>
   v.schmitz@tarent.de
 </div>
 
@@ -62,7 +62,7 @@ https://de.wikipedia.org/wiki/Kernel-based_Virtual_Machine#/media/File:Kernel-ba
 ### Container
 
 - Taskrunner (ähnlich systemd/init)
-- Isolieren von Anwendungen und deren Abhängigkeiten 
+- Isolieren von Anwendungen und deren Abhängigkeiten
   - eigenes Dateisystem
 - Plattformabhängig (i386/arm etc.)
 
@@ -132,7 +132,7 @@ Ziel ist es zu erkennen, wie einfach die Instalation ist.
 
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
-Note: 
+Note:
 docker run -d -p 3000:3000 gitea/gitea
 split view (TODO)
 Bonus bonus: Gibt es noch andere Ports im gitea-Container, die nicht exponiert sind? Wenn ja, exponiere auch diesen Port!
@@ -197,7 +197,7 @@ docker rm
 
 ## Zusammenfassung
 
-TODO
+- Docker Status übersicht und Lifecycle
 
 ---
 
@@ -238,7 +238,7 @@ docker run -v /some/content:/usr/share/nginx/html:ro -d nginx
 
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
-Note: 
+Note:
 split view (TODO)
 Kurzer Hinweis auf Anonymous und Named-Volumes
 ro,rw etc.
@@ -272,7 +272,7 @@ ro,rw etc.
 
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
-Note: 
+Note:
 docker run -v $(pwd)/gitea-data:/data -p 3000:3000 -p 22:3022
 docker stop `containterid`
 docker rm `containerid`
@@ -295,7 +295,7 @@ docker rm -f `containerid`
 
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
-Note: 
+Note:
 docker run -p 3000:3000 -p 3022:22 -v $(pwd)/giteatest:/data gitea/gitea
 
 ---
@@ -315,7 +315,7 @@ docker run -d \
 docker inspect wordpress-database
 ```
 
-Note: 
+Note:
 Beispiel environment variablen an MariaDB zeigen.
 
 ----
@@ -328,8 +328,14 @@ Beispiel environment variablen an MariaDB zeigen.
  - Sorge dafür, dass das Datenverzeichnis der Datenbank (/var/lib/postgresql/data) auf ein lokales
    Volume ($(pwd)/volumes/db) gemappt ist!
 
-Note: 
-docker run -d --name=gitea-database -e POSTGRES_USER=gitea -e POSTGRES_PASSWORD=gitea -e POSTGRES_DB=gitea -v $(pwd)/postgesql-data:/var/lib/postgresql/data postgres
+Note:
+docker run -d \
+--name=gitea-database \
+-e POSTGRES_USER=gitea \
+-e POSTGRES_PASSWORD=gitea \
+-e POSTGRES_DB=gitea \
+-v $(pwd)/postgesql-data:/var/lib/postgresql/data \
+postgres
 
 ----
 
@@ -353,7 +359,7 @@ Namensauflösung per Docker-DNS
 
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
-Note: 
+Note:
 Wordpress-Container starten, mit mysql verknüpfen
 Ziel: Interne Kommunikation zwischen Containern
 docker run --link=wordpress-database -e WORDPRESS_DB_HOST=wordpress-database -e WORDPRESS_DB_USER=wordpress -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_NAME=wordpress wordpress
@@ -366,7 +372,7 @@ docker run --link=wordpress-database -e WORDPRESS_DB_HOST=wordpress-database -e 
 - Konfiguriere den Container so, dass Gitea seine Konfiguration in der lokalen PostgreSQL speichert!
   - Benutze dafür die vorher erstellte Datenbank!
 
-Note: 
+Note:
 docker run -d --name=gitea-database -e POSTGRES_USER=gitea -e POSTGRES_PASSWORD=gitea -e POSTGRES_DB=gitea -v $(pwd)/postgesql-data:/var/lib/postgresql/data postgres
 docker run -p 3000:3000 -v $(pwd)/gitea/data:/data -p 3000:3000 -p 3022:22 --link=gitea-database gitea/gitea
 
@@ -388,7 +394,7 @@ Verbinden von Containern
 
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
-Note: 
+Note:
 Was ist ein Image und was ist ein Container
 Ein Image ist nicht lauffähig, es wir verwendet um ein Container zu erzeugen
 Ein Container ist eine Instanz von einem Image und kann zur Laufzeit verändert werden
@@ -412,7 +418,7 @@ docker image ls
 
 - `docker pull`
 - Docker Hub
-- Tags und Versionierung 
+- Tags und Versionierung
 
 ----
 
@@ -434,7 +440,7 @@ docker images
 https://hub.docker.com/
 https://hub.docker.com/_/nginx
 
-Notes: 
+Notes:
 Öffentliche, offizielle Docker-Registry
 Kostenloser Account
 Alle tags sichtbar
@@ -451,7 +457,7 @@ Dockerfiles können (meist) eingesehen werden (link zu Github)
 
 - Image mit dem CLI erstellen
 - Image aus Dockerfile erstellen
-- Tags und Versionierung 
+- Tags und Versionierung
 
 ----
 
@@ -475,7 +481,7 @@ exit
 docker commit mynginx-container mynginx-image
 ```
 
-Note: 
+Note:
 Docker commit erklären mit Überleitung zu Dockerfile
 
 ----
@@ -553,7 +559,7 @@ Ziel: Vereinfachung von docker cli
 Tool zur Vereinfachung von docker (v2)
 Tool zu benutzung von docker swarm (v3)
 
-Note: 
+Note:
 Example: wordpress mit postgresql
 
 ----
