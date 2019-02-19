@@ -578,21 +578,26 @@ Alpine ist der bevorzugte, da er wesentlich kleiner ist als alle anderen.
 
 ---
 
-## Advanced Optional
+# Optional
 
 ---
 
-## docker-compose
+# docker-compose
 
-TODO: motivation, syntax, cli
+*docker-compose* ist ein Tool zur vereinfachten abbildung und verwaltung von Multi-Container Applikationen.
 
-Ziel: Vereinfachung von docker cli
+Es gibt zwei Versionen docker-compose:
 
-Tool zur Vereinfachung von docker (v2)
-Tool zu benutzung von docker swarm (v3)
+- v2
+  - Vereinfachung von docker (v2)
+- v3
+   - Benutzung von docker swarm (v3)
+
 
 Note:
 Example: wordpress mit postgresql
+Ziel: beide versionen basiern auf yml syntax
+Ziel: Vereinfachung von docker cli
 
 ----
 
