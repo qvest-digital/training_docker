@@ -37,7 +37,7 @@ revealOptions:
 
 * Was ist Docker?
 * Klassische Virtualisierung
-* Container Virtualisierung
+* Container
 
 ----
 
@@ -51,19 +51,24 @@ revealOptions:
 
 ### Klassische Virtualisierung
 
-* VirtualBox, Hyper-V Server, QEMU
-Note: Bild übernehmen/einfügen (TODO)
-Note: https://de.wikipedia.org/wiki/Kernel-based_Virtual_Machine#/media/File:Kernel-based_Virtual_Machine.svg
+- VirtualBox, Hyper-V Server, QEMU
+
+Note:
+Bild übernehmen/einfügen (TODO)
+https://de.wikipedia.org/wiki/Kernel-based_Virtual_Machine#/media/File:Kernel-based_Virtual_Machine.svg
 
 ----
 
-### Container Virtualisierung
+### Container
 
-* Taskrunner (ähnlich systemd/init)
-* Isolieren von Anwendungen und deren Abhängigkeiten durch eigenes Dateisystem
+- Taskrunner (ähnlich systemd/init)
+- Isolieren von Anwendungen und deren Abhängigkeiten 
+  - eigenes Dateisystem
+- Plattformabhängig (i386/arm etc.)
 
-Note: Bild übernehmen/einfügen (TODO)
-Note: https://auctores.de/software/verwendete-software-architektur/docker-und-container/
+Note:
+Bild übernehmen/einfügen (TODO)
+https://auctores.de/software/verwendete-software-architektur/docker-und-container/
 
 ---
 
@@ -82,8 +87,8 @@ docker run hello-world
 
 <iframe src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
-Note: docker run hello-world
-Note: Erster Gehversuch mit Docker, Docker Umgebung funktioniert.
+Note:
+Erster Gehversuch mit Docker, Docker Umgebung funktioniert.
 
 ----
 
@@ -97,8 +102,9 @@ Einfache Anwendungsfälle von Docker CLI:
 - laufende Container anzeigen
 - Container stoppen
 
-Note: Ziel: Docker CLI Grundlagen verstehen
-Note: Systemd-Analogie ansprechen
+Note:
+Ziel: Docker CLI Grundlagen verstehen
+Systemd-Analogie ansprechen
 
 ----
 
@@ -112,8 +118,9 @@ docker logs <containerID>
 
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
-Note: https://hub.docker.com/_/wordpress/
-Note: Ziel ist es zu erkennen, wie einfach die Instalation ist.
+Note:
+https://hub.docker.com/_/wordpress/
+Ziel ist es zu erkennen, wie einfach die Instalation ist.
 
 ----
 
@@ -123,12 +130,12 @@ Note: Ziel ist es zu erkennen, wie einfach die Instalation ist.
 - Zeige alle laufenden Docker-Prozesse an und erkenne, ob der Port 3000 auf Port 8080 exponiert ist!
 - Bonus: Betrachte die Log-Ausgabe des gitea-Containers in Echtzeit!
 
-Note: split view (TODO)
-Note: Bonus bonus: Gibt es noch andere Ports im gitea-Container, die nicht exponiert sind? Wenn ja, exponiere auch diesen Port!
-
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
-Note: docker run -d -p 3000:3000 gitea/gitea
+Note: 
+docker run -d -p 3000:3000 gitea/gitea
+split view (TODO)
+Bonus bonus: Gibt es noch andere Ports im gitea-Container, die nicht exponiert sind? Wenn ja, exponiere auch diesen Port!
 
 ----
 
@@ -174,9 +181,10 @@ TODO: Einfaches Bild zum Lifecycle
 
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
-Note: docker ps -a
-Note: docker stop
-Note: docker rm
+Note:
+docker ps -a
+docker stop
+docker rm
 
 ----
 
@@ -205,11 +213,13 @@ docker run -d -p 80 wordpress
 docker ps
 ```
 
-Note: split view (TODO)
+
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
-Note: Zwei unterschiedliche Container, binden auf zwei unterschiedlichen Ports.
-Note: Random-Ports erklären
+Note:
+split view (TODO)
+zwei unterschiedliche Container, binden auf zwei unterschiedlichen Ports.
+Random-Ports erklären
 
 ----
 
@@ -225,11 +235,13 @@ TODO
 docker run -v /some/content:/usr/share/nginx/html:ro -d nginx
 ```
 
-Note: split view (TODO)
+
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
-Note: Kurzer Hinweis auf Anonymous und Named-Volumes
-Note: ro,rw etc.
+Note: 
+split view (TODO)
+Kurzer Hinweis auf Anonymous und Named-Volumes
+ro,rw etc.
 
 ----
 
@@ -260,10 +272,11 @@ Note: ro,rw etc.
 
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
-Note: docker run -v $(pwd)/gitea-data:/data -p 3000:3000 -p 22:3022
-Note: docker stop `containterid`
-Note: docker rm `containerid`
-Note: docker rm -f `containerid`
+Note: 
+docker run -v $(pwd)/gitea-data:/data -p 3000:3000 -p 22:3022
+docker stop `containterid`
+docker rm `containerid`
+docker rm -f `containerid`
 
 ----
 
@@ -282,13 +295,12 @@ Note: docker rm -f `containerid`
 
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
-Note: docker run -p 3000:3000 -p 3022:22 -v $(pwd)/giteatest:/data gitea/gitea
+Note: 
+docker run -p 3000:3000 -p 3022:22 -v $(pwd)/giteatest:/data gitea/gitea
 
 ---
 
 # Environment-Variablen
-
-Note: Beispiel environment variablen an MariaDB zeigen.
 
 ```
 docker run -d \
@@ -303,6 +315,9 @@ docker run -d \
 docker inspect wordpress-database
 ```
 
+Note: 
+Beispiel environment variablen an MariaDB zeigen.
+
 ----
 
 ## Übung PostgresDB starten
@@ -313,7 +328,8 @@ docker inspect wordpress-database
  - Sorge dafür, dass das Datenverzeichnis der Datenbank (/var/lib/postgresql/data) auf ein lokales
    Volume ($(pwd)/volumes/db) gemappt ist!
 
-Note: docker run -d --name=gitea-database -e POSTGRES_USER=gitea -e POSTGRES_PASSWORD=gitea -e POSTGRES_DB=gitea -v $(pwd)/postgesql-data:/var/lib/postgresql/data postgres
+Note: 
+docker run -d --name=gitea-database -e POSTGRES_USER=gitea -e POSTGRES_PASSWORD=gitea -e POSTGRES_DB=gitea -v $(pwd)/postgesql-data:/var/lib/postgresql/data postgres
 
 ----
 
@@ -335,11 +351,12 @@ Note: docker run -d --name=gitea-database -e POSTGRES_USER=gitea -e POSTGRES_PAS
 Kommunikation über die "Docker default bridge"
 Namensauflösung per Docker-DNS
 
-Note: Wordpress-Container starten, mit mysql verknüpfen
-Note: Ziel: Interne Kommunikation zwischen Containern
-Note: docker run --link=wordpress-database -e WORDPRESS_DB_HOST=wordpress-database -e WORDPRESS_DB_USER=wordpress -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_NAME=wordpress wordpress
-
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+
+Note: 
+Wordpress-Container starten, mit mysql verknüpfen
+Ziel: Interne Kommunikation zwischen Containern
+docker run --link=wordpress-database -e WORDPRESS_DB_HOST=wordpress-database -e WORDPRESS_DB_USER=wordpress -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_NAME=wordpress wordpress
 
 ----
 
@@ -349,8 +366,9 @@ Note: docker run --link=wordpress-database -e WORDPRESS_DB_HOST=wordpress-databa
 - Konfiguriere den Container so, dass Gitea seine Konfiguration in der lokalen PostgreSQL speichert!
   - Benutze dafür die vorher erstellte Datenbank!
 
-Note: docker run -d --name=gitea-database -e POSTGRES_USER=gitea -e POSTGRES_PASSWORD=gitea -e POSTGRES_DB=gitea -v $(pwd)/postgesql-data:/var/lib/postgresql/data postgres
-Note: docker run -p 3000:3000 -v $(pwd)/gitea/data:/data -p 3000:3000 -p 3022:22 --link=gitea-database gitea/gitea
+Note: 
+docker run -d --name=gitea-database -e POSTGRES_USER=gitea -e POSTGRES_PASSWORD=gitea -e POSTGRES_DB=gitea -v $(pwd)/postgesql-data:/var/lib/postgresql/data postgres
+docker run -p 3000:3000 -v $(pwd)/gitea/data:/data -p 3000:3000 -p 3022:22 --link=gitea-database gitea/gitea
 
 ----
 
@@ -368,16 +386,16 @@ Verbinden von Containern
 
 ----
 
-Note: Was ist ein Image und was ist ein Container
-
-Note: Ein Image ist nicht lauffähig, es wir verwendet um ein Container zu erzeugen
-Note: Ein Container ist eine Instanz von einem Image und kann zur Laufzeit verändert werden
-Note: Beispiel: docker run -it ubuntu -> apt-get update; apt-get install git -y; exit
-Note:           docker run -it ubuntu git --version
-Note: Das Selbe nochmal mit commit
-Note: docker image ls
-
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+
+Note: 
+Was ist ein Image und was ist ein Container
+Ein Image ist nicht lauffähig, es wir verwendet um ein Container zu erzeugen
+Ein Container ist eine Instanz von einem Image und kann zur Laufzeit verändert werden
+Beispiel: docker run -it ubuntu -> apt-get update; apt-get install git -y; exit
+docker run -it ubuntu git --version
+Das Selbe nochmal mit commit
+docker image ls
 
 ----
 
@@ -394,6 +412,38 @@ Note: docker image ls
 
 - `docker pull`
 - Docker Hub
+- Tags und Versionierung 
+
+----
+
+## docker pull
+
+```bash
+docker pull nginx
+docker pull nginx:latest
+docker pull nginx:alpine
+docker images
+```
+
+<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+
+----
+
+## Docker Hub
+
+https://hub.docker.com/
+https://hub.docker.com/_/nginx
+
+Notes: 
+Öffentliche, offizielle Docker-Registry
+Kostenloser Account
+Alle tags sichtbar
+Doku zu Images
+Dockerfiles können (meist) eingesehen werden (link zu Github)
+
+----
+
+## Docker Registry
 
 ---
 
@@ -425,7 +475,8 @@ exit
 docker commit mynginx-container mynginx-image
 ```
 
-Note: Docker commit erklären mit Überleitung zu Dockerfile
+Note: 
+Docker commit erklären mit Überleitung zu Dockerfile
 
 ----
 
@@ -470,7 +521,8 @@ TODO: Link zu Dokumentation
 Welche "base" Images gibt es?
 Was sind die Unterschiede?
 
-Note: Alpine ist der bevorzugte, da er wesentlich kleiner ist als alle anderen.
+Note:
+Alpine ist der bevorzugte, da er wesentlich kleiner ist als alle anderen.
 
 ----
 
@@ -501,7 +553,8 @@ Ziel: Vereinfachung von docker cli
 Tool zur Vereinfachung von docker (v2)
 Tool zu benutzung von docker swarm (v3)
 
-Note: Example: wordpress mit postgresql
+Note: 
+Example: wordpress mit postgresql
 
 ----
 
