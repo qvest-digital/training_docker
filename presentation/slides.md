@@ -8,15 +8,27 @@ revealOptions:
 ----
 
 <div class="divided">
-  <img src="https://cdn.vox-cdn.com/thumbor/0jbIJZPcxu4WmYZZZQW3KNLiXns=/0x0:1024x576/1200x800/filters:focal(431x207:593x369)/cdn.vox-cdn.com/uploads/chorus_image/image/54925925/spongebob_rainbow_meme_video_16x9.0.jpg">
-  <h4>Volker Schmitz (v.schmitz@tarent.de)</h4>
+  <h4>Volker Schmitz</h4>
+  <img src="./images/saltyblu.png">
+  <h5>DevOps Engineer</h5> 
+  v.schmitz@tarent.de
 </div>
 
 <div class="divided">
-  <img src="https://cdn.vox-cdn.com/thumbor/0jbIJZPcxu4WmYZZZQW3KNLiXns=/0x0:1024x576/1200x800/filters:focal(431x207:593x369)/cdn.vox-cdn.com/uploads/chorus_image/image/54925925/spongebob_rainbow_meme_video_16x9.0.jpg">
   <h4>Daniel Zerlett</h4>
-   d.zerlett@tarent.de
+  <img src="./images/b00lduck.png">
+  <h5>Software Architect</h5>
+  d.zerlett@tarent.de
 </div>
+
+----
+
+- Überblick
+- Erste Schritte mit dem Docker CLI
+- Container-Lifecycle
+- Portfreigaben
+- Volumes
+- Eigene Images erstellen
 
 ---
 
