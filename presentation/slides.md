@@ -21,7 +21,17 @@ revealOptions:
   d.zerlett@tarent.de
 </div>
 
+Note: 
+Wer seid Ihr/Vorstellungsrunde
+Regeln: 
+- Du
+- Fragen direkt mit aufzeigen
+  - kein reinreden
+- Diskusionen erwünscht 
+
 ----
+
+# Themen
 
 - Überblick
 - Docker CLI
@@ -35,47 +45,57 @@ revealOptions:
 
 # Überblick
 
-* Was ist Docker?
-* Klassische Virtualisierung
-* Container
+- Was ist Docker?
+- Container vs. Virtualisierung
 
 ----
 
-## Was ist Docker
+## Was ist Docker?
 
-- Motivation
-- Seit wann gibt es Docker
-- cgroups
+"Docker ist eine freie Software zur Isolierung von Anwendungen mit Containervirtualisierung."<br>--*Wikipedia*
+
+- vereinfacht die Bereitstellung von Anwendungen
+- gewährleistet die Trennung und Verwaltung von Ressourcen
+- ermöglicht Isolation von Anwendungen und deren Abhängigkeiten
+- basiert auf Linux-Techniken wie Cgroups und Namespaces
+
+Notes: - Erscheinungsjahr: 2013
+Probleme ohne Docker:
+- Abhängigkeiten
+- Skalierung
+- Versionierung/Rollback
+- Rückstände
+
 
 ----
 
-### Klassische Virtualisierung
+### Container vs. Virtualisierung
 
-- VirtualBox, Hyper-V Server, QEMU
+<img src="images/docker-containerized-and-vm-transparent-bg.png"/>
 
-Note:
-Bild übernehmen/einfügen (TODO)
-https://de.wikipedia.org/wiki/Kernel-based_Virtual_Machine#/media/File:Kernel-based_Virtual_Machine.svg
+- unterschiedliche Anwendungsszenarien
+- kombinierbar
 
-----
-
-### Container
-
-- Taskrunner (ähnlich systemd/init)
-- Isolieren von Anwendungen und deren Abhängigkeiten
-  - eigenes Dateisystem
-- Plattformabhängig (i386/arm etc.)
-
-Note:
-Bild übernehmen/einfügen (TODO)
-https://auctores.de/software/verwendete-software-architektur/docker-und-container/
+Note: 
+- Allgemein
+  - Container nutzen den selben Kernel
+- Virtualisierung
+  - Virtuelle Resourcen
+  - pro VM zusätzlicher Kernel
+- Container
+  - Taskrunner (ähnlich systemd/init)
+  - Isolieren von Anwendungen und deren Abhängigkeiten
+    - eigenes Dateisystem
+  - Plattformabhängig (i386/arm etc.)
+- Beispiel
+  - Glusterfs
 
 ---
 
 # Docker CLI
 
-* Einstieg in Docker CLI
-* Grundlagen zur Container Verwaltung
+- Einführung in Docker CLI
+- Grundlagen der Containerverwaltung
 
 ----
 
@@ -87,8 +107,9 @@ docker run hello-world
 
 <iframe src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
-Note:
-Erster Gehversuch mit Docker, Docker Umgebung funktioniert.
+Note: Erster Gehversuch mit Docker, Docker Umgebung funktioniert.
+
+
 
 ----
 
@@ -118,6 +139,8 @@ docker logs <containerID>
 
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
+[Wordpress](http://localhost:8080)
+
 Note:
 https://hub.docker.com/_/wordpress/
 Ziel ist es zu erkennen, wie einfach die Instalation ist.
@@ -126,16 +149,28 @@ Ziel ist es zu erkennen, wie einfach die Instalation ist.
 
 ### Übung gitea
 
-- Starte "gitea" vom Docker-Image "gitea/gitea" im Hintergund und exponiere den Container-Port 3000 auf den Host-Port 8080!
-- Zeige alle laufenden Docker-Prozesse an und erkenne, ob der Port 3000 auf Port 8080 exponiert ist!
-- Bonus: Betrachte die Log-Ausgabe des gitea-Containers in Echtzeit!
+- Starte "gitea" vom Docker-Image "gitea/gitea" im Hintergund
+- Exponiere den Container-Port 3000 auf den Host-Port 3000
+- Zeige alle laufenden Docker-Prozesse an
+- Erkenne, ob der Port 3000 auf Port 3000 exponiert ist
+- Betrachte die Log-Ausgabe des gitea-Containers in Echtzeit
+
+Note:
+Bonus bonus: Gibt es noch andere Ports im gitea-Container, die nicht exponiert sind? Wenn ja, exponiere auch diesen Port!
+
+----
+
+### Übung gitea
+
+```shell
+docker run -d -p 3000:3000 gitea/gitea
+docker ps
+docker logs <containerID>
+```
 
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
-Note:
-docker run -d -p 3000:3000 gitea/gitea
-split view (TODO)
-Bonus bonus: Gibt es noch andere Ports im gitea-Container, die nicht exponiert sind? Wenn ja, exponiere auch diesen Port!
+
 
 ----
 
@@ -389,9 +424,10 @@ Verbinden von Containern
 
 # Container und Images
 
-Ein Container ist die Instanz aus einem Image und kann zur Laufzeit verändert werden.
-Ein Image ist nicht **lauffähig** und es ist eine *"Blaupause"* für Container.
-Ein Image wird statisch gebaut.
+Ein Container ist die aktive Instanz aus einem Image und kann zur Laufzeit verändert werden.
+Ein Image ist nicht **lauffähig** und es ist eine *"Speicherabbild"* eines Containers.
+Ein Image besteht aus mehreren unveränderlichen Layern. 
+Ein Image kann verändert werden indem ein oder mehrere Layer hinzugefügt werden.
 
 ----
 

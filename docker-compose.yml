@@ -21,4 +21,5 @@ services:
   docker:
     image: docker:dind
     privileged: true
+    network_mode: host
 
