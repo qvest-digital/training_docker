@@ -341,7 +341,8 @@ postgres
 
 ## Zusammenfassung
 
-- Container Namen geben (--name)
+- Container benamung
+  - docker run --name ...
 - Environment-Variablen an Container übergeben (-e)
 - docker inspect
 
