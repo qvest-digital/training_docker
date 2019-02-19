@@ -16,11 +16,11 @@ services:
       - "127.0.0.1:4200:4200"
     privileged: true
     environment:
-      - DOCKER_TLS_VERIFY="1"                                                           ✓  4869  16:01:14
-      - DOCKER_HOST="tcp://192.168.99.101:2376"
-      - DOCKER_CERT_PATH="/root/.docker/machine/machines/vbox-test"
-      - DOCKER_MACHINE_NAME="vbox-test"
-
+      - DOCKER_HOST=tcp://docker:2375
     volumes:
-#      - /var/run/docker.sock:/var/run/docker.sock
       - ${HOME}/.docker/machine/machines/vbox-test:/root/.docker/machine/machines/vbox-test:ro
+
+  docker:
+    image: docker:dind
+    privileged: true
+
