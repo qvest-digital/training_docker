@@ -10,7 +10,7 @@ services:
       - ${PWD}/presentation:/reveal
     init: true
 
-  shellinabox1:
+  shell_1:
     build: shells/shellinabox1
     ports:
       - "127.0.0.1:4200:4200"
