@@ -32,6 +32,20 @@ revealOptions:
 
 ---
 
+## Einstieg in Docker
+
+### Inhalt
+* Was ist Docker?
+* Klassische Virtualisierung
+* Container Virtualisierung
+
+### Ziele
+
+* Kleiner einblick in Docker Virtualisierung
+* Unterschiede in der Virtualiserung
+
+----
+
 ## Was ist Docker
 
 - Motivation
@@ -40,11 +54,7 @@ revealOptions:
 
 ----
 
-## Container vs. Virtual Machine
-
-----
-
-### Betriebssystemvirtualisierung
+### Klassische Virtualisierung
 
 * VirtualBox, Hyper-V Server, QEMU
 Note: Bild übernehmen/einfügen (TODO)
@@ -52,7 +62,7 @@ Note: https://de.wikipedia.org/wiki/Kernel-based_Virtual_Machine#/media/File:Ker
 
 ----
 
-### Containervirtualisierung
+### Container Virtualisierung
 
 * Taskrunner (ähnlich systemd/init)
 * Isolieren von Anwendungen und deren Abhängigkeiten durch eigenes Dateisystem
@@ -62,19 +72,28 @@ Note: https://auctores.de/software/verwendete-software-architektur/docker-und-co
 
 ---
 
-## Erste Schritte
+## Docker CLI
+
+### Inhalt
+* Einstieg in Docker CLI
+* Grundlagen zur Container Verwaltung
+
+### Ziele
+* Starten und Stoppen von Containern
+* Grundverständinss der CLI
+
+----
+
+## Docker CLI
 
 ```bash
 docker run hello-world
 ```
-Note: Ziel: Erster Gehversuch mit Docker, Docker Umgebung funktioniert.
-----
-
-## Erste Schritte
 
 <iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note: docker run hello-world
+Note: Erster Gehversuch mit Docker, Docker Umgebung funktioniert.
 
 ----
 
@@ -90,11 +109,6 @@ Einfache Anwendungsfälle von Docker CLI:
 
 Note: Ziel: Docker CLI Grundlagen verstehen
 Note: Systemd-Analogie ansprechen
-----
-
-## Docker CLI
-
-<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 ----
 
@@ -105,6 +119,9 @@ docker run -d -p 8080:80 wordpress
 docker ps
 docker logs <containerID>
 ```
+
+<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+
 Note: https://hub.docker.com/_/wordpress/
 Note: Ziel ist es zu erkennen, wie einfach die Instalation ist.
 
@@ -127,7 +144,7 @@ Note: docker run -d -p 3000:3000 gitea/gitea
 
 ### Zusammenfassung
 
-- Erstellen eines Containers mit exponiertem Port 
+- Erstellen eines Containers mit exponiertem Port
   - `docker run`
 - Containerübersicht
   - `docker ps`
@@ -151,9 +168,9 @@ TODO: Einfaches Bild zum Lifecycle
 - Created
   - Container ist erstellt aber nicht gestartet
 - Running
-  - Container ist gestartet 
+  - Container ist gestartet
 - Stopped
-  - Container ist noch vorhanden aber gestoppt 
+  - Container ist noch vorhanden aber gestoppt
 - Paused
   - Container ist angehalten
 - Deleted
@@ -171,7 +188,7 @@ Note: docker rm
 
 ### Übung Lifecycle
 
-- Alle laufenden Container sollen beendet und gelöscht werden. 
+- Alle laufenden Container sollen beendet und gelöscht werden.
 - Wie stelle ich fest, dass alle Container gelöscht sind?
 
 ---
@@ -225,7 +242,7 @@ Note: ro,rw etc.
 
 - Starte gitea mit folgenden Optionen:
   - Persistenz der Git-Konfiguration (Container-Pfad /data)
-  - Exponiere das Webinterface 
+  - Exponiere das Webinterface
     - Containerport 3000 auf lokalen Port 3000
   - Exponiere SSH
     - Containerport 22 auf lokalen Port 3022
@@ -240,28 +257,28 @@ Note: ro,rw etc.
 
 Note: docker run -v $(pwd)/gitea-data:/data -p 3000:3000 -p 22:3022
 Note: docker stop `containterid`
-Note: docker rm `containerid` 
+Note: docker rm `containerid`
 Note: docker rm -f `containerid`
-  
+
 ----
 
-### Zusammenfassung  
+### Zusammenfassung
 
 - Exponieren von beliebigen Ports
   - Random Ports
   - Fixed Ports
 - Einbinden von Volumes
   - Schreib/Lesezugriff
-  - Schreibgeschützt (ro) 
+  - Schreibgeschützt (ro)
 - Stoppen und löschen von Containern
   - docker stop
-  - docker rm  
-  - docker rm -f 
-  
-<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->  
+  - docker rm
+  - docker rm -f
+
+<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note: docker run -p 3000:3000 -p 3022:22 -v $(pwd)/giteatest:/data gitea/gitea
-  
+
 ---
 
 ## Environment-Variablen
@@ -286,11 +303,11 @@ docker inspect wordpress-database
 ### Übung PostgresDB starten
 
  - Starte einen [postgreSQL](https://hub.docker.com/_/postgres/) Docker-Container mit:
-   - einer automatisch erstellten Datenbank mit dediziertem Benutzeraccount 
+   - einer automatisch erstellten Datenbank mit dediziertem Benutzeraccount
    - Umgebungsvariablen POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB
- - Sorge dafür, dass das Datenverzeichnis der Datenbank (/var/lib/postgresql/data) auf ein lokales 
+ - Sorge dafür, dass das Datenverzeichnis der Datenbank (/var/lib/postgresql/data) auf ein lokales
    Volume ($(pwd)/volumes/db) gemappt ist!
-   
+
 Note: docker run -d --name=gitea-database -e POSTGRES_USER=gitea -e POSTGRES_PASSWORD=gitea -e POSTGRES_DB=gitea -v $(pwd)/postgesql-data:/var/lib/postgresql/data postgres
 
 ----
@@ -321,7 +338,7 @@ Note: docker run --link=wordpress-database -e WORDPRESS_DB_HOST=wordpress-databa
 - Stoppe und lösche nun deinen Gitea Container!
 - Konfiguriere den Container so, dass Gitea seine Konfiguration in der lokalen PostgreSQL speichert!
   - Benutze dafür die vorher erstellte Datenbank!
-  
+
 Note: docker run -d --name=gitea-database -e POSTGRES_USER=gitea -e POSTGRES_PASSWORD=gitea -e POSTGRES_DB=gitea -v $(pwd)/postgesql-data:/var/lib/postgresql/data postgres
 Note: docker run -p 3000:3000 -v $(pwd)/gitea/data:/data -p 3000:3000 -p 3022:22 --link=gitea-database gitea/gitea
 
@@ -355,7 +372,7 @@ Note: docker image ls
 - docker commit
 - docker images
   - docker image ls
- 
+
 
 # Docker Images erstellen
 
@@ -367,9 +384,9 @@ Note: docker image ls
 
 docker run --name mynginx-container -it nginx bash
   echo "<h1>Hello World</h1>" > /usr/share/nginx/html/index.html
-  exit 
+  exit
 docker commit mynginx-container mynginx-image
-  
+
 Note: Docker commit erklären mit Überleitung zu Dockerfile
 
 ----
@@ -380,7 +397,7 @@ Note: Docker commit erklären mit Überleitung zu Dockerfile
 Dockerfile
 ```
 FROM nginx
-RUN echo "<h1>Hello World from Dockerfile</h1>" > /usr/share/nginx/html/index.html 
+RUN echo "<h1>Hello World from Dockerfile</h1>" > /usr/share/nginx/html/index.html
 ```
 
 ```bash
