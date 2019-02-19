@@ -389,7 +389,9 @@ Verbinden von Containern
 
 # Container und Images
 
-- Begriffsklärung
+Ein Container ist die Instanz aus einem Image und kann zur Laufzeit verändert werden.
+Ein Image ist nicht **lauffähig** und es ist eine *"Blaupause"* für Container.
+Ein Image wird statisch gebaut.
 
 ----
 
@@ -397,8 +399,6 @@ Verbinden von Containern
 
 Note:
 Was ist ein Image und was ist ein Container
-Ein Image ist nicht lauffähig, es wir verwendet um ein Container zu erzeugen
-Ein Container ist eine Instanz von einem Image und kann zur Laufzeit verändert werden
 Beispiel: docker run -it ubuntu -> apt-get update; apt-get install git -y; exit
 docker run -it ubuntu git --version
 Das Selbe nochmal mit commit
