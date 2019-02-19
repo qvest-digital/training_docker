@@ -584,6 +584,13 @@ Alpine ist der bevorzugte, da er wesentlich kleiner ist als alle anderen.
 
 # docker-compose
 
+- Was ist das?
+- Generelle bedienung von *docker-compose*
+
+---
+
+## Was ist *docker-compose*
+
 *docker-compose* ist ein Tool zur vereinfachten abbildung und verwaltung von Multi-Container Applikationen.
 
 Es gibt zwei Versionen docker-compose:
@@ -598,6 +605,10 @@ Note:
 Example: wordpress mit postgresql
 Ziel: beide versionen basiern auf yml syntax
 Ziel: Vereinfachung von docker cli
+
+----
+
+## docker-compose beispiel
 
 ----
 
