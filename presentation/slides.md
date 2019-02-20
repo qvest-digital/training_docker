@@ -31,7 +31,7 @@ Regeln:
 
 ----
 
-# Themen
+## Themen
 
 - Überblick
 - Docker CLI
@@ -69,7 +69,7 @@ Probleme ohne Docker:
 
 ----
 
-### Container vs. Virtualisierung
+## Container vs. Virtualisierung
 
 <img src="images/docker-containerized-and-vm-transparent-bg.png"/>
 
@@ -92,14 +92,14 @@ Note:
 
 ---
 
-# Docker CLI
+# Einblick in die CLI
 
 - Einführung in Docker CLI
 - Grundlagen der Containerverwaltung
 
 ----
 
-## Docker CLI
+## hello-world
 
 ```bash
 docker run hello-world
@@ -108,8 +108,6 @@ docker run hello-world
 <iframe src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note: Erster Gehversuch mit Docker, Docker Umgebung funktioniert.
-
-
 
 ----
 
@@ -147,7 +145,7 @@ Ziel ist es zu erkennen, wie einfach die Instalation ist.
 
 ----
 
-### Übung gitea
+## Übung gitea
 
 - Starte "gitea" vom Docker-Image "gitea/gitea" im Hintergund
 - Exponiere den Container-Port 3000 auf den Host-Port 3000
@@ -160,7 +158,7 @@ Bonus bonus: Gibt es noch andere Ports im gitea-Container, die nicht exponiert s
 
 ----
 
-### Übung gitea
+## Übung gitea
 
 ```shell
 docker run -d -p 3000:3000 gitea/gitea
@@ -170,11 +168,9 @@ docker logs <containerID>
 
 <iframe width="100%" src="http://localhost:4202?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
-
-
 ----
 
-### Zusammenfassung
+## Zusammenfassung
 
 - Erstellen eines Containers mit exponiertem Port
   - `docker run`
@@ -190,26 +186,14 @@ docker logs <containerID>
 
 # Container-Lifecycle
 
-- TODO
+- Überblick der Container Zustände
+- Wie erreicht man Container Zustände
 
 ----
+
+## Container-Lifecycle
 
 TODO: Einfaches Bild zum Lifecycle
-
-----
-
-- Created
-  - Container ist erstellt aber nicht gestartet
-- Running
-  - Container ist gestartet
-- Stopped
-  - Container ist noch vorhanden aber gestoppt
-- Paused
-  - Container ist angehalten
-- Deleted
-  - Container ist gelöscht
-
-----
 
 <iframe width="100%" src="http://localhost:4203?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
@@ -230,12 +214,28 @@ docker rm
 ## Zusammenfassung
 
 - Docker Status übersicht und Lifecycle
+  - Created
+    - Container ist erstellt aber nicht gestartet
+  - Running
+    - Container ist gestartet
+  - Stopped
+    - Container ist noch vorhanden aber gestoppt
+  - Paused
+    - Container ist angehalten
+  - Deleted
+    - Container ist gelöscht
 
 ---
 
-# Portfreigaben
+# Ports & Volumes
+
+- Einblick in Portfreigaben
+- Einblick in Volumes
+  - Schreibberechtigungen
 
 ----
+
+## Einblick Portfreigaben
 
 Docker kann Container Ports an Hostports binden (exponieren).
 
@@ -244,7 +244,6 @@ docker run -d -p 80:8081 wordpress
 docker run -d -p 80 wordpress
 docker ps
 ```
-
 
 <iframe width="100%" src="http://localhost:4204?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
@@ -255,18 +254,11 @@ Random-Ports erklären
 
 ----
 
-## Zusammenfassung
-
-TODO
-
----
-
-# Volumes
+## Einblick Volumes
 
 ```shell
 docker run -v /some/content:/usr/share/nginx/html:ro -d nginx
 ```
-
 
 <iframe width="100%" src="http://localhost:4205?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
@@ -332,7 +324,14 @@ docker run -p 3000:3000 -p 3022:22 -v $(pwd)/giteatest:/data gitea/gitea
 
 ---
 
-# Environment-Variablen
+# Umgebungsvariablen
+
+- Benutzen von Umgebungsvariablen
+- Funktion von Umgebungsvariablen
+
+----
+
+## Einblick Umgebungsvariablen
 
 ```
 docker run -d \
@@ -387,6 +386,8 @@ postgres
 
 ----
 
+## Einblick Kommunikation Netzwerk
+
 Kommunikation über die "Docker default bridge"
 Namensauflösung per Docker-DNS
 
@@ -399,9 +400,9 @@ docker run --link=wordpress-database -e WORDPRESS_DB_HOST=wordpress-database -e 
 
 ----
 
-### Übung: Gitea mit PostgreSQL verbinden
+## Übung: Gitea mit PostgreSQL
 
-- Stoppe und lösche nun deinen Gitea Container!
+- Stoppe und lösche deinen Gitea Container
 - Konfiguriere den Container so, dass Gitea seine Konfiguration in der lokalen PostgreSQL speichert!
   - Benutze dafür die vorher erstellte Datenbank!
 
@@ -411,7 +412,17 @@ docker run -p 3000:3000 -v $(pwd)/gitea/data:/data -p 3000:3000 -p 3022:22 --lin
 
 ----
 
-### Zusammenfassung
+## Kommunikation über Sockets
+
+```bash
+docker run -p 9000:9000 -v "/var/run/docker.sock:/var/run/docker.sock" portainer/portainer
+```
+
+<iframe width="100%" src="http://localhost:4208?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+
+----
+
+## Zusammenfassung
 
 Verbinden von Containern
   - --link
@@ -421,6 +432,13 @@ Verbinden von Containern
 
 # Container und Images
 
+- Begriffsklärung
+- Unterschiede
+
+----
+
+## Definition Container / Images
+
 Ein Container ist die aktive Instanz aus einem Image und kann zur Laufzeit verändert werden.
 Ein Image ist nicht **lauffähig** und es ist eine *"Speicherabbild"* eines Containers.
 Ein Image besteht aus mehreren unveränderlichen Layern.
@@ -428,7 +446,7 @@ Ein Image kann verändert werden indem ein oder mehrere Layer hinzugefügt werde
 
 ----
 
-# Container und Images
+## Container und Images
 
 <iframe width="100%" src="http://localhost:4209?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
@@ -621,7 +639,7 @@ Alpine ist der bevorzugte, da er wesentlich kleiner ist als alle anderen.
 - Generelle bedienung von *docker-compose*
 - Netzwerke in docker-compose
 
----
+----
 
 ## Was ist *docker-compose*
 
@@ -633,7 +651,6 @@ Es gibt zwei Versionen docker-compose:
   - Vereinfachung von docker (v2)
 - v3
    - Benutzung von docker swarm (v3)
-
 
 Note:
 Example: wordpress mit postgresql
@@ -685,6 +702,17 @@ docker-compose rm
 
 ----
 
+## docker-compose stacks
+
+- docker-compose definiert einen Stack für jedes "docker-compose File"
+- Die Container in einem Stack befinden sich im selben Netzwerk.
+
+```shell
+docker-compose -p mystack up -d
+```
+
+----
+
 ## Zusamenfassung
 
 * *docker-compose* Files
@@ -693,6 +721,7 @@ docker-compose rm
   * stop
   * rm
   * logs
+- Einblick in docker-compose Stacks
 
 ---
 
@@ -717,25 +746,27 @@ Note:
   - Wie funktioniert ändert sich die Netzwerk definition?
   - Wo liegt darin der vorteil?
 
+----
+
 ## Zusammenfassung
 
 - Docker CLI *network*
 - Verständniss von Docker Netzwerken
 
---
+---
 
 # Image Layer
 
 - Was sind Layerf
 - Dockerfile im Bezug au Layer
 
----
+----
 
 ## Was sind Layer
 - Layer sind unveränderliche Schichten eines Images
 - Jeder befehl in einer Dockerfile erzeugt Layer
 
----
+----
 
 ## Dockerfile Layer
 
@@ -746,11 +777,15 @@ Note:
 
 ----
 
-### Übung
+## Übung
 
 TBD
 
----
+----
+
+## Zusammenfassung
+
+----
 
 ## Advanced Layer
 
@@ -775,6 +810,11 @@ TBD
 - COPY --from
 - STOPSIGNAL
 
+Note:
+- Es existieren zwei Dockerfiles die beide Funktionieren
+- ein Go Service ein Java Service
+  - der Java service ist selbsterarbeitet
+
 ----
 
 ## Übung
@@ -792,14 +832,6 @@ TBD
 - Dockerfiles vergleichen
 - Layer Vergleichen
 - Image Größen vergleichen
-
----
-
-## Ziel:
-
-- Es existieren zwei Dockerfiles die beide Funktionieren
-- ein Go Service ein Java Service
-  - der Java service ist selbsterarbeitet
 
 ---
 
