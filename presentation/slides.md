@@ -105,7 +105,7 @@ Note:
 docker run hello-world
 ```
 
-<iframe src="http://shell_1:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note: Erster Gehversuch mit Docker, Docker Umgebung funktioniert.
 
@@ -137,7 +137,7 @@ docker ps
 docker logs <containerID>
 ```
 
-<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:4201?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 [Wordpress](http://localhost:8080)
 
@@ -168,7 +168,7 @@ docker ps
 docker logs <containerID>
 ```
 
-<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:4202?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 
 
@@ -185,9 +185,6 @@ docker logs <containerID>
 - Docker CLI Hilfe
   - `docker help`
   - `docker help <subcommand>`
-
-Note: split view (TODO)
-<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 ---
 
@@ -214,7 +211,7 @@ TODO: Einfaches Bild zum Lifecycle
 
 ----
 
-<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:4203?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 docker ps -a
@@ -249,7 +246,7 @@ docker ps
 ```
 
 
-<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:4204?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 split view (TODO)
@@ -271,7 +268,7 @@ docker run -v /some/content:/usr/share/nginx/html:ro -d nginx
 ```
 
 
-<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:4205?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 split view (TODO)
@@ -305,7 +302,7 @@ ro,rw etc.
 - Container mit den selben Optionen wieder erstellen
 - Was passiert mit der Konfiguration und den Nutzdaten von gitea?
 
-<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:4206?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 docker run -v $(pwd)/gitea-data:/data -p 3000:3000 -p 22:3022
@@ -328,7 +325,7 @@ docker rm -f `containerid`
   - docker rm
   - docker rm -f
 
-<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:4207?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 docker run -p 3000:3000 -p 3022:22 -v $(pwd)/giteatest:/data gitea/gitea
@@ -393,7 +390,7 @@ postgres
 Kommunikation über die "Docker default bridge"
 Namensauflösung per Docker-DNS
 
-<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:4208?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 Wordpress-Container starten, mit mysql verknüpfen
@@ -433,7 +430,7 @@ Ein Image kann verändert werden indem ein oder mehrere Layer hinzugefügt werde
 
 # Container und Images
 
-<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:4209?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 Was ist ein Image und was ist ein Container
@@ -481,7 +478,7 @@ docker pull nginx:alpine
 docker images
 ```
 
-<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:4210?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 Wie lade ich Images herunter?
@@ -509,7 +506,7 @@ Dockerfiles können (meist) eingesehen werden (link zu Github)
 - Docker Tag verweist auf die registry
 - Docker push
 
-<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:4211?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 - Pullen eines containers
@@ -675,7 +672,7 @@ docker-compose stop
 docker-compose rm
 ```
 
-<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:4212?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 ----
 
