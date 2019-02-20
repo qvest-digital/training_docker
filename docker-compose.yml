@@ -8,60 +8,62 @@ services:
     volumes:
       - ${PWD}/presentation:/reveal
     init: true
-  shell_0:
-    build: shells/shellinabox1
+  shell_0: &build
+    build:
+      context: shells/shellinabox1
+      args:
+        GATEWAY: ${DOCKER_BRIDGE_GATEWAY}
     ports:
       - "127.0.0.1:4200:4200"
   shell_1:
-    build: shells/shellinabox1
+    <<: *build
     ports:
       - "127.0.0.1:4201:4200"
   shell_2:
-    build: shells/shellinabox1
+    <<: *build
     ports:
       - "127.0.0.1:4202:4200"
   shell_3:
-    build: shells/shellinabox1
+    <<: *build
     ports:
       - "127.0.0.1:4203:4200"
   shell_4:
-    build: shells/shellinabox1
+    <<: *build
     ports:
       - "127.0.0.1:4204:4200"
   shell_5:
-    build: shells/shellinabox1
+    <<: *build
     ports:
       - "127.0.0.1:4205:4200"
   shell_6:
-    build: shells/shellinabox1
+    <<: *build
     ports:
       - "127.0.0.1:4206:4200"
   shell_7:
-    build: shells/shellinabox1
+    <<: *build
     ports:
       - "127.0.0.1:4207:4200"
   shell_8:
-    build: shells/shellinabox1
+    <<: *build
     ports:
       - "127.0.0.1:4208:4200"
   shell_9:
-    build: shells/shellinabox1
+    <<: *build
     ports:
       - "127.0.0.1:4209:4200"
   shell_10:
-    build: shells/shellinabox1
+    <<: *build
     ports:
       - "127.0.0.1:4210:4200"
   shell_11:
-    build: shells/shellinabox1
+    <<: *build
     ports:
       - "127.0.0.1:4211:4200"
   shell_12:
-    build: shells/shellinabox1
+    <<: *build
     ports:
       - "127.0.0.1:4212:4200"
   docker:
     image: docker:dind
     privileged: true
     network_mode: host
-
