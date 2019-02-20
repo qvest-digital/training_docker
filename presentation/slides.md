@@ -21,13 +21,13 @@ revealOptions:
   d.zerlett@tarent.de
 </div>
 
-Note: 
+Note:
 Wer seid Ihr/Vorstellungsrunde
-Regeln: 
+Regeln:
 - Du
 - Fragen direkt mit aufzeigen
   - kein reinreden
-- Diskusionen erwünscht 
+- Diskusionen erwünscht
 
 ----
 
@@ -76,7 +76,7 @@ Probleme ohne Docker:
 - unterschiedliche Anwendungsszenarien
 - kombinierbar
 
-Note: 
+Note:
 - Allgemein
   - Container nutzen den selben Kernel
 - Virtualisierung
@@ -105,7 +105,7 @@ Note:
 docker run hello-world
 ```
 
-<iframe src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe src="http://shell_1:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note: Erster Gehversuch mit Docker, Docker Umgebung funktioniert.
 
@@ -426,7 +426,7 @@ Verbinden von Containern
 
 Ein Container ist die aktive Instanz aus einem Image und kann zur Laufzeit verändert werden.
 Ein Image ist nicht **lauffähig** und es ist eine *"Speicherabbild"* eines Containers.
-Ein Image besteht aus mehreren unveränderlichen Layern. 
+Ein Image besteht aus mehreren unveränderlichen Layern.
 Ein Image kann verändert werden indem ein oder mehrere Layer hinzugefügt werden.
 
 ----
@@ -509,7 +509,7 @@ Dockerfiles können (meist) eingesehen werden (link zu Github)
 - Docker Tag verweist auf die registry
 - Docker push
 
-TODO IFRAME
+<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 - Pullen eines containers
@@ -586,7 +586,7 @@ docker run -d -p 8082:80 mynginx-image:2
 - Bonus: Nutze Nginx mit alpine anstatt ubuntu
 - Bonus vergleiche die Image größen
 
-TODO: Link zu Dokumentation
+https://hub.docker.com/_/nginx
 
 ----
 
@@ -622,6 +622,7 @@ Alpine ist der bevorzugte, da er wesentlich kleiner ist als alle anderen.
 
 - Was ist das?
 - Generelle bedienung von *docker-compose*
+- Netzwerke in docker-compose
 
 ---
 
@@ -644,21 +645,65 @@ Ziel: Vereinfachung von docker cli
 
 ----
 
-## docker-compose beispiel
+## docker-compose Beispiel
+
+```yaml
+version: "2.2"
+services:
+  wordpress:
+    image: wordpress
+    ports:
+      - "8080:80"
+  wordpress-database:
+    image: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD: supersicher
+      - MYSQL_USER: wordpress
+      - MYSQL_PASSWORD: wordpress
+      - MYSQL_DATABASE: wordpress
+    volumes:
+      - $(pwd)/mariadb-data:/var/lib/mysql
+```
 
 ----
 
-### Übung
+## docker-compose Befehle
+
+```shell
+docker-compose up -d
+docker-compose stop
+docker-compose rm
+```
+
+<iframe width="100%" src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+
+----
+
+## Übung
 
 - Stoppe und lösche deine vorrangegangen Container ohne Nutzdatemverlust.
 - Erstelle eine docker-compose.yml in der [gitea](https://hub.docker.com/r/gitea/gitea/) und mariadb als Services beschrieben sind.
   - Stelle sicher das alle Volumes und Ports erhalten bleiben.
 - Lagere das Daten-Verzeichnis von gitea auf deinen Computer aus.
 
+----
+
+## Zusamenfassung
+
+* *docker-compose* Files
+* *docker-compose* CLI
+  * up
+  * stop
+  * rm
+  * logs
+
 ---
 
-## Docker Netzwerke
+# Docker Netzwerke
 
+- Kapselung von Services durch Netzwerke
+
+Note:
 - docker network ls
 - docker-compose naming (netzwerke und container)
 - docker-compose -p
@@ -667,17 +712,31 @@ Ziel: Vereinfachung von docker cli
 
 ----
 
-### Übung
+## Übung
 
 - Füge deiner docker-compose.yml ein "seprates" Netzwerk hinzu!
 - Richte nun die Verbindung von gitea und mariaDB über das neuerstellte Netzwerk ein.
+- Bonus: Trenne die beiden *compose*-Files
+  - Wie funktioniert ändert sich die Netzwerk definition?
+  - Wo liegt darin der vorteil?
+
+## Zusammenfassung
+
+- Docker CLI *network*
+- Verständniss von Docker Netzwerken
+
+--
+
+# Image Layer
+
+- Was sind Layerf
+- Dockerfile im Bezug au Layer
 
 ---
 
-## Layer und Storage Driver (theorie only)
-
-- Was ist das eigentlich?
-- Wo sehe ich das?
+## Was sind Layer
+- Layer sind unveränderliche Schichten eines Images
+- Jeder befehl in einer Dockerfile erzeugt Layer
 
 ---
 
@@ -692,9 +751,7 @@ Ziel: Vereinfachung von docker cli
 
 ### Übung
 
-- Erweitere deine Dockerfile so, dass die Anwendung nicht mehr unter dem default User und Gruppe läuft!
-  - Stelle mit RUN sicher, dass der User berechtigungen hat das Binary zu starten und im Verzeichnis (/app) zu schreiben.
-- Konfiguriere die Anwendung über ENV variablen, stelle sicher dass alle Ports exponiert werden.
+TBD
 
 ---
 
@@ -714,7 +771,7 @@ Ziel: Vereinfachung von docker cli
 
 ---
 
-### Multistagebuilds
+# Multistagebuilds
 
 - Konzept vorstellen
   - beispiel an Go Service
@@ -723,7 +780,7 @@ Ziel: Vereinfachung von docker cli
 
 ----
 
-#### Übung
+## Übung
 
 - Baue in einem vorrangestellen Dockercontainer dein Java Jar zusammen, nenne diesen "build"!
   - benutze hierfür Gradle
@@ -731,9 +788,9 @@ Ziel: Vereinfachung von docker cli
   - Nutze hierfür die Docker "Multistage Build"-Funktionalität (COPY --from=build)
 - Java Service bauen mit multistage (service tut das gleiche (wie go service) ist in aber in Java geschrieben)
 
----
+----
 
-### Zusammenfassung Layer, Praxisbeispiel
+## Zusammenfassung Layer, Praxisbeispiel
 
 - Dockerfiles vergleichen
 - Layer Vergleichen
@@ -741,7 +798,7 @@ Ziel: Vereinfachung von docker cli
 
 ---
 
-#### Ziel:
+## Ziel:
 
 - Es existieren zwei Dockerfiles die beide Funktionieren
 - ein Go Service ein Java Service
@@ -749,7 +806,7 @@ Ziel: Vereinfachung von docker cli
 
 ---
 
-### Best practice
+# Best practice
 
 - Konfiguration über Umgebungsvariablen
 - Logging über STDOUT
@@ -759,7 +816,7 @@ Ziel: Vereinfachung von docker cli
 
 ----
 
-#### Übung:
+## Übung:
 
 - start.sh
   - mit debug help etc
@@ -772,11 +829,38 @@ Ziel: Vereinfachung von docker cli
 
 ---
 
-## Dynamisches routing labels mit traefik -- optional
+# Security
+
+- docker User Space
+- dies kann man Reglementieren
+- Angreifbare - libaries im Container/Image
+- Docker Hub Security Scan
+- Docker
+
+----
+
+## User Space
+
+- Docker läuft als root
+- Container laufen Default als root
+- Kein standard Zugriff auf das Host Netz
+
+----
+
+## Was tun?
+
+- Dockerfile
+  - USER
+DockerCLI
+  - *--user*
+
+---
+
+# Dynamisches routing labels mit traefik
 
 Traefik beispiel zeigen
 
 ----
 
-### Übung alles in traefik einbauen
+## traefik als frontend Komponente einbauen
 
