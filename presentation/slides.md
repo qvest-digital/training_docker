@@ -1,9 +1,14 @@
 ---
 revealOptions:
   transition: fade
+
 ---
 
 ![docker](./images/docker_logo.png)
+
+<div id="header-footer">
+  <p class="slide-footer">Volker Schmit & Daniel Zerlett by tarent</p>
+</div>
 
 ----
 
