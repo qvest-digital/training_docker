@@ -90,6 +90,12 @@ Note:
 - Beispiel
   - Glusterfs
 
+----
+
+## Architektur Überblick
+
+<img src="images/engine-components-flow.png"/>
+
 ---
 
 # Einblick in die CLI
