@@ -462,9 +462,12 @@ docker run -d -p 3000:3000 -v /root/examples/gitea/data:/data -p 3000:3000 -p 30
 ## Kommunikation über Sockets
 
 ```bash
-docker run -p 9000:9000 -v "/var/run/docker.sock:/var/run/docker.sock" portainer/portainer
+docker run -d -p 9000:9000 \
+  -v "/var/run/docker.sock:/var/run/docker.sock" \
+  portainer/portainer
 ```
 
+<iframe src="http://localhost:4208?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 
 ----
