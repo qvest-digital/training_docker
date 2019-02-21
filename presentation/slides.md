@@ -388,9 +388,12 @@ Beispiel environment variablen an MariaDB zeigen.
 
  - Starte einen [postgreSQL](https://hub.docker.com/_/postgres/) Docker-Container mit:
    - einer automatisch erstellten Datenbank mit dediziertem Benutzeraccount
-   - Umgebungsvariablen POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB
- - Sorge dafür, dass das Datenverzeichnis der Datenbank (/var/lib/postgresql/data) auf ein lokales
-   Volume ($(pwd)/volumes/db) gemappt ist!
+   - Umgebungsvariablen
+     - POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB
+ - Sorge dafür, dass das Datenverzeichnis lokal gemapped ist.
+   - /var/lib/postgresql/data) auf ein lokales - $(pwd)/volumes/db
+
+<iframe class=small width="100%" src="http://localhost:4206?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 docker run -d \
@@ -451,8 +454,8 @@ docker run --link=wordpress-database -e WORDPRESS_DB_HOST=wordpress-database -e 
 <iframe class="small" src="http://localhost:4208?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
-docker run -d --name=gitea-database -e POSTGRES_USER=gitea -e POSTGRES_PASSWORD=gitea -e POSTGRES_DB=gitea -v $(pwd)/postgesql-data:/var/lib/postgresql/data postgres
-docker run -p 3000:3000 -v $(pwd)/gitea/data:/data -p 3000:3000 -p 3022:22 --link=gitea-database gitea/gitea
+docker run -d --name=gitea-database -e POSTGRES_USER=gitea -e POSTGRES_PASSWORD=gitea -e POSTGRES_DB=gitea -v /root/examples/gitea/psql/data:/var/lib/postgresql/data postgres
+docker run -d -p 3000:3000 -v /root/examples/gitea/data:/data -p 3000:3000 -p 3022:22 --link=gitea-database gitea/gitea
 
 ----
 
