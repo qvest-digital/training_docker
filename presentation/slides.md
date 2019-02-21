@@ -482,6 +482,13 @@ Ein Image kann verändert werden indem ein oder mehrere Layer hinzugefügt werde
 
 ## Container und Images
 
+```shell
+docker run -it ubuntu bash
+  >> apt-get install git
+  >> exit
+docker run -it ubuntu git --version
+```
+
 <iframe width="100%" src="http://localhost:4209?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
