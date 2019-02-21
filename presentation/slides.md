@@ -4,7 +4,7 @@ revealOptions:
 
 ---
 
-<div id="header-footer">  
+<div id="header-footer">
   <p class="slide-footer"><img src="images/light.svg" height="40" width="200"><br>tarent solutions GmbH<br>Volker Schmitz & Daniel Zerlett</p>
 </div>
 
@@ -126,7 +126,7 @@ Erster Gehversuch mit Docker, Docker Umgebung funktioniert.
 
 ## Docker CLI
 
-Docker CLI ist ein Kommandozeilen-Tool mit dem sich auf einfachste Weise der Docker-Daemon kontrollieren lässt.
+Docker CLI ist ein Kommandozeilen-Tool mit dem sich der Docker-Daemon kontrollieren lässt.
 
 Einfache Anwendungsfälle von Docker CLI:
 - Container erstellen
