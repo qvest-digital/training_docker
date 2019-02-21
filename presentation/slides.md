@@ -511,7 +511,7 @@ Das Selbe nochmal mit commit
 
 ---
 
-# Docker Hub und Registry
+# Docker Hub & Registry
 
 - `docker pull`
 - Docker Hub
