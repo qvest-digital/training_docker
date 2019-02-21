@@ -662,7 +662,6 @@ docker run -d -p 8082:80 mynginx-image:2
 ## Übung
 
 - Baue ein Docker-Image mit tag mynginx, das auf nginx basiert
-- Tagge den Container als mynginx
 - Baue einen zweiten nginx container der den "COPY"-Befehl nutzt.
 - Tagge den Container als mynginx in Version 2
 - Bonus: Nutze Nginx mit alpine anstatt ubuntu
@@ -679,8 +678,16 @@ https://en.wikipedia.org/wiki/Tantrum
 
 ## Docker Base Images
 
-- Übersicht
-- Unterschiede
+- scratch
+  - Ur-Image aller Images
+  - Leeres Image
+- alpine
+  - full featured
+  - ca. 4.5MB
+- debian, ubuntu, centos, etc.
+  - im Prinzip wie *alpine*
+  - ca 100MB(!) groß
+  - viele unnötige Pakete
 
 Note:
 Alpine ist der bevorzugte, da er wesentlich kleiner ist als alle anderen.
@@ -693,15 +700,75 @@ Alpine ist der bevorzugte, da er wesentlich kleiner ist als alle anderen.
   - FROM
   - COPY
   - RUN
-  - CMD
 - Docker CLI
   - docker build -t tag:version .
   - docker commit image tag:version
 - Docker Hub
+- Docker Base images
 
 ---
 
 # Optional
+
+---
+
+# Entrypoint vs. Command
+
+- Entrypoint definition
+- Command definition
+- Unterschiede
+
+----
+
+## Entrypoint
+
+- Entrypoint definiert den Einstiegspunkt des Images:
+  - Executable
+  - dessen Parameter
+- Exec Syntax im Dockerfile
+  - *Keyword*: **ENTRYPOINT**
+
+```dockerfile
+# Exec-Form
+ENTRYPOINT ["executable", "param1", "param2"]
+ENTRYPOINT [ "sh", "-c", "echo $HOME" ]
+
+# Shell-Form (nicht zu Empfehlen)
+ENTRYPOINT "echo $HOME"
+```
+
+Note:
+Using this syntax, Docker will not use a command shell, which means that normal shell processing does not happen. If you need shell processing features, then you can start the JSON array with the shell command.
+
+----
+
+## Command (CMD)
+
+- CMD kann den Einstiegspunkt in das Image definieren.
+- Gibt es einen *ENTRYPOINT*
+  - CMD wird an *ENTRYPOINT* angehangen
+- Gibt es **keinen** *ENTRYPOINT*
+  - Dann verhält sich **CMD** wie **ENTRYPOINT**
+
+```dockerfile
+# exec form, this is the preferred form
+CMD ["executable","param1","param2"]
+
+# as default parameters to ENTRYPOINT
+CMD ["param1","param2"]
+
+# shell form
+CMD command param1 param2
+```
+
+----
+
+## Entrypoint und Command
+|  |  No ENTRYPOINT  |  ENTRYPOINT [ "ep_exe", "ep_p1" ]  |
+|----|----|----|
+| No CMD | illegal |  ep_exe ep_p1  |
+| CMD [ "cmd_exe", "cmd_p1" ] | cmd_exe cmd_p1   |  ep_exe ep_p1 cmd_exe cmd_p1 |
+
 
 ---
 
