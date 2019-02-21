@@ -595,6 +595,15 @@ Note:
 - docker tag nginx localhost:5000/nginx
 - docker push localhost:5000/nginx
 
+----
+
+## Zusammenfassung
+
+- https://hub.docker.com
+- Eigene Registries
+  - pushen in nicht standard *registry*
+- Versionierung über Tags
+
 ---
 
 # Images erstellen
@@ -607,23 +616,21 @@ Note:
 
 ## Image mit dem CLI erstellen
 
-### Beispiel: nginx mit eigener index.html
+Beispiel: nginx mit eigener index.html
 
 ```bash
 # bash im nginx Container starten
-docker run --name mynginx-container -it nginx bash
-```
-
-```bash
+docker run --name mynginx-container -d -p 8089:80 nginx
+docker exec -it mynginx-container bash
 # im Container
 echo "<h1>Hello World</h1>" > /usr/share/nginx/html/index.html
 exit
-```
 
-```bash
 # Neues Image mit Änderungen erstellen
 docker commit mynginx-container mynginx-image
 ```
+
+<iframe class=small width="100%" src="http://localhost:4211?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 Docker commit erklären mit Überleitung zu Dockerfile
@@ -818,8 +825,8 @@ Note:
 
 # Image Layer
 
-- Was sind Layerf
-- Dockerfile im Bezug au Layer
+- Was sind Layer
+- Dockerfile im Bezug auf Layer
 
 ----
 
