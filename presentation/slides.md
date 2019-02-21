@@ -524,9 +524,9 @@ Das Selbe nochmal mit commit
 ## Zusammenfassung
 
 - Unterschied Container und Images
-- docker commit
+- `docker commit`
   - Erstellen eines Images aus einem Container
-- docker images
+- `docker images`
   - Anzeigen von Images
 
 ---
@@ -581,20 +581,19 @@ Dockerfiles können (meist) eingesehen werden (link zu Github)
 
 ## Docker Registry
 
-- Simple eigene Registry erstellen
+- Eigene Registry erstellen
   - https://hub.docker.com/_/registry
-- Docker Tag verweist auf die registry
-- Docker push
+- Docker Tag verweist auf die Registry
+- `docker push`
 
 <iframe width="100%" src="http://localhost:4211?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 - Pullen eines containers
-- retaggen für eigene registry
-  - docker pull nginx:latest
-  - docker image tag nginx localhost:5000/myimage
-  - docker push localhost:5000/myimage
-- Eigene Registy pushen
+- docker run -d -p 5000:5000 --restart always registry:2
+- docker pull nginx
+- docker tag nginx localhost:5000/nginx
+- docker push localhost:5000/nginx
 
 ---
 
