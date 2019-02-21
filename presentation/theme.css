@@ -371,11 +371,6 @@ iframe {
     height: 400px;
 }
 
-iframe.small {
-    width: 90%;
-    height: 250px;
-}
-
 .reveal .footer {
     position: absolute;
     bottom: 1em;
