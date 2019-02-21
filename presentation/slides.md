@@ -524,9 +524,9 @@ Das Selbe nochmal mit commit
 ## Zusammenfassung
 
 - Unterschied Container und Images
-- docker commit
+- `docker commit`
   - Erstellen eines Images aus einem Container
-- docker images
+- `docker images`
   - Anzeigen von Images
 
 ---
@@ -581,20 +581,28 @@ Dockerfiles können (meist) eingesehen werden (link zu Github)
 
 ## Docker Registry
 
-- Simple eigene Registry erstellen
+- Eigene Registry erstellen
   - https://hub.docker.com/_/registry
-- Docker Tag verweist auf die registry
-- Docker push
+- Docker Tag verweist auf die Registry
+- `docker push`
 
 <iframe width="100%" src="http://localhost:4211?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 - Pullen eines containers
-- retaggen für eigene registry
-  - docker pull nginx:latest
-  - docker image tag nginx localhost:5000/myimage
-  - docker push localhost:5000/myimage
-- Eigene Registy pushen
+- docker run -d -p 5000:5000 --restart always registry:2
+- docker pull nginx
+- docker tag nginx localhost:5000/nginx
+- docker push localhost:5000/nginx
+
+----
+
+## Zusammenfassung
+
+- https://hub.docker.com
+- Eigene Registries
+  - pushen in nicht standard *registry*
+- Versionierung über Tags
 
 ---
 
@@ -608,23 +616,21 @@ Note:
 
 ## Image mit dem CLI erstellen
 
-### Beispiel: nginx mit eigener index.html
+Beispiel: nginx mit eigener index.html
 
 ```bash
 # bash im nginx Container starten
-docker run --name mynginx-container -it nginx bash
-```
-
-```bash
+docker run --name mynginx-container -d -p 8089:80 nginx
+docker exec -it mynginx-container bash
 # im Container
 echo "<h1>Hello World</h1>" > /usr/share/nginx/html/index.html
 exit
-```
 
-```bash
 # Neues Image mit Änderungen erstellen
 docker commit mynginx-container mynginx-image
 ```
+
+<iframe class=small width="100%" src="http://localhost:4211?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 Docker commit erklären mit Überleitung zu Dockerfile
@@ -643,34 +649,38 @@ RUN echo "<h1>Hello World from Dockerfile</h1>" > \
 ```bash
 # Image bauen
 docker build -t mynginx-image:2 .
-
 # Container aus Image (mit CLI erstellt) starten
 docker run -d -p 8081:80 mynginx-image
-
 # Container aus Image (mit Dockerfile erstellt) starten
 docker run -d -p 8082:80 mynginx-image:2
 ```
+
+<iframe class=small width="100%" src="http://localhost:4211?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 ----
 
 ## Übung
 
-- Baue ein docker Image das auf nginx basiert
-- Dieses soll eine modifizierte index.html haben
+- Baue ein Docker-Image mit tag mynginx, das auf nginx basiert
 - Tagge den Container als mynginx
 - Baue einen zweiten nginx container der den "COPY"-Befehl nutzt.
 - Tagge den Container als mynginx in Version 2
 - Bonus: Nutze Nginx mit alpine anstatt ubuntu
-- Bonus vergleiche die Image größen
+- Bonus: Vergleiche die Imagegrößen
 
 https://hub.docker.com/_/nginx
+
+<iframe class=small width="100%" src="http://localhost:4211?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+
+Note:
+https://en.wikipedia.org/wiki/Tantrum
 
 ----
 
 ## Docker Base Images
 
-Welche "base" Images gibt es?
-Was sind die Unterschiede?
+- Übersicht
+- Unterschiede
 
 Note:
 Alpine ist der bevorzugte, da er wesentlich kleiner ist als alle anderen.
@@ -819,8 +829,8 @@ Note:
 
 # Image Layer
 
-- Was sind Layerf
-- Dockerfile im Bezug au Layer
+- Was sind Layer
+- Dockerfile im Bezug auf Layer
 
 ----
 
