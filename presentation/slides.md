@@ -290,6 +290,10 @@ ro,rw etc.
 
 ### Docker Volumes Detail
 
+- Jedes Lokale Verzeichniss kann in Docker gemounted werden.
+  - bidirektionale Gründe
+    - Lesen von Configs
+    - Generierten output vom container Persistieren.
 - Default: read/write
   - docker run -v /local/folder:/container/folder imageName
   - docker run -v /local/folder:/container/folder:rw imageName
@@ -298,7 +302,7 @@ ro,rw etc.
 
 ----
 
-## Übung Volumes and Ports
+## Übung Volumes & Ports
 
 - Starte gitea mit folgenden Optionen:
   - Persistenz der Git-Konfiguration (Container-Pfad /data)
@@ -312,6 +316,10 @@ ro,rw etc.
   - Bonus: Gibt es einen Befehl der Stoppen und Löschen vereint?
 - Container mit den selben Optionen wieder erstellen
 - Was passiert mit der Konfiguration und den Nutzdaten von gitea?
+
+----
+
+## Übung Volumes & Ports
 
 <iframe width="100%" src="http://localhost:4206?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
