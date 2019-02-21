@@ -281,7 +281,7 @@ Port Ranges 8000-9000:8000:9000
 
 ## Einblick Volumes
 
-Docker kann Containerverzeichnisse mit lokalen Verzeichnissen verbinden ("volume mount")
+Docker kann Containerverzeichnisse mit lokalen Verzeichnissen verbinden ("volume mount").
 
 ```shell
 docker run -v /root/examples/nginx/:/usr/share/nginx/html:ro -d nginx
