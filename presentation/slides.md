@@ -425,7 +425,7 @@ docker run -d --name wordpress-database
 docker run --link=wordpress-database wordpress
 ```
 
-<iframe width="100%" src="http://localhost:4208?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:4207?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 Wordpress-Container starten, mit mysql verknüpfen
@@ -481,6 +481,13 @@ Ein Image kann verändert werden indem ein oder mehrere Layer hinzugefügt werde
 ----
 
 ## Container und Images
+
+```shell
+docker run -it ubuntu bash
+  >> apt-get install git
+  >> exit
+docker run -it ubuntu git --version
+```
 
 <iframe width="100%" src="http://localhost:4209?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
@@ -540,6 +547,7 @@ Wie lade ich Images herunter?
 ## Docker Hub
 
 https://hub.docker.com/
+<br>
 https://hub.docker.com/_/nginx
 
 Notes:
