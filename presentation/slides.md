@@ -764,11 +764,23 @@ CMD command param1 param2
 ----
 
 ## Entrypoint und Command
-|  |  No ENTRYPOINT  |  ENTRYPOINT [ "ep_exe", "ep_p1" ]  |
-|----|----|----|
-| No CMD | illegal |  ep_exe ep_p1  |
-| CMD [ "cmd_exe", "cmd_p1" ] | cmd_exe cmd_p1   |  ep_exe ep_p1 cmd_exe cmd_p1 |
-
+<table class="epcmd">
+<tr>
+  <td>&nbsp;</td>
+  <td class="fat">no ENTRYPOINT</td>
+  <td class="fat">ENTRYPOINT ["ep_exe", "ep_p1"]</td>
+</tr>
+<tr>
+  <td class="fat">no CMD</td>
+  <td style="color: red">illegal</td>
+  <td>ep_exe ep_p1</td>
+</tr>
+<tr>
+  <td class="fat">CMD ["cmd_exe", "cmd_p1"]</td>
+  <td>cmd_exe cmd_p1</td>
+  <td>ep_exe ep_p1 cmd_exe cmd_p1</td>
+</tr>
+</table>
 
 ---
 

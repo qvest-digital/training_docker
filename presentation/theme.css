@@ -391,3 +391,13 @@ iframe.small {
     text-align: center;
     font-size: 65%;
 }
+
+
+table.epcmd td {
+    font-size: 0.8em;
+    border: 1px solid black !important;
+}
+
+table.epcmd td.fat {
+    font-weight: bold;
+}
