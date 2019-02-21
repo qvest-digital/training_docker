@@ -4,11 +4,11 @@ revealOptions:
 
 ---
 
-![docker](./images/docker_logo.png)
-
 <div id="header-footer">  
   <p class="slide-footer"><img src="images/light.svg" height="40" width="200"><br>tarent solutions GmbH<br>Volker Schmitz & Daniel Zerlett</p>
 </div>
+
+![docker](./images/docker_logo.png)
 
 ----
 
@@ -97,7 +97,7 @@ Note:
 
 ----
 
-## Architektur Überblick
+## Architekturüberblick
 
 <img src="images/engine-components-flow.png"/>
 
@@ -205,8 +205,8 @@ docker logs -f <containerID>
 
 # Container-Lifecycle
 
-- Überblick der Container Zustände
-- Wie erreicht man Containerzustände
+- Überblick der Containerzustände
+- Wechseln zwischen Containerzuständen
 
 ----
 
@@ -233,6 +233,9 @@ docker rm
 
 ## Zusammenfassung
 
+<img src="images/simple_lifecycle.svg"/>
+
+Note:
 - Docker Status übersicht und Lifecycle
   - Created
     - Container ist erstellt aber nicht gestartet
@@ -277,6 +280,8 @@ Port Ranges 8000-9000:8000:9000
 ----
 
 ## Einblick Volumes
+
+Docker kann Containerverzeichnisse mit lokalen Verzeichnissen verbinden ("volume mount")
 
 ```shell
 docker run -v /root/examples/nginx/:/usr/share/nginx/html:ro -d nginx
