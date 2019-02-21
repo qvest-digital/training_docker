@@ -24,13 +24,31 @@ body {
     color: #384d54;
 }
 
-.reveal:after {
-    content: 'Docker-Workshop';
+.reveal:before {
+    content: 'https://github.com/tarent/training_docker | v.schmitz@tarent.de | d.zerlett@tarent.de';
     position: absolute;
-    bottom: 20px;
+    height: 40px;
+    bottom: 13px;
+    padding-left: 200px;
     left: 20px;
-    font-size: 0.5em;
+    font-size: 28px;
 }
+
+.reveal:after {
+    background-image: url('images/light.svg');
+    background-position: left top;
+    background-size: auto 40px;
+    background-repeat: no-repeat;
+    content: '';
+    position: absolute;
+    height: 40px;
+    bottom: 25px;
+    padding-left: 200px;
+    left: 20px;
+}
+
+
+
 
 ::selection {
     color: #fff;
@@ -66,7 +84,6 @@ body {
     line-height: 1.2;
     letter-spacing: normal;
     text-transform: uppercase;
-    text-shadow: 1px 1px #384d54;
     word-wrap: break-word;
 }
 
@@ -363,10 +380,9 @@ iframe {
 
 #header-footer .slide-footer {
     position: fixed;
-    bottom: 0;
+    bottom: 20px;
     left: 0;
     right: 0;
-    height: 10px;
     text-align: center;
     font-size: 65%;
 }
