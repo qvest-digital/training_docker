@@ -7,7 +7,7 @@ revealOptions:
 ![docker](./images/docker_logo.png)
 
 <div id="header-footer">
-  <p class="slide-footer">Volker Schmit & Daniel Zerlett by tarent</p>
+  <p class="slide-footer">tarent solutions GmbH<br>Volker Schmitz & Daniel Zerlett</p>
 </div>
 
 ----
@@ -271,6 +271,7 @@ Note:
 Zwei unterschiedliche Container, binden auf zwei unterschiedlichen Ports.
 Random-Ports erklären
 Multiple Ports für einen Conainer
+Port Ranges 8000-9000:8000:9000
 
 ----
 
@@ -325,7 +326,7 @@ ro,rw etc.
 <iframe width="100%" src="http://localhost:4206?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
-docker run -v $(pwd)/gitea-data:/data -p 3000:3000 -p 22:3022
+docker run -v /root/examples/gitea/data:/data -p 3000:3000 -p 22:3022 -d gitea/gitea
 docker stop `containterid`
 docker rm `containerid`
 docker rm -f `containerid`
@@ -337,6 +338,7 @@ docker rm -f `containerid`
 - Exponieren von beliebigen Ports
   - Random Ports
   - Fixed Ports
+  - Port Ranges
 - Einbinden von Volumes
   - Schreib/Lesezugriff
   - Schreibgeschützt (ro)
@@ -344,8 +346,6 @@ docker rm -f `containerid`
   - docker stop
   - docker rm
   - docker rm -f
-
-<iframe width="100%" src="http://localhost:4207?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 docker run -p 3000:3000 -p 3022:22 -v $(pwd)/giteatest:/data gitea/gitea
