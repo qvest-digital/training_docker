@@ -712,12 +712,12 @@ Alpine ist der bevorzugte, da er wesentlich kleiner ist als alle anderen.
 
 ---
 
-# Entrypoint vs. Command
+# Entrypoint vs. CMD
 
 - Entrypoint definition
 - Command definition
 - Unterschiede
-
+- Best Practice
 ----
 
 ## Entrypoint
@@ -782,26 +782,61 @@ CMD command param1 param2
 </tr>
 </table>
 
+----
+
+## Docker CLI
+
+Alles hinter dem Image beim Befehl `docker run` überchreibt CMD.
+Der Entrypoint ist überschreibbar mit --entrypoint
+
+```bash
+# überschreiben des CMD
+docker run alpine ls
+
+# überschreiben des Entrypoints (keine Shell Form)
+docker run  --entrypoint='/bin/false' alpine
+```
+
+----
+
+## Best Practice
+
+Docker schägt vor den Hauptbefehl auf den ENTRYPOINT zu setzen und dessen Parameter als CMD
+
+```dockerfile
+ENTRYPOINT [ "java" ]
+CMD [ "-jar", "app.jar" ]
+```
+
+```bash
+docker run myapp -Xms512m -jar app.jar
+# java -Xms512m -jar app.jar
+```
+----
+
+## Zusammenfassung
+
+- Dockerfile
+  - ENTRYPOINT
+  - CMD
+- Unterschiede ENTRYPOINT CMD
+- Best Practice
+
 ---
 
 # docker-compose
 
-- Was ist das?
-- Generelle bedienung von *docker-compose*
+- Einstieg in `docker-compose`
+- Generelle Bedienung von *docker-compose*
 - Netzwerke in docker-compose
 
 ----
 
 ## Was ist *docker-compose*
 
-*docker-compose* ist ein Tool zur vereinfachten abbildung und verwaltung von Multi-Container Applikationen.
+*docker-compose* ist ein Tool zur vereinfachten Abbildung und Verwaltung von Multi-Container Applikationen.
 
-Es gibt zwei Versionen docker-compose:
-
-- v2
-  - Vereinfachung von docker (v2)
-- v3
-   - Benutzung von docker swarm (v3)
+Es ist in Python geschrieben und kommuniziert über die Docker API.
 
 Note:
 Example: wordpress mit postgresql
@@ -827,7 +862,7 @@ services:
       - MYSQL_PASSWORD: wordpress
       - MYSQL_DATABASE: wordpress
     volumes:
-      - $(pwd)/mariadb-data:/var/lib/mysql
+      - /root/examples/wordpress/maria/data:/var/lib/mysql
 ```
 
 ----
