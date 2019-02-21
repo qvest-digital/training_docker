@@ -3,7 +3,7 @@ FROM alpine
 ARG GATEWAY
 RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
     && apk update \
-    && apk add --no-cache docker bash shellinabox@testing
+    && apk add --no-cache docker bash vim shellinabox@testing
 
 RUN echo 'export PS1="\w \$ "' >> /root/.bashrc
 RUN echo "export DOCKER_HOST=tcp://${GATEWAY}:2375" >> /root/.bashrc
