@@ -206,7 +206,7 @@ docker logs -f <containerID>
 # Container-Lifecycle
 
 - Überblick der Container Zustände
-- Wie erreicht man Container Zustände
+- Wie erreicht man Containerzustände
 
 ----
 
@@ -416,8 +416,13 @@ postgres
 
 ## Einblick Kommunikation Netzwerk
 
-Kommunikation über die "Docker default bridge"
-Namensauflösung per Docker-DNS
+```shell
+docker run -d --name wordpress-database
+           -e MYSQL_ROOT_PASSWORD=supersicher \
+           -v /root/examples/mariadb/data:/var/lib/mysql \
+           mariadb
+docker run --link=wordpress-database wordpress
+```
 
 <iframe width="100%" src="http://localhost:4208?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
