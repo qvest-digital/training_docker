@@ -469,7 +469,6 @@ docker run -d -p 9000:9000 \
 
 <iframe src="http://localhost:4208?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
-
 ----
 
 ## Zusammenfassung
@@ -477,6 +476,7 @@ docker run -d -p 9000:9000 \
 Verbinden von Containern
   - --link
   - Namensauflösung per Docker DNS
+  - Kommunikation mit Sockets
 
 ---
 
