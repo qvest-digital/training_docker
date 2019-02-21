@@ -881,33 +881,21 @@ docker-compose rm
 
 ## Übung
 
-- Stoppe und lösche deine vorrangegangen Container ohne Nutzdatemverlust.
+- Stoppe und lösche deine vorrangegangen Container ohne Nutzdatenverlust.
 - Erstelle eine docker-compose.yml in der [gitea](https://hub.docker.com/r/gitea/gitea/) und mariadb als Services beschrieben sind.
   - Stelle sicher das alle Volumes und Ports erhalten bleiben.
 - Lagere das Daten-Verzeichnis von gitea auf deinen Computer aus.
 
 ----
 
-## docker-compose stacks
-
-- docker-compose definiert einen Stack für jedes "docker-compose File"
-- Die Container in einem Stack befinden sich im selben Netzwerk.
-
-```shell
-docker-compose -p mystack up -d
-```
-
-----
-
 ## Zusamenfassung
 
-* *docker-compose* Files
-* *docker-compose* CLI
-  * up
-  * stop
-  * rm
-  * logs
-- Einblick in docker-compose Stacks
+- *docker-compose* Files
+- *docker-compose* CLI
+  - up
+  - stop
+  - rm
+  - logs
 
 ---
 
