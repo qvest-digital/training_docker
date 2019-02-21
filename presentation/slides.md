@@ -298,15 +298,14 @@ ro,rw etc.
 
 ### Docker Volumes Detail
 
-- Jedes Lokale Verzeichniss kann in Docker gemounted werden.
-  - bidirektionale Gründe
-    - Lesen von Configs
-    - Generierten output vom container Persistieren.
-- Default: read/write
-  - docker run -v /local/folder:/container/folder imageName
-  - docker run -v /local/folder:/container/folder:rw imageName
-- Read only
-  - docker run -v /local/folder:/container/folder:ro imageName
+- Jedes lokale Verzeichnis kann in Container gemounted werden
+  - Lesen von Configs <!-- .element: class="fragment" -->
+  - Generierten output vom Container persistieren <!-- .element: class="fragment" -->
+- Standard: read/write (rw) <!-- .element: class="fragment" -->
+  - docker run -v /local/folder:/container/folder imageName <!-- .element: class="fragment" -->
+  - docker run -v /local/folder:/container/folder:rw imageName <!-- .element: class="fragment" -->
+- Read only (ro) <!-- .element: class="fragment" -->
+  - docker run -v /local/folder:/container/folder:ro imageName <!-- .element: class="fragment" -->
 
 ----
 
@@ -406,10 +405,10 @@ postgres
 
 ## Zusammenfassung
 
-- Container benamung
-  - docker run --name ...
+- Containernamen
+  - `docker run --name ...`
 - Environment-Variablen an Container übergeben (-e)
-- docker inspect
+- `docker inspect`
 
 ---
 
@@ -420,19 +419,21 @@ postgres
 
 ----
 
-## Einblick Kommunikation Netzwerk
+## Container verknüpfen
 
 ```shell
 docker run -d --name wordpress-database
            -e MYSQL_ROOT_PASSWORD=supersicher \
            -v /root/examples/mariadb/data:/var/lib/mysql \
            mariadb
-docker run --link=wordpress-database wordpress
+docker run -d --link=wordpress-database -p 8080:80 wordpress
 ```
 
 <iframe width="100%" src="http://localhost:4207?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
+/examples/worpress.sh benutzen!
+Nicht der beste Weg, nur zur Demonstration
 Wordpress-Container starten, mit mysql verknüpfen
 Ziel: Interne Kommunikation zwischen Containern
 docker run --link=wordpress-database -e WORDPRESS_DB_HOST=wordpress-database -e WORDPRESS_DB_USER=wordpress -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_NAME=wordpress wordpress
@@ -443,7 +444,7 @@ docker run --link=wordpress-database -e WORDPRESS_DB_HOST=wordpress-database -e 
 
 - Stoppe und lösche deinen Gitea Container
 - Konfiguriere den Container so, dass Gitea seine Konfiguration in der lokalen PostgreSQL speichert!
-  - Benutze dafür die vorher erstellte Datenbank!
+  - Benutze dafür die zuvor erstellte Datenbank!
 
 Note:
 docker run -d --name=gitea-database -e POSTGRES_USER=gitea -e POSTGRES_PASSWORD=gitea -e POSTGRES_DB=gitea -v $(pwd)/postgesql-data:/var/lib/postgresql/data postgres
