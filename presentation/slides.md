@@ -118,7 +118,9 @@ docker run hello-world
 
 <iframe src="http://localhost:4200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
-Note: Erster Gehversuch mit Docker, Docker Umgebung funktioniert.
+Note:
+Erster Gehversuch mit Docker, Docker Umgebung funktioniert.
+`docker run [options] IMAGE [COMMAND] [ARG...] [flags]`
 
 ----
 
@@ -141,6 +143,7 @@ Systemd-Analogie ansprechen
 ## Docker CLI
 
 ```shell
+docker run -p 8080:80 wordpress
 docker run -d -p 8080:80 wordpress
 docker ps
 docker logs <containerID>
@@ -179,6 +182,11 @@ docker logs <containerID>
 
 <iframe width="100%" src="http://localhost:4202?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
+Note:
+```shell
+docker logs -f <containerID>
+
+```
 ----
 
 ## Zusammenfassung
@@ -206,8 +214,6 @@ docker logs <containerID>
 
 TODO: Einfaches Bild zum Lifecycle
 
-<iframe width="100%" src="http://localhost:4203?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
-
 Note:
 docker ps -a
 docker stop
@@ -219,6 +225,8 @@ docker rm
 
 - Alle laufenden Container sollen beendet und gelöscht werden.
 - Wie stelle ich fest, dass alle Container gelöscht sind?
+
+<iframe width="100%" src="http://localhost:4203?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 ----
 
