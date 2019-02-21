@@ -490,7 +490,9 @@ Verbinden von Containern
 ## Definition Container / Images
 
 Ein Container ist die aktive Instanz aus einem Image und kann zur Laufzeit verändert werden.
-Ein Image ist nicht **lauffähig** und es ist eine *"Speicherabbild"* eines Containers.
+Ein Image ist nicht **lauffähig** und es ist ein *"Speicherabbild"* eines Containers.
+
+
 Ein Image besteht aus mehreren unveränderlichen Layern.
 Ein Image kann verändert werden indem ein oder mehrere Layer hinzugefügt werden.
 
@@ -500,9 +502,11 @@ Ein Image kann verändert werden indem ein oder mehrere Layer hinzugefügt werde
 
 ```shell
 docker run -it ubuntu bash
-  >> apt-get install git
+  >> apt-get update
+  >> apt-get install -y git
   >> exit
 docker run -it ubuntu git --version
+docker commit <containerid>
 ```
 
 <iframe width="100%" src="http://localhost:4209?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
