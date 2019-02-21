@@ -9,6 +9,8 @@ services:
       - ${PWD}/presentation:/reveal
     init: true
   shell_0: &build
+    volumes:
+      - ./examples:/root/examples
     build:
       context: shells/shellinabox1
       args:

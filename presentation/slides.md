@@ -261,15 +261,16 @@ Docker kann Container Ports an Hostports binden (exponieren).
 ```
 docker run -d -p 80:8081 wordpress
 docker run -d -p 80 wordpress
+docker run -d -p 80:8082 -p 443:8443
 docker ps
 ```
 
 <iframe width="100%" src="http://localhost:4204?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
-split view (TODO)
-zwei unterschiedliche Container, binden auf zwei unterschiedlichen Ports.
+Zwei unterschiedliche Container, binden auf zwei unterschiedlichen Ports.
 Random-Ports erklären
+Multiple Ports für einen Conainer
 
 ----
 
