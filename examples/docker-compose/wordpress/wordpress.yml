@@ -1,8 +1,0 @@
-version: "2.2"
-
-services:
-  wordpress:
-    image: wordpress
-    restart: always
-    ports:
-      - 8080:80
