@@ -212,7 +212,8 @@ docker logs -f <containerID>
 
 ## Container-Lifecycle
 
-TODO: Einfaches Bild zum Lifecycle
+
+<img src="images/simple_lifecycle.svg"/>
 
 Note:
 docker ps -a
