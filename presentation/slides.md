@@ -442,9 +442,13 @@ docker run --link=wordpress-database -e WORDPRESS_DB_HOST=wordpress-database -e 
 
 ## Übung: Gitea mit PostgreSQL
 
-- Stoppe und lösche deinen Gitea Container
-- Konfiguriere den Container so, dass Gitea seine Konfiguration in der lokalen PostgreSQL speichert!
-  - Benutze dafür die zuvor erstellte Datenbank!
+- Stoppe deinen Gitea-Container
+- Leere das Gitea-Datenverzeichnis (Volume)
+- Starte deinen Gitea-Container
+- Gitea soll seine Konfiguration in einer PostgreSQL speichern
+- Benutze dafür die zuvor erstellte Datenbank
+
+<iframe class="small" src="http://localhost:4208?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 docker run -d --name=gitea-database -e POSTGRES_USER=gitea -e POSTGRES_PASSWORD=gitea -e POSTGRES_DB=gitea -v $(pwd)/postgesql-data:/var/lib/postgresql/data postgres
@@ -458,7 +462,7 @@ docker run -p 3000:3000 -v $(pwd)/gitea/data:/data -p 3000:3000 -p 3022:22 --lin
 docker run -p 9000:9000 -v "/var/run/docker.sock:/var/run/docker.sock" portainer/portainer
 ```
 
-<iframe width="100%" src="http://localhost:4208?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+
 
 ----
 
