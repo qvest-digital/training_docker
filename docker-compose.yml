@@ -65,6 +65,26 @@ services:
     <<: *build
     ports:
       - "127.0.0.1:4212:4200"
+  shell_13:
+    <<: *build
+    ports:
+      - "127.0.0.1:4213:4200"
+  shell_14:
+    <<: *build
+    ports:
+      - "127.0.0.1:4214:4200"
+  shell_15:
+    <<: *build
+    ports:
+      - "127.0.0.1:4215:4200"
+  shell_16:
+    <<: *build
+    ports:
+      - "127.0.0.1:4216:4200"
+  shell_17:
+    <<: *build
+    ports:
+      - "127.0.0.1:4217:4200"
   docker:
     image: docker:dind
     volumes:
