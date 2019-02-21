@@ -649,34 +649,38 @@ RUN echo "<h1>Hello World from Dockerfile</h1>" > \
 ```bash
 # Image bauen
 docker build -t mynginx-image:2 .
-
 # Container aus Image (mit CLI erstellt) starten
 docker run -d -p 8081:80 mynginx-image
-
 # Container aus Image (mit Dockerfile erstellt) starten
 docker run -d -p 8082:80 mynginx-image:2
 ```
+
+<iframe class=small width="100%" src="http://localhost:4211?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 ----
 
 ## Übung
 
-- Baue ein docker Image das auf nginx basiert
-- Dieses soll eine modifizierte index.html haben
+- Baue ein Docker-Image mit tag mynginx, das auf nginx basiert
 - Tagge den Container als mynginx
 - Baue einen zweiten nginx container der den "COPY"-Befehl nutzt.
 - Tagge den Container als mynginx in Version 2
 - Bonus: Nutze Nginx mit alpine anstatt ubuntu
-- Bonus vergleiche die Image größen
+- Bonus: Vergleiche die Imagegrößen
 
 https://hub.docker.com/_/nginx
+
+<iframe class=small width="100%" src="http://localhost:4211?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+
+Note:
+https://en.wikipedia.org/wiki/Tantrum
 
 ----
 
 ## Docker Base Images
 
-Welche "base" Images gibt es?
-Was sind die Unterschiede?
+- Übersicht
+- Unterschiede
 
 Note:
 Alpine ist der bevorzugte, da er wesentlich kleiner ist als alle anderen.
