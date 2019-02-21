@@ -7,6 +7,7 @@ RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/ap
 
 RUN echo 'export PS1="\w \$ "' >> /root/.bashrc
 RUN echo "export DOCKER_HOST=tcp://${GATEWAY}:2375" >> /root/.bashrc
+RUN echo "alias dockerps='docker ps --format \"table {{.ID}}\\t{{.Image}}\\t{{.Status}}\\t{{.Ports}}\\t{{.Names}}\"'" >> /root/.bashrc
 
 ADD styles.css /data/
 
