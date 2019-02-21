@@ -277,7 +277,7 @@ Multiple Ports für einen Conainer
 ## Einblick Volumes
 
 ```shell
-docker run -v /some/content:/usr/share/nginx/html:ro -d nginx
+docker run -v /root/examples/nginx/:/usr/share/nginx/html:ro -d nginx
 ```
 
 <iframe width="100%" src="http://localhost:4205?u=trainer&p=trainer"> <!-- .element: class="fragment" -->

@@ -67,5 +67,7 @@ services:
       - "127.0.0.1:4212:4200"
   docker:
     image: docker:dind
+    volumes:
+      - ./examples:/root/examples
     privileged: true
     network_mode: host
