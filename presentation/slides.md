@@ -263,9 +263,9 @@ Note:
 Docker kann Container Ports an Hostports binden (exponieren).
 
 ```
-docker run -d -p 80:8081 wordpress
+docker run -d -p 8081:80 wordpress
 docker run -d -p 80 wordpress
-docker run -d -p 80:8082 -p 443:8443
+docker run -d -p 8082:80 -p 443:8443
 docker ps
 ```
 
