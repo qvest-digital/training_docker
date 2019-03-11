@@ -386,12 +386,11 @@ docker rm -f `containerid`
   - Fixed Ports
   - Port Ranges
 - Einbinden von Volumes
-  - Schreib/Lesezugriff
-  - Schreibgeschützt (ro)
+  - Volumetypen
+  - Schreibberechtigung (ro/rw)
 - Stoppen und löschen von Containern
   - docker stop
-  - docker rm
-  - docker rm -f
+  - docker rm [-f]
 
 Note:
 docker run -p 3000:3000 -p 3022:22 -v $(pwd)/giteatest:/data gitea/gitea
@@ -421,7 +420,7 @@ docker inspect wordpress-database
 ```
 
 Note:
-Beispiel environment variablen an MariaDB zeigen.
+Beispiel environment Variablen an MariaDB zeigen.
 
 ----
 
@@ -1073,6 +1072,16 @@ Note:
 
 ---
 
+# Dynamisches routing labels mit traefik
+
+Traefik beispiel zeigen
+
+----
+
+## traefik als frontend Komponente einbauen
+
+---
+
 # Security
 
 - docker User Space
@@ -1098,13 +1107,14 @@ Note:
 DockerCLI
   - *--user*
 
+
+
 ---
 
-# Dynamisches routing labels mit traefik
+# Produktionsbeispiel
 
-Traefik beispiel zeigen
 
-----
+---
 
-## traefik als frontend Komponente einbauen
+# Swarm
 
