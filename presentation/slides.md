@@ -60,9 +60,9 @@ Regeln:
 "Docker ist eine freie Software zur Isolierung von Anwendungen mit Containervirtualisierung."<br>--*Wikipedia*
 
 - vereinfacht die Bereitstellung von Anwendungen
-- gewährleistet die Trennung und Verwaltung von Ressourcen
+- gewährleistet die Trennung von Ressourcen
 - ermöglicht Isolation von Anwendungen und deren Abhängigkeiten
-- basiert auf Linux-Techniken wie Cgroups und Namespaces
+- basiert auf Linux-Techniken wie cgroups und Namespaces
 
 Notes: - Erscheinungsjahr: 2013
 Probleme ohne Docker:
@@ -149,13 +149,24 @@ docker ps
 docker logs <containerID>
 ```
 
-<iframe width="100%" src="http://localhost:4201?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:42010?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 [Wordpress](http://localhost:8080)
 
 Note:
 https://hub.docker.com/_/wordpress/
 Ziel ist es zu erkennen, wie einfach die Instalation ist.
+
+----
+
+### Docker API
+
+
+```shell
+curl --unix-socket /var/run/docker.sock http/containers/json
+```
+
+<iframe width="100%" src="http://localhost:42011?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 ----
 
@@ -180,7 +191,7 @@ docker ps
 docker logs <containerID>
 ```
 
-<iframe width="100%" src="http://localhost:4202?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:42020?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 ```shell
@@ -207,6 +218,7 @@ docker logs -f <containerID>
 
 - Überblick der Containerzustände
 - Wechseln zwischen Containerzuständen
+- Restart-Policies
 
 ----
 
@@ -227,7 +239,25 @@ docker rm
 - Alle laufenden Container sollen beendet und gelöscht werden.
 - Wie stelle ich fest, dass alle Container gelöscht sind?
 
-<iframe width="100%" src="http://localhost:4203?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:42030?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+
+----
+
+## Restart Policies
+
+- no
+- always
+- on-failure
+- unless-stopped
+
+
+```shell
+  docker run --restart=always alpine /bin/false
+```
+
+<iframe class=small width="100%" src="http://localhost:42031?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+
+
 
 ----
 
@@ -248,13 +278,16 @@ Note:
   - Deleted
     - Container ist gelöscht
 
+
 ---
 
 # Ports & Volumes
 
 - Einblick in Portfreigaben
 - Einblick in Volumes
-  - Schreibberechtigungen
+  - Typen
+  - Berechtigungen
+
 
 ----
 
@@ -269,7 +302,7 @@ docker run -d -p 8082:80 -p 443:8443
 docker ps
 ```
 
-<iframe width="100%" src="http://localhost:4204?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:42040?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 Zwei unterschiedliche Container, binden auf zwei unterschiedlichen Ports.
@@ -283,16 +316,24 @@ Port Ranges 8000-9000:8000:9000
 
 Docker kann Containerverzeichnisse mit lokalen Verzeichnissen verbinden ("volume mount").
 
+- Volumetypen
+  - anonymous
+    - `docker run -v /path/in/container ...`
+  - named    
+    - `docker volume create somevolumename`
+    - `docker run -v name:/path/in/container ...`
+  - host
+    - `docker run -v /path/on/host:/path/in/container ...`
+
+----
+
+## Demo Host-Volume
+
 ```shell
 docker run -v /root/examples/nginx/:/usr/share/nginx/html:ro -d nginx
 ```
 
-<iframe width="100%" src="http://localhost:4205?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
-
-Note:
-split view (TODO)
-Kurzer Hinweis auf Anonymous und Named-Volumes
-ro,rw etc.
+<iframe width="100%" src="http://localhost:42050?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 ----
 
@@ -328,7 +369,7 @@ ro,rw etc.
 
 ## Übung Volumes & Ports
 
-<iframe width="100%" src="http://localhost:4206?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:42060?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 docker run -v /root/examples/gitea/data:/data -p 3000:3000 -p 22:3022 -d gitea/gitea
@@ -432,7 +473,7 @@ docker run -d --name wordpress-database
 docker run -d --link=wordpress-database -p 8080:80 wordpress
 ```
 
-<iframe width="100%" src="http://localhost:4208?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:42080?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 /examples/wordpress.sh benutzen!
@@ -509,7 +550,7 @@ docker run -it ubuntu git --version
 docker commit <containerid>
 ```
 
-<iframe width="100%" src="http://localhost:4211?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:42110?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 Was ist ein Image und was ist ein Container
@@ -557,7 +598,7 @@ docker pull nginx:alpine
 docker images
 ```
 
-<iframe width="100%" src="http://localhost:4212?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:42120?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 Wie lade ich Images herunter?
@@ -586,7 +627,7 @@ Dockerfiles können (meist) eingesehen werden (link zu Github)
 - Docker Tag verweist auf die Registry
 - `docker push`
 
-<iframe width="100%" src="http://localhost:4213?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:42130?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
 - Pullen eines containers
@@ -875,7 +916,7 @@ docker-compose stop
 docker-compose rm
 ```
 
-<iframe width="100%" src="http://localhost:4217?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+<iframe width="100%" src="http://localhost:42170?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 ----
 

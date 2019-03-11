@@ -6,4 +6,4 @@ export DOCKER_BRIDGE_GATEWAY=$GATEWAY
 
 docker-compose build
 
-docker-compose up -d
+docker-compose up -d --remove-orphans
