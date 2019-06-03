@@ -1,0 +1,39 @@
+version: '2.1'
+
+services:
+  rocketchat:
+    image: rocket.chat:latest
+    restart: unless-stopped
+    volumes:
+      - ./uploads:/app/uploads
+    environment:
+      - PORT=3000
+      - ROOT_URL=http://chat.inumio.com
+      - MONGO_URL=mongodb://mongo:27017/rocketchat
+      - MONGO_OPLOG_URL=mongodb://mongo:27017/local
+      - Accounts_UseDNSDomainCheck=True
+    healthcheck:
+      test: curl localhost:3000
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+  mongo:
+    image: mongo
+    restart: unless-stopped
+    volumes:
+       - ./data/db:/data/db
+       - ./data/dump:/dump
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo --quiet 1
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    command: mongod --smallfiles --oplogSize 128 --replSet rs0 --storageEngine=mmapv1
+
+  mongo-init-replica:
+    image: mongo
+    command: 'mongo mongo/rocketchat --eval \"rs.initiate({ _id: ''rs0'', members: [ { _id: 0, host: ''localhost:27017'' } ]})\"'
+
+
+
