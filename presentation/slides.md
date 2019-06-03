@@ -949,13 +949,16 @@ docker-compose rm
 
 <iframe src="http://localhost:42180?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
-
 Note:
 - docker network ls
 - docker-compose naming (netzwerke und container)
 - docker-compose -p
 - docker network rm
 - Unterschied docker-compose stop/down
+
+## Docker Netzwerk Beispiel
+
+TODO: wordpress database netzwerk
 
 ----
 
@@ -996,11 +999,14 @@ Note:
 - ENV
 - RUN TODO: Bsp einbauen
 
+https://github.com/jmhobbs/terminal-parrot/blob/master/Dockerfile
+
 ----
 
 ## Übung
 
-TBD
+Baue ein Dockerfile optimiere die Layer.
+
 
 ----
 
