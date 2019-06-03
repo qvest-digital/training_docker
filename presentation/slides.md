@@ -959,7 +959,27 @@ Beispiel an rocket.chat
     - Automatic Startup & Crash Recovery
     - Reboot and Check
 
+Note: 
+- ist das so okay?
+- kann man etwas ändern?
+
 ----
+
+# Vorgehen und Ziele
+
+- Docker-Compose 
+  - Rocket.Chat ans laufen bekommen
+      - Ddocker Volumes
+- SSL mit traefik dynamisches routing
+  - multiple Compose Files
+  - Docker Netzwerke
+- Docker Security
+  - Eigenes Image bauen
+- Auflösung von Abhänihgkeiten
+  - Hinzufügen von Health Checks
+- Backup and Recovery
+
+---
 
 ## Docker Netzwerke CLI
 
