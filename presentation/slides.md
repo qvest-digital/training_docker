@@ -1244,11 +1244,11 @@ TBD
 
 # Security
 
-- docker User Space
-- dies kann man Reglementieren
+- Docker User Space
+- Dies kann man Reglementieren
 - Angreifbare - libaries im Container/Image
 - Docker Hub Security Scan
-- Docker
+- Docker User Space
 
 ----
 
@@ -1266,4 +1266,29 @@ TBD
   - USER
 DockerCLI
   - *--user*
+
+---
+
+## Orchestrierung mit Swarm
+
+----
+
+## Initialisieren
+
+----
+
+## Erweitern
+
+----
+
+## Swarm CLI
+
+Alles anders aber doch irgendwie gleich.
+
+- docker stack 
+- docker service 
+
+----
+
+## Scalierung und Redundanz
 
