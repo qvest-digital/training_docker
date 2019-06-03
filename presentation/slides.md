@@ -1007,15 +1007,13 @@ Note:
 
 ---
 
-# Dynamisches Routing SSL mit Traefik
-
-A reverse proxy / load balancer that's easy, dynamic, automatic, fast, full-featured, open source, production proven, provides metrics, and integrates with every major cluster technology... No wonder it's so popular!
+# Traefik
 
 <img src="images/traefik.svg"/>
 
 ----
 
-# Traefik als frontend loadbalancer nutzen
+# Traefik als Loadbalancer
 
 ```
 proxy:
@@ -1043,8 +1041,10 @@ Baut eine Docker Compose mit traefik und routet rocket.chat darüber.
 
 ----
 
-# Traefik ssl über Let's Encrypt
+# Traefik SSL mit Let's Encrypt
 
+
+TBD
 
 ---
 
