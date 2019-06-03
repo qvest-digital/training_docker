@@ -1087,7 +1087,11 @@ Note:
 
 ---
 
-## Docker Netzwerke
+# Docker Netzwerke
+
+----
+
+## Docker Netzwerke CLI
 
 <iframe src="http://localhost:42180?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
@@ -1273,7 +1277,7 @@ DockerCLI
 
 ---
 
-## Orchestrierung mit Swarm
+# Orchestrierung mit Swarm
 
 ----
 
@@ -1296,3 +1300,8 @@ Alles anders aber doch irgendwie gleich.
 
 ## Scalierung und Redundanz
 
+---
+
+# Logging
+
+Mit Grafana Telegraf und InfluxDB
