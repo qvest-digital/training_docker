@@ -1221,14 +1221,14 @@ Baut eine Docker Compose mit traefik und routet rocket.chat über diesen.
 
 ---
 
-## Backup 
+# Backup 
 
   - mongodb
   - Volumes
 
 ---
 
-## Monitoring
+# Monitoring
 
   - Grafana
   - Telegraf
