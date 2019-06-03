@@ -1013,6 +1013,38 @@ RUN apt-get clean
 
 ---
 
+# Multistagebuilds
+
+- Konzept vorstellen
+  - beispiel an Go Service
+- COPY --from
+- STOPSIGNAL
+
+Note:
+- Es existieren zwei Dockerfiles die beide Funktionieren
+- ein Go Service ein Java Service
+  - der Java service ist selbsterarbeitet
+
+----
+
+## Übung
+
+- Baue in einem vorrangestellen Dockercontainer dein Java Jar zusammen, nenne diesen "build"!
+  - benutze hierfür Gradle
+- Kopiere das erfolgreich gebaute Jar vom ersten Container in den zweiten Container.
+  - Nutze hierfür die Docker "Multistage Build"-Funktionalität (COPY --from=build)
+- Java Service bauen mit multistage (service tut das gleiche (wie go service) ist in aber in Java geschrieben)
+
+----
+
+## Zusammenfassung Layer, Praxisbeispiel
+
+- Dockerfiles vergleichen
+- Layer Vergleichen
+- Image Größen vergleichen
+
+---
+
 # Docker bis Produktion
 
 Beispiel an rocket.chat 
@@ -1081,13 +1113,71 @@ Note:
 
 ---
 
+# Docker Healthcheck
+ 
+Dieser sagt Docker welchen Status ein Service hat.
+
+
+----
+
+## Status
+
+- Healthy
+- Unhealthy
+- Starting
+
+Dafür kann man jeden Befehl nehmen der im Container ausführbar ist, dieser muss 0 oder 1 als exit code haben. 
+
+Note: 
+Warum braucht man das?
+Hauptsächlich für Orchestrierung.
+
+----
+
+## Beispiel 
+
+Im Dockerfile:
+```
+HEALTHCHECK --interval=5m --timeout=3s \
+  CMD curl -f http://localhost/ || exit 1
+```
+
+In Compose:
+```
+healthcheck:
+  test: ["CMD", "curl", "-f", "http://localhost"]
+  interval: 1m30s
+  timeout: 10s
+  retries: 3
+  start_period: 40s
+```
+
+----
+
+## Übung
+
+Baut in rocket.chat sowie in die MongoDB valide health checks ein. 
+Nutzt dafür docker compose.
+
+----
+
+## Zusammenfassung
+
+Docker Heathcheck über Dockerfile und docker-compose
+
+---
+
 # Traefik
+
+----
+
+## Was is traefik?
 
 <img src="images/traefik.svg"/>
 
 ----
 
-# Traefik als Loadbalancer
+## Traefik als Loadbalancer
 
 ```
 proxy:
@@ -1103,53 +1193,30 @@ proxy:
 
 ----
 
-# Dynamisches Routing über Treafik 
+## Dynamisches Routing über Treafik 
 
-- docker labels
+```
+  whoami:
+    image: containous/whoami # A container that exposes an API to show its IP address
+    labels:
+      - "traefik.frontend.rule=Host:whoami.docker.localhost"
+```
+
+```
+curl -H Host:whoami.docker.localhost http://127.0.0.1
+```
 
 ----
 
-# Übung 
+## Übung 
 
-Baut eine Docker Compose mit traefik und routet rocket.chat darüber.
+Baut eine Docker Compose mit traefik und routet rocket.chat über diesen.
 
 ----
 
-# Traefik SSL mit Let's Encrypt
+## Traefik SSL mit Let's Encrypt
 
 TBD
-
----
-
-# Multistagebuilds
-
-- Konzept vorstellen
-  - beispiel an Go Service
-- COPY --from
-- STOPSIGNAL
-
-Note:
-- Es existieren zwei Dockerfiles die beide Funktionieren
-- ein Go Service ein Java Service
-  - der Java service ist selbsterarbeitet
-
-----
-
-## Übung
-
-- Baue in einem vorrangestellen Dockercontainer dein Java Jar zusammen, nenne diesen "build"!
-  - benutze hierfür Gradle
-- Kopiere das erfolgreich gebaute Jar vom ersten Container in den zweiten Container.
-  - Nutze hierfür die Docker "Multistage Build"-Funktionalität (COPY --from=build)
-- Java Service bauen mit multistage (service tut das gleiche (wie go service) ist in aber in Java geschrieben)
-
-----
-
-## Zusammenfassung Layer, Praxisbeispiel
-
-- Dockerfiles vergleichen
-- Layer Vergleichen
-- Image Größen vergleichen
 
 ---
 
@@ -1172,17 +1239,6 @@ Note:
 - Sinnvolle(tm) Exit-Codes
  (siehe --init)
 - Nutze die Health Resource im HEALTHCHECK
-
-
----
-
-# Dynamisches routing labels mit traefik
-
-Traefik beispiel zeigen
-
-----
-
-## traefik als frontend Komponente einbauen
 
 ---
 
@@ -1210,15 +1266,4 @@ Traefik beispiel zeigen
   - USER
 DockerCLI
   - *--user*
-
-
-
----
-
-# Produktionsbeispiel
-
-
----
-
-# Swarm
 
