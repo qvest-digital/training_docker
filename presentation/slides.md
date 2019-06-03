@@ -981,7 +981,7 @@ Note:
 
 ---
 
-## Docker Netzwerke CLI
+## Docker Netzwerke
 
 <iframe src="http://localhost:42180?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
@@ -992,19 +992,11 @@ Note:
 - docker network rm
 - Unterschied docker-compose stop/down
 
-## Docker Netzwerk Beispiel
-
-TODO: wordpress database netzwerk
-
 ----
 
 ## Übung
 
-- Füge deiner docker-compose.yml ein "seprates" Netzwerk hinzu!
-- Richte nun die Verbindung von gitea und mariaDB über das neuerstellte Netzwerk ein.
-- Bonus: Trenne die beiden *compose*-Files
-  - Wie funktioniert ändert sich die Netzwerk definition?
-  - Wo liegt darin der vorteil?
+- Füge der docker-compose.yml von Rocket.Chat ein "seprates" Netzwerk hinzu!
 
 ----
 
@@ -1012,6 +1004,47 @@ TODO: wordpress database netzwerk
 
 - Docker CLI *network*
 - Verständniss von Docker Netzwerken
+
+---
+
+# Dynamisches Routing SSL mit Traefik
+
+A reverse proxy / load balancer that's easy, dynamic, automatic, fast, full-featured, open source, production proven, provides metrics, and integrates with every major cluster technology... No wonder it's so popular!
+
+<img src="images/traefik.svg"/>
+
+----
+
+# Traefik als frontend loadbalancer nutzen
+
+```
+proxy:
+  image: traefik # The official Traefik docker image
+  command: --api --docker # Enables the web UI and tells Traefik to listen to docker
+  ports:
+    - "80:80"     # The HTTP port
+    - "443:443" # The HTTPS port 
+    - "8080:8080" # The Web UI (enabled by --api)
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
+```
+
+----
+
+# Dynamisches Routing über Treafik 
+
+- docker labels
+
+----
+
+# Übung 
+
+Baut eine Docker Compose mit traefik und routet rocket.chat darüber.
+
+----
+
+# Traefik ssl über Let's Encrypt
+
 
 ---
 
