@@ -939,9 +939,25 @@ docker-compose rm
 
 ---
 
-# Docker Netzwerke
+# Docker bis Produktion
 
-- Kapselung von Services durch Netzwerke
+Beispiel an rocket.chat 
+
+----
+
+# Bespandsaufnahme
+
+- https://rocket.chat/docs/installation/docker-containers/
+    - Securing the Server
+      - Firewall basics (skipped)
+    - Securing the server
+      - fail2ban (skipped)
+    - Install docker-compose
+    - Editin Host-File
+    - Installing NGINX & SSL certificate
+    - Create docker-compose
+    - Automatic Startup & Crash Recovery
+    - Reboot and Check
 
 ----
 
