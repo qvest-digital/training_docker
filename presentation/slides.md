@@ -748,10 +748,6 @@ Alpine ist der bevorzugte, da er wesentlich kleiner ist als alle anderen.
 
 ---
 
-# Optional
-
----
-
 # Entrypoint vs. CMD
 
 - Entrypoint definition
@@ -939,6 +935,84 @@ docker-compose rm
 
 ---
 
+# Image Layer
+
+- Was sind Layer
+- Dockerfile im Bezug auf Layer
+
+----
+
+## Was sind Layer
+
+- Layer sind unveränderliche Schichten eines Images
+- Jeder befehl in einer Dockerfile erzeugt Layer
+
+----
+
+## Dockerfile Layer
+
+- EXPOSE
+- USER
+- ENV
+- RUN TODO: Bsp einbauen
+
+```
+FROM golang:alpine3.7
+RUN apk update && apk add --no-cache git
+WORKDIR /project
+RUN git clone https://github.com/jmhobbs/terminal-parrot
+WORKDIR /project/terminal-parrot
+RUN CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -o /parrot parrot.go data.go draw.go
+ENTRYPOINT ["/parrot"]
+```
+
+Note:
+ - https://github.com/jmhobbs/terminal-parrot/blob/master/Dockerfile
+
+----
+
+## Übung
+
+Baue ein Dockerfile und optimiere die Layer.
+Wo ist der Unterschied zwischen: 
+```
+RUN apt-get update \
+    && apt-get install -y nginx \
+    && apt-get clean
+```
+
+```
+RUN apt-get update 
+RUN apt-get install -y nginx
+RUN apt-get clean
+```
+
+----
+
+## Zusammenfassung
+
+- Dockerfile Layer
+- Jeder "Dockerfile Layer bildet einen Layer"
+- Speicher Optimierung
+
+----
+
+## Advanced Layer
+
+- COPY vs ADD
+- WORKDIR
+- ENTRYPOINT vs CMD
+  - ENTRYPOINT nicht überschreibbar
+- HEALTHCHECK ?
+
+----
+
+### Übung
+
+- Versuche den RUN Befehl durch WORKDIR und COPY --chown zu erstezen.
+
+---
+
 # Docker bis Produktion
 
 Beispiel an rocket.chat 
@@ -1043,69 +1117,7 @@ Baut eine Docker Compose mit traefik und routet rocket.chat darüber.
 
 # Traefik SSL mit Let's Encrypt
 
-
 TBD
-
----
-
-# Image Layer
-
-- Was sind Layer
-- Dockerfile im Bezug auf Layer
-
-----
-
-## Was sind Layer
-- Layer sind unveränderliche Schichten eines Images
-- Jeder befehl in einer Dockerfile erzeugt Layer
-
-----
-
-## Dockerfile Layer
-
-- EXPOSE
-- USER
-- ENV
-- RUN TODO: Bsp einbauen
-
-```
-FROM golang:alpine3.7
-RUN apk update && apk add --no-cache git
-WORKDIR /project
-RUN git clone https://github.com/jmhobbs/terminal-parrot
-WORKDIR /project/terminal-parrot
-RUN CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -o /parrot parrot.go data.go draw.go
-ENTRYPOINT ["/parrot"]
-```
-
-Note:
- - https://github.com/jmhobbs/terminal-parrot/blob/master/Dockerfile
-
-----
-
-## Übung
-
-Baue ein Dockerfile und optimiere die Layer.
-
-----
-
-## Zusammenfassung
-
-----
-
-## Advanced Layer
-
-- COPY vs ADD
-- WORKDIR
-- ENTRYPOINT vs CMD
-  - ENTRYPOINT nicht überschreibbar
-- HEALTHCHECK ?
-
-----
-
-### Übung
-
-- Versuche den RUN Befehl durch WORKDIR und COPY --chown zu erstezen.
 
 ---
 
