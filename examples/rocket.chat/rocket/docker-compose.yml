@@ -18,7 +18,16 @@ services:
       timeout: 10s
       retries: 5
     command: bash -c 'for i in `seq 1 30`; do node main.js && s=$$? && break || s=$$?; echo "Tried $$i times. Waiting 5 secs..."; sleep 5; done; (exit $$s)'
-
+    networks:
+      - default
+      - reverse-proxy
+    labels:
+      - "traefik.backend=rocketchat"
+      - "traefik.enable=true"
+      - "traefik.port=3000"
+      - "traefik.frontend.rule=Host: chat.network-innovation.de"
+      - "traefik.docker.network=traefik_reverse-proxy"
+    
   mongo:
     image: mongo
     restart: unless-stopped
@@ -37,4 +46,8 @@ services:
     command: 'bash -c "for i in `seq 1 30`; do mongo mongo/rocketchat --eval \"rs.initiate({ _id: ''rs0'', members: [ { _id: 0, host: ''localhost:27017'' } ]})\" && s=$$? && break || s=$$?; echo \"Tried $$i times. Waiting 5 secs...\"; sleep 5; done; (exit $$s)"'
 
 
+networks:
+  reverse-proxy:
+    external:
+      name: traefik_reverse-proxy
 
