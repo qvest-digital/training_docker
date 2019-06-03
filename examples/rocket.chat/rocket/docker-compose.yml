@@ -8,7 +8,7 @@ services:
       - ./uploads:/app/uploads
     environment:
       - PORT=3000
-      - ROOT_URL=http://chat.inumio.com
+      - ROOT_URL=http://chat.network-innovation.de
       - MONGO_URL=mongodb://mongo:27017/rocketchat
       - MONGO_OPLOG_URL=mongodb://mongo:27017/local
       - Accounts_UseDNSDomainCheck=True
@@ -17,6 +17,15 @@ services:
       interval: 10s
       timeout: 10s
       retries: 5
+    labels:
+      - "traefik.backend=rocketchat"
+      - "traefik.enable=true"
+      - "traefik.port=3000"
+      - "traefik.frontend.rule=Host: chat.network-innovation.de"
+      - "traefik.docker.network=traefik_webgateway"
+    networks:
+      - default
+      - webgateway
     command: bash -c 'for i in `seq 1 30`; do node main.js && s=$$? && break || s=$$?; echo "Tried $$i times. Waiting 5 secs..."; sleep 5; done; (exit $$s)'
 
   mongo:
@@ -37,4 +46,8 @@ services:
     command: 'bash -c "for i in `seq 1 30`; do mongo mongo/rocketchat --eval \"rs.initiate({ _id: ''rs0'', members: [ { _id: 0, host: ''localhost:27017'' } ]})\" && s=$$? && break || s=$$?; echo \"Tried $$i times. Waiting 5 secs...\"; sleep 5; done; (exit $$s)"'
 
 
+networks:
+  webgateway:
+    external:
+      name: traefik_webgateway
 
