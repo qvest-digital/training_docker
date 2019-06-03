@@ -1296,3 +1296,8 @@ Alles anders aber doch irgendwie gleich.
 
 ## Scalierung und Redundanz
 
+---
+
+# Logging
+
+Mit Grafana Telegraf und InfluxDB
