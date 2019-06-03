@@ -943,6 +943,13 @@ docker-compose rm
 
 - Kapselung von Services durch Netzwerke
 
+----
+
+## Docker Netzwerke CLI
+
+<iframe src="http://localhost:42180?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+
+
 Note:
 - docker network ls
 - docker-compose naming (netzwerke und container)
