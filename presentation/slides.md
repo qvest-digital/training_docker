@@ -935,17 +935,17 @@ docker-compose rm
 
 ---
 
-# Image Layer
+# Image-Layer
 
-- Was sind Layer
+- Was sind Layer?
 - Dockerfile im Bezug auf Layer
 
 ----
 
-## Was sind Layer
+## Was sind Layer?
 
 - Layer sind unveränderliche Schichten eines Images
-- Jeder befehl in einer Dockerfile erzeugt Layer
+- Jede Anweisung in einem Dockerfile erzeugt einen neuen Layer
 
 ----
 
@@ -954,7 +954,7 @@ docker-compose rm
 - EXPOSE
 - USER
 - ENV
-- RUN TODO: Bsp einbauen
+- RUN
 
 ```
 FROM golang:alpine3.7
@@ -993,7 +993,7 @@ RUN apt-get clean
 
 - Dockerfile Layer
 - Jeder "Dockerfile Layer bildet einen Layer"
-- Speicher Optimierung
+- Optimierung
 
 ----
 
@@ -1003,24 +1003,18 @@ RUN apt-get clean
 - WORKDIR
 - ENTRYPOINT vs CMD
   - ENTRYPOINT nicht überschreibbar
-- HEALTHCHECK ?
+- HEALTHCHECK
 
 ----
 
-### Übung
-
-- Versuche den RUN Befehl durch WORKDIR und COPY --chown zu erstezen.
-
-----
-
-# Multistagebuilds
+# Multi-Stage-Builds
 
 ----
 
 ## Beispiel
 
 ```
-FROM golang:alpine3.7
+FROM golang:alpine3.7 AS builder
 WORKDIR /project
 COPY *.go ./
 RUN apk update && apk add --no-cache git
@@ -1028,14 +1022,9 @@ RUN go get github.com/nsf/termbox-go
 RUN CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -o parrot parrot.go data.go draw.go
 
 FROM scratch
-COPY --from=0 /project/parrot /parrot
+COPY --from=builder /project/parrot /parrot
 ENTRYPOINT ["/parrot"]
 ```
-
-Note:
-- Konzept vorstellen
-  - beispiel an Go Service
-- COPY --from
 
 ----
 
@@ -1045,21 +1034,11 @@ Note:
 
 ----
 
-## Übung
-
-- Baue in einem vorrangestellen Dockercontainer dein Java Jar zusammen, nenne diesen "build"!
-  - benutze hierfür Gradle
-- Kopiere das erfolgreich gebaute Jar vom ersten Container in den zweiten Container.
-  - Nutze hierfür die Docker "Multistage Build"-Funktionalität (COPY --from=build)
-- Java Service bauen mit multistage (service tut das gleiche (wie go service) ist in aber in Java geschrieben)
-
-----
-
 ## Zusammenfassung Layer, Praxisbeispiel
 
 - Dockerfiles vergleichen
-- Layer Vergleichen
-- Image Größen vergleichen
+- Layer vergleichen
+- Imagegrößen vergleichen
 
 ---
 
@@ -1069,16 +1048,16 @@ Beispiel an rocket.chat
 
 ----
 
-# Bespandsaufnahme
+# Bestandsaufnahme
 
 - https://rocket.chat/docs/installation/docker-containers/
-    - Securing the Server
+    - Securing the server
       - Firewall basics (skipped)
     - Securing the server
       - fail2ban (skipped)
-    - Install docker-compose
-    - Editin Host-File
-    - Installing NGINX & SSL certificate
+    - Install docker-compose (skipped)
+    - Editing the Host-File (skipped)
+    - Installing NGINX & SSL certificate (skipped)
     - Create docker-compose
     - Automatic Startup & Crash Recovery
     - Reboot and Check
@@ -1093,14 +1072,14 @@ Note:
 
 - Docker-Compose 
   - Rocket.Chat ans laufen bekommen
-      - Ddocker Volumes
-- SSL mit traefik dynamisches routing
-  - multiple Compose Files
+      - Persistenz (Volumes)
+- SSL mit traefik/dynamisches routing
+  - mehrere compose-Files
   - Docker Netzwerke
 - Docker Security
   - Eigenes Image bauen
 - Auflösung von Abhänihgkeiten
-  - Hinzufügen von Health Checks
+  - Hinzufügen von Health-Checks
 - Backup and Recovery
 
 ---
@@ -1124,21 +1103,20 @@ Note:
 
 ## Übung
 
-- Füge der docker-compose.yml von Rocket.Chat ein "seprates" Netzwerk hinzu!
+- Füge der docker-compose.yml von Rocket.Chat ein "separates" Netzwerk hinzu!
 
 ----
 
 ## Zusammenfassung
 
 - Docker CLI *network*
-- Verständniss von Docker Netzwerken
+- Verständnis von Docker-Netzwerken
 
 ---
 
 # Docker Healthcheck
  
-Dieser sagt Docker welchen Status ein Service hat.
-
+Liefert den aktuellen Health-Status des Containers.
 
 ----
 
@@ -1148,7 +1126,7 @@ Dieser sagt Docker welchen Status ein Service hat.
 - Unhealthy
 - Starting
 
-Dafür kann man jeden Befehl nehmen der im Container ausführbar ist, dieser muss 0 oder 1 als exit code haben. 
+Dafür kann man jeden Befehl nehmen der im Container ausführbar ist, dieser muss 0 oder 1 zurückgeben (exit code). 
 
 Note: 
 Warum braucht man das?
@@ -1178,14 +1156,14 @@ healthcheck:
 
 ## Übung
 
-Baut in rocket.chat sowie in die MongoDB valide health checks ein. 
-Nutzt dafür docker compose.
+Baut in rocket.chat sowie in die MongoDB valide Health-Checks ein. 
+Nutzt dafür das docker-compose-File.
 
 ----
 
 ## Zusammenfassung
 
-Docker Heathcheck über Dockerfile und docker-compose
+Docker Healthcheck über Dockerfile und docker-compose-File
 
 ---
 
@@ -1199,7 +1177,7 @@ Docker Heathcheck über Dockerfile und docker-compose
 
 ----
 
-## Traefik als Loadbalancer
+## Traefik als Reverse-Proxy
 
 ```
 proxy:
@@ -1238,7 +1216,20 @@ Baut eine Docker Compose mit traefik und routet rocket.chat über diesen.
 
 ## Traefik SSL mit Let's Encrypt
 
-TBD
+ - ACME
+
+
+----
+
+## Monitoring
+
+  - Grafana
+  - Telegraf
+  - InfluxDB
+
+---
+
+# ENDE PRAXISTEIL
 
 ---
 
@@ -1316,10 +1307,7 @@ Alles anders aber doch irgendwie gleich.
 
 ----
 
-## Scalierung und Redundanz
+## Skalierung und Redundanz
 
 ---
 
-# Logging
-
-Mit Grafana Telegraf und InfluxDB

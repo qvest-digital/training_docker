@@ -5,7 +5,8 @@ logLevel = "INFO"
   address = ":8080"
 
 [docker]
-  domain = "example.com"
+  endpoint = "unix:///var/run/docker.sock"
+  domain = "docker.localhost"
   watch = true
   exposedbydefault = false
 
@@ -25,6 +26,7 @@ logLevel = "INFO"
    storage="/etc/traefik/acme/acme.json"
    entryPoint="https"
    acmeLogging=true
+   onDemand = false
    OnHostRule=true
    [acme.httpChallenge]
      entryPoint = "http"
