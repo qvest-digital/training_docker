@@ -1195,7 +1195,12 @@ proxy:
 
 ## Dynamisches Routing über Treafik 
 
-- docker labels
+```
+  whoami:
+    image: containous/whoami # A container that exposes an API to show its IP address
+    labels:
+      - "traefik.frontend.rule=Host:whoami.docker.localhost"
+```
 
 ----
 
