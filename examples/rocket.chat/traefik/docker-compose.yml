@@ -13,6 +13,6 @@ services:
       - ./config:/etc/traefik
 
 networks:
-  reverse-proxy:
+  webgateway:
     driver: bridge
   
