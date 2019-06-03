@@ -1049,7 +1049,7 @@ Beispiel an rocket.chat
 
 ----
 
-# Bestandsaufnahme
+## Bestandsaufnahme
 
 - https://rocket.chat/docs/installation/docker-containers/
     - Securing the server
@@ -1069,7 +1069,7 @@ Note:
 
 ----
 
-# Vorgehen und Ziele
+## Vorgehen und Ziele
 
 - Docker-Compose 
   - Rocket.Chat ans laufen bekommen
