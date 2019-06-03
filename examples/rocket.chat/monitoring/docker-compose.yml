@@ -15,7 +15,7 @@ services:
       - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
     restart: always
 
-    grafana:
+  grafana:
     image: grafana/grafana
     container_name: grafana
     restart: always
