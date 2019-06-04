@@ -1337,6 +1337,9 @@ DockerCLI
 }
 ```
 
+Note:
+docker run --log-driver json-file --log-opt max-size=10m alpine echo hello world
+
 ---
 
 # Orchestrierung mit Swarm
