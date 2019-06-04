@@ -1219,26 +1219,40 @@ Note:
 
 Baut eine Docker Compose mit traefik und routet rocket.chat über diesen.
 
+<iframe src="http://localhost:42190?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+
 ----
 
 ## Traefik SSL mit Let's Encrypt
 
- - ACME
+- ACME
 
 ---
 
 # Backup 
 
-  - mongodb
-  - Volumes
+- mongodb
+- Volumes
+
+----
+
+# Backup
+
+<iframe src="http://localhost:42200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 ---
 
 # Monitoring
 
-  - Grafana
-  - Telegraf
-  - InfluxDB
+- Grafana
+- Telegraf
+- InfluxDB
+
+----
+
+# Monitoring 
+
+<iframe src="http://localhost:42210?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 ---
 
