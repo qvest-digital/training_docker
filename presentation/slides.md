@@ -1207,32 +1207,52 @@ proxy:
 curl -H Host:whoami.docker.localhost http://127.0.0.1
 ```
 
+Note: 
+- traefik.backend=blog
+- traefik.frontend.rule=Host:blog.example.com
+- traefik.docker.network=proxy
+- traefik.port=80
+
 ----
 
 ## Übung 
 
 Baut eine Docker Compose mit traefik und routet rocket.chat über diesen.
 
+<iframe src="http://localhost:42190?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
+
 ----
 
 ## Traefik SSL mit Let's Encrypt
 
- - ACME
+- ACME
 
 ---
 
 # Backup 
 
-  - mongodb
-  - Volumes
+- mongodb
+- Volumes
+
+----
+
+# Backup
+
+<iframe src="http://localhost:42200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 ---
 
 # Monitoring
 
-  - Grafana
-  - Telegraf
-  - InfluxDB
+- Grafana
+- Telegraf
+- InfluxDB
+
+----
+
+# Monitoring 
+
+<iframe src="http://localhost:42210?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 ---
 
@@ -1290,15 +1310,65 @@ DockerCLI
 
 ---
 
+# Docker Daemon
+
+- Configuration von Netzwerken 
+- Configuration des Logging Drivers
+
+----
+
+## Netzwerkconfiguration
+
+```json
+{
+  "bip": "10.60.3.1/24",
+  "default-address-pools":
+  [
+    {
+      "scope":"local",
+      "base":"10.60.0.0/16",
+      "size":24
+    },
+    {
+      "scope":"global",
+      "base":"10.61.0.0/16",
+      "size":24
+    }
+  ]
+}
+```
+----
+
+## Logging Configuration
+
+```json
+{
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "10m",
+    "max-file": "3" 
+  }
+}
+```
+
+Note:
+docker run --log-driver json-file --log-opt max-size=10m alpine echo hello world
+
+---
+
 # Orchestrierung mit Swarm
 
 ----
 
 ## Initialisieren
 
+- docker swarm init
+
 ----
 
 ## Erweitern
+
+- docker join
 
 ----
 
@@ -1313,5 +1383,11 @@ Alles anders aber doch irgendwie gleich.
 
 ## Skalierung und Redundanz
 
+- Storage
+  - NFS, GlusterFS
+- Datenbanken
+  - Cluster
+
 ---
 
+# Ende

@@ -97,6 +97,18 @@ services:
     <<: *build
     ports:
       - "127.0.0.1:42180:4200"
+  shell_190:
+    <<: *build
+    ports:
+      - "127.0.0.1:42190:4200"
+  shell_200:
+    <<: *build
+    ports:
+      - "127.0.0.1:42200:4200"
+  shell_210:
+    <<: *build
+    ports:
+      - "127.0.0.1:42210:4200"
   docker:
     image: docker:dind
     volumes:
