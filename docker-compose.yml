@@ -24,7 +24,7 @@ services:
   shell_11:
     <<: *build
     ports:
-      - "127.0.0.1:42011:4200"      
+      - "127.0.0.1:42011:4200"
   shell_20:
     <<: *build
     ports:
@@ -36,7 +36,7 @@ services:
   shell_31:
     <<: *build
     ports:
-      - "127.0.0.1:42031:4200"      
+      - "127.0.0.1:42031:4200"
   shell_40:
     <<: *build
     ports:

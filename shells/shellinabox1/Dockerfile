@@ -1,4 +1,4 @@
-FROM docker/compose:1.23.2
+FROM docker/compose:1.29.2
 
 ARG GATEWAY
 RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
