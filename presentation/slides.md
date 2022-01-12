@@ -29,6 +29,7 @@ revealOptions:
 Note:
 Wer seid Ihr/Vorstellungsrunde
 Regeln:
+
 - Du
 - Fragen direkt mit aufzeigen
   - kein reinreden
@@ -71,7 +72,6 @@ Probleme ohne Docker:
 - Versionierung/Rollback
 - Rückstände
 
-
 ----
 
 ## Container vs. Virtualisierung
@@ -89,7 +89,7 @@ Note:
   - pro VM zusätzlicher Kernel
 - Container
   - Taskrunner (ähnlich systemd/init)
-  - Isolieren von Anwendungen und deren Abhängigkeiten
+  - Isolieren von Prozessen und deren Abhängigkeiten
     - eigenes Dateisystem
   - Plattformabhängig (i386/arm etc.)
 - Beispiel
@@ -224,7 +224,6 @@ docker logs -f <containerID>
 
 ## Container-Lifecycle
 
-
 <img src="images/simple_lifecycle.svg"/>
 
 Note:
@@ -250,14 +249,11 @@ docker rm
 - on-failure
 - unless-stopped
 
-
 ```shell
   docker run --restart=always alpine /bin/false
 ```
 
 <iframe class=small width="100%" src="http://localhost:42031?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
-
-
 
 ----
 
@@ -266,6 +262,7 @@ docker rm
 <img src="images/simple_lifecycle.svg"/>
 
 Note:
+
 - Docker Status übersicht und Lifecycle
   - Created
     - Container ist erstellt aber nicht gestartet
@@ -278,7 +275,6 @@ Note:
   - Deleted
     - Container ist gelöscht
 
-
 ---
 
 # Ports & Volumes
@@ -288,14 +284,13 @@ Note:
   - Typen
   - Berechtigungen
 
-
 ----
 
 ## Einblick Portfreigaben
 
 Docker kann Container Ports an Hostports binden (exponieren).
 
-```
+```shell
 docker run -d -p 8081:80 wordpress
 docker run -d -p 80 wordpress
 docker run -d -p 8082:80 -p 443:8443
@@ -319,7 +314,7 @@ Docker kann Containerverzeichnisse mit lokalen Verzeichnissen verbinden ("volume
 - Volumetypen
   - anonymous
     - `docker run -v /path/in/container ...`
-  - named    
+  - named
     - `docker volume create somevolumename`
     - `docker run -v name:/path/in/container ...`
   - host
@@ -406,7 +401,7 @@ docker run -p 3000:3000 -p 3022:22 -v $(pwd)/giteatest:/data gitea/gitea
 
 ## Einblick Umgebungsvariablen
 
-```
+```shell
 docker run -d \
            -e MYSQL_ROOT_PASSWORD=supersicher \
            -e MYSQL_USER=wordpress \
@@ -426,12 +421,12 @@ Beispiel environment Variablen an MariaDB zeigen.
 
 ## Übung PostgresDB starten
 
- - Starte einen [postgreSQL](https://hub.docker.com/_/postgres/) Docker-Container mit:
-   - einer automatisch erstellten Datenbank mit dediziertem Benutzeraccount
-   - Umgebungsvariablen
-     - POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB
- - Sorge dafür, dass das Datenverzeichnis lokal gemapped ist.
-   - /var/lib/postgresql/data) auf ein lokales - $(pwd)/volumes/db
+- Starte einen [postgreSQL](https://hub.docker.com/_/postgres/) Docker-Container mit:
+  - einer automatisch erstellten Datenbank mit dediziertem Benutzeraccount
+  - Umgebungsvariablen
+    - POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB
+- Sorge dafür, dass das Datenverzeichnis lokal gemapped ist.
+  - /var/lib/postgresql/data) auf ein lokales - $(pwd)/volumes/db
 
 <iframe class=small width="100%" src="http://localhost:4207?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
@@ -514,9 +509,10 @@ docker run -d -p 9000:9000 \
 ## Zusammenfassung
 
 Verbinden von Containern
-  - --link
-  - Namensauflösung per Docker DNS
-  - Kommunikation mit Sockets
+
+- --link
+- Namensauflösung per Docker DNS
+- Kommunikation mit Sockets
 
 ---
 
@@ -554,9 +550,12 @@ docker commit <containerid>
 Note:
 Was ist ein Image und was ist ein Container
 Beispiel: git commit
+
 - docker run -it ubuntu -> apt-get update; apt-get install git -y; exit
 - docker run -it ubuntu git --version
+
 Das Selbe nochmal mit commit
+
 - docker image ls
 
 ----
@@ -577,8 +576,8 @@ Das Selbe nochmal mit commit
 - Docker Hub
 - Tags und Versionierung
 
-
 Note:
+
 - docker pull
   - Dient zum herunterladen von Images
   - Default regirsty ist docker Hub
@@ -629,6 +628,7 @@ Dockerfiles können (meist) eingesehen werden (link zu Github)
 <iframe width="100%" src="http://localhost:42130?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
+
 - Pullen eines containers
 - docker run -d -p 5000:5000 --restart always registry:2
 - docker pull nginx
@@ -639,7 +639,7 @@ Note:
 
 ## Zusammenfassung
 
-- https://hub.docker.com
+- [hub.docker.cok](https://hub.docker.com)
 - Eigene Registries
   - pushen in nicht standard *registry*
 - Versionierung über Tags
@@ -679,7 +679,7 @@ Docker commit erklären mit Überleitung zu Dockerfile
 
 ## Image aus Dockerfile erstellen
 
-```
+```shell
 # Dockerfile
 FROM nginx
 RUN echo "<h1>Hello World from Dockerfile</h1>" > \
@@ -754,6 +754,7 @@ Alpine ist der bevorzugte, da er wesentlich kleiner ist als alle anderen.
 - Command definition
 - Unterschiede
 - Best Practice
+
 ----
 
 ## Entrypoint
@@ -951,7 +952,7 @@ docker-compose rm
 
 ## Dockerfile Layer
 
-```
+```Dockerfile
 FROM golang:alpine3.7
 RUN apk update
 RUN apk add --no-cache git
@@ -975,15 +976,16 @@ Note:
 ## Übung
 
 Optimiere das Dockerfile und optimiere die Layer.
-Wo ist der Unterschied zwischen: 
-```
+Wo ist der Unterschied zwischen:
+
+```shell
 RUN apt-get update \
     && apt-get install -y nginx \
     && apt-get clean
 ```
 
-```
-RUN apt-get update 
+```shell
+RUN apt-get update
 RUN apt-get install -y nginx
 RUN apt-get clean
 ```
@@ -1014,7 +1016,7 @@ RUN apt-get clean
 
 ## Beispiel
 
-```
+```Dockerfile
 FROM golang:alpine3.7 AS builder
 WORKDIR /project
 COPY *.go ./
@@ -1045,25 +1047,25 @@ ENTRYPOINT ["/parrot"]
 
 # Docker bis Produktion
 
-Beispiel an rocket.chat 
+Beispiel an rocket.chat
 
 ----
 
 ## Bestandsaufnahme
 
 - https://rocket.chat/docs/installation/docker-containers/
-    - Securing the server
-      - Firewall basics (skipped)
-    - Securing the server
-      - fail2ban (skipped)
-    - Install docker-compose (skipped)
-    - Editing the Host-File (skipped)
-    - Installing NGINX & SSL certificate (skipped)
-    - Create docker-compose
-    - Automatic Startup & Crash Recovery
-    - Reboot and Check
+  - Securing the server
+    - Firewall basics (skipped)
+  - Securing the server
+    - fail2ban (skipped)
+  - Install docker-compose (skipped)
+  - Editing the Host-File (skipped)
+  - Installing NGINX & SSL certificate (skipped)
+  - Create docker-compose
+  - Automatic Startup & Crash Recovery
+  - Reboot and Check
 
-Note: 
+Note:
 - ist das so okay?
 - kann man etwas ändern?
 
@@ -1071,9 +1073,9 @@ Note:
 
 ## Vorgehen und Ziele
 
-- Docker-Compose 
+- Docker-Compose
   - Rocket.Chat ans laufen bekommen
-      - Persistenz (Volumes)
+    - Persistenz (Volumes)
 - SSL mit traefik/dynamisches routing
   - mehrere compose-Files
   - Docker Netzwerke
@@ -1094,6 +1096,7 @@ Note:
 <iframe src="http://localhost:42180?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
+
 - docker network ls
 - docker-compose naming (netzwerke und container)
 - docker-compose -p
@@ -1116,7 +1119,7 @@ Note:
 ---
 
 # Docker Healthcheck
- 
+
 Liefert den aktuellen Health-Status des Containers.
 
 ----
@@ -1127,24 +1130,26 @@ Liefert den aktuellen Health-Status des Containers.
 - Unhealthy
 - Starting
 
-Dafür kann man jeden Befehl nehmen der im Container ausführbar ist, dieser muss 0 oder 1 zurückgeben (exit code). 
+Dafür kann man jeden Befehl nehmen der im Container ausführbar ist, dieser muss 0 oder 1 zurückgeben (exit code).
 
-Note: 
+Note:
 Warum braucht man das?
 Hauptsächlich für Orchestrierung.
 
 ----
 
-## Beispiel 
+## Beispiel
 
 Im Dockerfile:
-```
+
+```DOCKERFILE
 HEALTHCHECK --interval=5m --timeout=3s \
   CMD curl -f http://localhost/ || exit 1
 ```
 
 In Compose:
-```
+
+```yaml
 healthcheck:
   test: ["CMD", "curl", "-f", "http://localhost"]
   interval: 1m30s
@@ -1157,7 +1162,7 @@ healthcheck:
 
 ## Übung
 
-Baut in rocket.chat sowie in die MongoDB valide Health-Checks ein. 
+Baut in rocket.chat sowie in die MongoDB valide Health-Checks ein.
 Nutzt dafür das docker-compose-File.
 
 ----
@@ -1180,13 +1185,13 @@ Docker Healthcheck über Dockerfile und docker-compose-File
 
 ## Traefik als Reverse-Proxy
 
-```
+```yaml
 proxy:
   image: traefik # The official Traefik docker image
   command: --api --docker # Enables the web UI and tells Traefik to listen to docker
   ports:
     - "80:80"     # The HTTP port
-    - "443:443" # The HTTPS port 
+    - "443:443" # The HTTPS port
     - "8080:8080" # The Web UI (enabled by --api)
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
@@ -1194,20 +1199,21 @@ proxy:
 
 ----
 
-## Dynamisches Routing über Treafik 
+## Dynamisches Routing über Treafik
 
-```
+```yaml
   whoami:
     image: containous/whoami # A container that exposes an API to show its IP address
     labels:
       - "traefik.frontend.rule=Host:whoami.docker.localhost"
 ```
 
-```
+```shell
 curl -H Host:whoami.docker.localhost http://127.0.0.1
 ```
 
-Note: 
+Note:
+
 - traefik.backend=blog
 - traefik.frontend.rule=Host:blog.example.com
 - traefik.docker.network=proxy
@@ -1215,7 +1221,7 @@ Note:
 
 ----
 
-## Übung 
+## Übung
 
 Baut eine Docker Compose mit traefik und routet rocket.chat über diesen.
 
@@ -1229,7 +1235,7 @@ Baut eine Docker Compose mit traefik und routet rocket.chat über diesen.
 
 ---
 
-# Backup 
+# Backup
 
 - mongodb
 - Volumes
@@ -1250,7 +1256,7 @@ Baut eine Docker Compose mit traefik und routet rocket.chat über diesen.
 
 ----
 
-# Monitoring 
+# Monitoring
 
 <iframe src="http://localhost:42210?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
@@ -1270,7 +1276,7 @@ Baut eine Docker Compose mit traefik und routet rocket.chat über diesen.
 
 ----
 
-## Übung:
+## Übung
 
 - start.sh
   - mit debug help etc
@@ -1307,12 +1313,11 @@ Baut eine Docker Compose mit traefik und routet rocket.chat über diesen.
 DockerCLI
   - *--user*
 
-
 ---
 
 # Docker Daemon
 
-- Configuration von Netzwerken 
+- Configuration von Netzwerken
 - Configuration des Logging Drivers
 
 ----
@@ -1337,6 +1342,7 @@ DockerCLI
   ]
 }
 ```
+
 ----
 
 ## Logging Configuration
@@ -1346,7 +1352,7 @@ DockerCLI
   "log-driver": "json-file",
   "log-opts": {
     "max-size": "10m",
-    "max-file": "3" 
+    "max-file": "3"
   }
 }
 ```
@@ -1376,8 +1382,8 @@ docker run --log-driver json-file --log-opt max-size=10m alpine echo hello world
 
 Alles anders aber doch irgendwie gleich.
 
-- docker stack 
-- docker service 
+- docker stack
+- docker service
 
 ----
 
