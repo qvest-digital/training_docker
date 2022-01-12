@@ -77,6 +77,9 @@ Probleme ohne Docker:
 
 ## Architekturüberblick
 
+<img src="images/docker_architecture.svg"/>
+
+Note:
 - Container Runtime
   - Containerd
 - OCI (Open Container Initiative)
