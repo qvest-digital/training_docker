@@ -9,6 +9,7 @@ services:
       - ${PWD}/presentation:/reveal
     init: true
   shell_0: &build
+    image: local/shellinabox
     volumes:
       - ./examples:/root/examples
       - docker-certs-client:/certs/client:ro

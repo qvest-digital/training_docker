@@ -1,4 +1,4 @@
 #!/bin/bash
-docker-compose build
+docker build shells/shellinabox1 -t local/shellinabox
 
 docker-compose up -d --remove-orphans
