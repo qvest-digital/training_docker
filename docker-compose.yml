@@ -11,10 +11,13 @@ services:
   shell_0: &build
     volumes:
       - ./examples:/root/examples
+      - docker-certs-client:/certs/client:ro
+    environment:
+      - DOCKER_TLS_CERTDIR=/certs
     build:
       context: shells/shellinabox1
-      args:
-        GATEWAY: ${DOCKER_BRIDGE_GATEWAY}
+      #args:
+      #  GATEWAY: ${DOCKER_BRIDGE_GATEWAY}
     ports:
       - "127.0.0.1:42000:4200"
   shell_10:
@@ -111,7 +114,18 @@ services:
       - "127.0.0.1:42210:4200"
   docker:
     image: docker:dind
+    networks:
+      default:
+        aliases:
+          - docker
     volumes:
       - ./examples:/root/examples
+      - docker-certs-ca:/certs/ca
+      - docker-certs-client:/certs/client:ro
+    environment:
+      - DOCKER_TLS_CERTDIR=/certs
     privileged: true
-    network_mode: host
+
+volumes:
+  docker-certs-client:
+  docker-certs-ca:
