@@ -1,4 +1,4 @@
-FROM docker
+FROM docker:latest
 
 ARG GATEWAY
 RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
@@ -13,6 +13,8 @@ RUN echo "set bg=dark" > /root/.vimrc
 
 ADD styles.css /data/
 
+COPY dbash /usr/local/bin/dbash
+
 EXPOSE 4200
 
-CMD ["shellinaboxd", "--css", "/data/styles.css", "-s", "/:0:0:/root:/bin/bash", "--disable-ssl"]
+CMD ["shellinaboxd", "--css", "/data/styles.css", "-s", "/:0:0:/root:/usr/local/bin/dbash", "--disable-ssl"]

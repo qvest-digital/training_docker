@@ -12,6 +12,10 @@ services:
     volumes:
       - ./examples:/root/examples
       - docker-certs-client:/certs/client:ro
+    networks:
+      default:
+        aliases:
+          - docker
     environment:
       - DOCKER_TLS_CERTDIR=/certs
     build:
@@ -121,7 +125,7 @@ services:
     volumes:
       - ./examples:/root/examples
       - docker-certs-ca:/certs/ca
-      - docker-certs-client:/certs/client:ro
+      - docker-certs-client:/certs/client
     environment:
       - DOCKER_TLS_CERTDIR=/certs
     privileged: true
@@ -129,3 +133,6 @@ services:
 volumes:
   docker-certs-client:
   docker-certs-ca:
+
+networks:
+  docker-subnet:
