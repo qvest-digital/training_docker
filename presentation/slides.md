@@ -74,11 +74,20 @@ Probleme ohne Docker:
 
 ----
 
+# Containerd
+
+- Worauf baut docker auf.
+- Docker nutzt den CRIO Standard für container
+- API Schnittstelle
+
+----
+
 ## Container vs. Virtualisierung
 
 <img src="images/docker-containerized-and-vm-transparent-bg.png"/>
 
 - unterschiedliche Anwendungsszenarien
+- Prozess Isolation vs Hardware Virtualisierung
 - kombinierbar
 
 Note:
