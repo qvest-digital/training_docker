@@ -4,11 +4,11 @@ revealOptions:
 
 ---
 
+# Container mit Docker
+
 <div id="header-footer">
   <p class="slide-footer"><img src="images/light.svg" height="40" width="200"><br>tarent solutions GmbH<br>Volker Schmitz & Daniel Zerlett</p>
 </div>
-
-![docker](./images/docker_logo.png)
 
 ----
 
@@ -52,6 +52,7 @@ Regeln:
 # Überblick
 
 - Was ist Docker?
+- Container Architektur
 - Container vs. Virtualisierung
 
 ----
@@ -74,11 +75,19 @@ Probleme ohne Docker:
 
 ----
 
-# Containerd
+## Architekturüberblick
 
-- Worauf baut docker auf.
-- Docker nutzt den CRIO Standard für container
-- API Schnittstelle
+- Container Runtime
+  - Containerd
+- OCI (Open Container Initiative)
+- Docker, Kubernetes, Podman, Docker-Compose
+
+----
+
+## Architekturüberblick
+
+- add pictures here
+- MacOS Windows ist container kram anders
 
 ----
 
@@ -103,12 +112,6 @@ Note:
   - Plattformabhängig (i386/arm etc.)
 - Beispiel
   - Glusterfs
-
-----
-
-## Architekturüberblick
-
-<img src="images/engine-components-flow.png"/>
 
 ---
 
