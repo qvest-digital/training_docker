@@ -27,16 +27,16 @@ body {
 .reveal:before {
     content: 'https://github.com/tarent/training_docker | v.schmitz@tarent.de | d.zerlett@tarent.de';
     position: absolute;
-    height: 50px;
+    height: 60px;
     bottom: 11px;
-    padding-left: 195px;
+    padding-left: 65px;
     left: 20px;
     font-size: 28px;
     overflow: hidden;
 }
 
 .reveal:after {
-    background-image: url('images/tarent_academy_light-3.svg');
+    background-image: url('images/pfeil.svg');
     background-position: left top;
     background-size: auto 50px;
     background-repeat: no-repeat;

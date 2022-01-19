@@ -1,0 +1,4 @@
+#!/bin/bash
+export DOCKER_TLS_CERTDIR=/certs
+
+docker-entrypoint.sh /bin/bash

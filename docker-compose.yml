@@ -9,12 +9,20 @@ services:
       - ${PWD}/presentation:/reveal
     init: true
   shell_0: &build
+    image: local/shellinabox
     volumes:
       - ./examples:/root/examples
+      - docker-certs-client:/certs/client:ro
+    networks:
+      default:
+        aliases:
+          - docker
+    environment:
+      - DOCKER_TLS_CERTDIR=/certs
     build:
       context: shells/shellinabox1
-      args:
-        GATEWAY: ${DOCKER_BRIDGE_GATEWAY}
+      #args:
+      #  GATEWAY: ${DOCKER_BRIDGE_GATEWAY}
     ports:
       - "127.0.0.1:42000:4200"
   shell_10:
@@ -24,7 +32,7 @@ services:
   shell_11:
     <<: *build
     ports:
-      - "127.0.0.1:42011:4200"      
+      - "127.0.0.1:42011:4200"
   shell_20:
     <<: *build
     ports:
@@ -36,7 +44,7 @@ services:
   shell_31:
     <<: *build
     ports:
-      - "127.0.0.1:42031:4200"      
+      - "127.0.0.1:42031:4200"
   shell_40:
     <<: *build
     ports:
@@ -111,7 +119,21 @@ services:
       - "127.0.0.1:42210:4200"
   docker:
     image: docker:dind
+    networks:
+      default:
+        aliases:
+          - docker
     volumes:
       - ./examples:/root/examples
+      - docker-certs-ca:/certs/ca
+      - docker-certs-client:/certs/client
+    environment:
+      - DOCKER_TLS_CERTDIR=/certs
     privileged: true
-    network_mode: host
+    ports:
+      - 3000:3000
+      - 8080:8080
+
+volumes:
+  docker-certs-client:
+  docker-certs-ca:

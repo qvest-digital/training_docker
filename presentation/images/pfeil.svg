@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="64px" viewBox="0 0 80 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Logo_tarent" transform="translate(-24.000000, -127.000000)">
+            <g id="Group-2" transform="translate(24.000000, 127.000000)">
+                <path d="M32,0 C14.327,0 0,14.327 0,32 C0,49.673 14.327,64 32,64 C49.673,64 64,49.673 64,32 C64,14.327 49.673,0 32,0" id="Fill-17" fill="#BB242A"></path>
+                <path d="M53.268,35.268 L42.268,46.268 C41.78,46.756 41.14,47 40.5,47 C39.86,47 39.22,46.756 38.732,46.268 C37.756,45.291 37.756,43.709 38.732,42.732 L45.464,36 L12.5,36 C11.119,36 10,34.881 10,33.5 L10,22.5 C10,21.119 11.119,20 12.5,20 C13.881,20 15,21.119 15,22.5 L15,31 L45.464,31 L38.732,24.268 C37.756,23.292 37.756,21.708 38.732,20.732 C39.708,19.756 41.292,19.756 42.268,20.732 L53.268,31.732 C54.244,32.709 54.244,34.291 53.268,35.268" id="Fill-18" fill="#fff"></path>
+            </g>
+        </g>
+    </g>
+</svg>

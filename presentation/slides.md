@@ -4,11 +4,11 @@ revealOptions:
 
 ---
 
+# Container mit Docker
+
 <div id="header-footer">
   <p class="slide-footer"><img src="images/light.svg" height="40" width="200"><br>tarent solutions GmbH<br>Volker Schmitz & Daniel Zerlett</p>
 </div>
-
-![docker](./images/docker_logo.png)
 
 ----
 
@@ -29,6 +29,7 @@ revealOptions:
 Note:
 Wer seid Ihr/Vorstellungsrunde
 Regeln:
+
 - Du
 - Fragen direkt mit aufzeigen
   - kein reinreden
@@ -51,6 +52,7 @@ Regeln:
 # Überblick
 
 - Was ist Docker?
+- Containerarchitektur
 - Container vs. Virtualisierung
 
 ----
@@ -71,15 +73,36 @@ Probleme ohne Docker:
 - Versionierung/Rollback
 - Rückstände
 
+----
+
+## Architekturüberblick
+
+<img src="images/docker_architecture.svg"/>
+
+Note:
+- Container Runtime
+  - Containerd
+- OCI (Open Container Initiative)
+- Docker, Kubernetes, Podman, Docker-Compose
+- MacOS Windows ist container kram anders
+
+----
+
+## Hardwarevirtualisierung (VM)
+
+<img src="images/arch-vm.png"/>
+
+----
+
+## Containerisierung
+
+<img src="images/arch-container.png"/>
 
 ----
 
 ## Container vs. Virtualisierung
 
 <img src="images/docker-containerized-and-vm-transparent-bg.png"/>
-
-- unterschiedliche Anwendungsszenarien
-- kombinierbar
 
 Note:
 - Allgemein
@@ -89,17 +112,11 @@ Note:
   - pro VM zusätzlicher Kernel
 - Container
   - Taskrunner (ähnlich systemd/init)
-  - Isolieren von Anwendungen und deren Abhängigkeiten
+  - Isolieren von Prozessen und deren Abhängigkeiten
     - eigenes Dateisystem
   - Plattformabhängig (i386/arm etc.)
 - Beispiel
   - Glusterfs
-
-----
-
-## Architekturüberblick
-
-<img src="images/engine-components-flow.png"/>
 
 ---
 
@@ -159,17 +176,6 @@ Ziel ist es zu erkennen, wie einfach die Instalation ist.
 
 ----
 
-### Docker API
-
-
-```shell
-curl --unix-socket /var/run/docker.sock http/containers/json
-```
-
-<iframe width="100%" src="http://localhost:42011?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
-
-----
-
 ## Übung gitea
 
 - Starte "gitea" vom Docker-Image "gitea/gitea" im Hintergund
@@ -224,7 +230,6 @@ docker logs -f <containerID>
 
 ## Container-Lifecycle
 
-
 <img src="images/simple_lifecycle.svg"/>
 
 Note:
@@ -250,14 +255,11 @@ docker rm
 - on-failure
 - unless-stopped
 
-
 ```shell
   docker run --restart=always alpine /bin/false
 ```
 
 <iframe class=small width="100%" src="http://localhost:42031?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
-
-
 
 ----
 
@@ -266,6 +268,7 @@ docker rm
 <img src="images/simple_lifecycle.svg"/>
 
 Note:
+
 - Docker Status übersicht und Lifecycle
   - Created
     - Container ist erstellt aber nicht gestartet
@@ -278,7 +281,6 @@ Note:
   - Deleted
     - Container ist gelöscht
 
-
 ---
 
 # Ports & Volumes
@@ -288,14 +290,13 @@ Note:
   - Typen
   - Berechtigungen
 
-
 ----
 
 ## Einblick Portfreigaben
 
 Docker kann Container Ports an Hostports binden (exponieren).
 
-```
+```shell
 docker run -d -p 8081:80 wordpress
 docker run -d -p 80 wordpress
 docker run -d -p 8082:80 -p 443:8443
@@ -319,7 +320,7 @@ Docker kann Containerverzeichnisse mit lokalen Verzeichnissen verbinden ("volume
 - Volumetypen
   - anonymous
     - `docker run -v /path/in/container ...`
-  - named    
+  - named
     - `docker volume create somevolumename`
     - `docker run -v name:/path/in/container ...`
   - host
@@ -406,7 +407,7 @@ docker run -p 3000:3000 -p 3022:22 -v $(pwd)/giteatest:/data gitea/gitea
 
 ## Einblick Umgebungsvariablen
 
-```
+```shell
 docker run -d \
            -e MYSQL_ROOT_PASSWORD=supersicher \
            -e MYSQL_USER=wordpress \
@@ -426,12 +427,12 @@ Beispiel environment Variablen an MariaDB zeigen.
 
 ## Übung PostgresDB starten
 
- - Starte einen [postgreSQL](https://hub.docker.com/_/postgres/) Docker-Container mit:
-   - einer automatisch erstellten Datenbank mit dediziertem Benutzeraccount
-   - Umgebungsvariablen
-     - POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB
- - Sorge dafür, dass das Datenverzeichnis lokal gemapped ist.
-   - /var/lib/postgresql/data) auf ein lokales - $(pwd)/volumes/db
+- Starte einen [postgreSQL](https://hub.docker.com/_/postgres/) Docker-Container mit:
+  - einer automatisch erstellten Datenbank mit dediziertem Benutzeraccount
+  - Umgebungsvariablen
+    - POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB
+- Sorge dafür, dass das Datenverzeichnis lokal gemapped ist.
+  - /var/lib/postgresql/data) auf ein lokales - $(pwd)/volumes/db
 
 <iframe class=small width="100%" src="http://localhost:4207?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
@@ -514,9 +515,10 @@ docker run -d -p 9000:9000 \
 ## Zusammenfassung
 
 Verbinden von Containern
-  - --link
-  - Namensauflösung per Docker DNS
-  - Kommunikation mit Sockets
+
+- --link
+- Namensauflösung per Docker DNS
+- Kommunikation mit Sockets
 
 ---
 
@@ -554,9 +556,12 @@ docker commit <containerid>
 Note:
 Was ist ein Image und was ist ein Container
 Beispiel: git commit
+
 - docker run -it ubuntu -> apt-get update; apt-get install git -y; exit
 - docker run -it ubuntu git --version
+
 Das Selbe nochmal mit commit
+
 - docker image ls
 
 ----
@@ -577,8 +582,8 @@ Das Selbe nochmal mit commit
 - Docker Hub
 - Tags und Versionierung
 
-
 Note:
+
 - docker pull
   - Dient zum herunterladen von Images
   - Default regirsty ist docker Hub
@@ -629,6 +634,7 @@ Dockerfiles können (meist) eingesehen werden (link zu Github)
 <iframe width="100%" src="http://localhost:42130?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 Note:
+
 - Pullen eines containers
 - docker run -d -p 5000:5000 --restart always registry:2
 - docker pull nginx
@@ -639,7 +645,7 @@ Note:
 
 ## Zusammenfassung
 
-- https://hub.docker.com
+- [hub.docker.cok](https://hub.docker.com)
 - Eigene Registries
   - pushen in nicht standard *registry*
 - Versionierung über Tags
@@ -679,7 +685,7 @@ Docker commit erklären mit Überleitung zu Dockerfile
 
 ## Image aus Dockerfile erstellen
 
-```
+```shell
 # Dockerfile
 FROM nginx
 RUN echo "<h1>Hello World from Dockerfile</h1>" > \
@@ -754,6 +760,7 @@ Alpine ist der bevorzugte, da er wesentlich kleiner ist als alle anderen.
 - Command definition
 - Unterschiede
 - Best Practice
+
 ----
 
 ## Entrypoint
@@ -951,7 +958,7 @@ docker-compose rm
 
 ## Dockerfile Layer
 
-```
+```Dockerfile
 FROM golang:alpine3.7
 RUN apk update
 RUN apk add --no-cache git
@@ -975,15 +982,16 @@ Note:
 ## Übung
 
 Optimiere das Dockerfile und optimiere die Layer.
-Wo ist der Unterschied zwischen: 
-```
+Wo ist der Unterschied zwischen:
+
+```shell
 RUN apt-get update \
     && apt-get install -y nginx \
     && apt-get clean
 ```
 
-```
-RUN apt-get update 
+```shell
+RUN apt-get update
 RUN apt-get install -y nginx
 RUN apt-get clean
 ```
@@ -1014,7 +1022,7 @@ RUN apt-get clean
 
 ## Beispiel
 
-```
+```Dockerfile
 FROM golang:alpine3.7 AS builder
 WORKDIR /project
 COPY *.go ./
@@ -1040,353 +1048,6 @@ ENTRYPOINT ["/parrot"]
 - Dockerfiles vergleichen
 - Layer vergleichen
 - Imagegrößen vergleichen
-
----
-
-# Docker bis Produktion
-
-Beispiel an rocket.chat 
-
-----
-
-## Bestandsaufnahme
-
-- https://rocket.chat/docs/installation/docker-containers/
-    - Securing the server
-      - Firewall basics (skipped)
-    - Securing the server
-      - fail2ban (skipped)
-    - Install docker-compose (skipped)
-    - Editing the Host-File (skipped)
-    - Installing NGINX & SSL certificate (skipped)
-    - Create docker-compose
-    - Automatic Startup & Crash Recovery
-    - Reboot and Check
-
-Note: 
-- ist das so okay?
-- kann man etwas ändern?
-
-----
-
-## Vorgehen und Ziele
-
-- Docker-Compose 
-  - Rocket.Chat ans laufen bekommen
-      - Persistenz (Volumes)
-- SSL mit traefik/dynamisches routing
-  - mehrere compose-Files
-  - Docker Netzwerke
-- Docker Security
-  - Eigenes Image bauen
-- Auflösung von Abhänihgkeiten
-  - Hinzufügen von Health-Checks
-- Backup and Recovery
-
----
-
-# Docker Netzwerke
-
-----
-
-## Docker Netzwerke CLI
-
-<iframe src="http://localhost:42180?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
-
-Note:
-- docker network ls
-- docker-compose naming (netzwerke und container)
-- docker-compose -p
-- docker network rm
-- Unterschied docker-compose stop/down
-
-----
-
-## Übung
-
-- Füge der docker-compose.yml von Rocket.Chat ein "separates" Netzwerk hinzu!
-
-----
-
-## Zusammenfassung
-
-- Docker CLI *network*
-- Verständnis von Docker-Netzwerken
-
----
-
-# Docker Healthcheck
- 
-Liefert den aktuellen Health-Status des Containers.
-
-----
-
-## Status
-
-- Healthy
-- Unhealthy
-- Starting
-
-Dafür kann man jeden Befehl nehmen der im Container ausführbar ist, dieser muss 0 oder 1 zurückgeben (exit code). 
-
-Note: 
-Warum braucht man das?
-Hauptsächlich für Orchestrierung.
-
-----
-
-## Beispiel 
-
-Im Dockerfile:
-```
-HEALTHCHECK --interval=5m --timeout=3s \
-  CMD curl -f http://localhost/ || exit 1
-```
-
-In Compose:
-```
-healthcheck:
-  test: ["CMD", "curl", "-f", "http://localhost"]
-  interval: 1m30s
-  timeout: 10s
-  retries: 3
-  start_period: 40s
-```
-
-----
-
-## Übung
-
-Baut in rocket.chat sowie in die MongoDB valide Health-Checks ein. 
-Nutzt dafür das docker-compose-File.
-
-----
-
-## Zusammenfassung
-
-Docker Healthcheck über Dockerfile und docker-compose-File
-
----
-
-# Traefik
-
-----
-
-## Was is traefik?
-
-<img src="images/traefik.svg"/>
-
-----
-
-## Traefik als Reverse-Proxy
-
-```
-proxy:
-  image: traefik # The official Traefik docker image
-  command: --api --docker # Enables the web UI and tells Traefik to listen to docker
-  ports:
-    - "80:80"     # The HTTP port
-    - "443:443" # The HTTPS port 
-    - "8080:8080" # The Web UI (enabled by --api)
-  volumes:
-    - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
-```
-
-----
-
-## Dynamisches Routing über Treafik 
-
-```
-  whoami:
-    image: containous/whoami # A container that exposes an API to show its IP address
-    labels:
-      - "traefik.frontend.rule=Host:whoami.docker.localhost"
-```
-
-```
-curl -H Host:whoami.docker.localhost http://127.0.0.1
-```
-
-Note: 
-- traefik.backend=blog
-- traefik.frontend.rule=Host:blog.example.com
-- traefik.docker.network=proxy
-- traefik.port=80
-
-----
-
-## Übung 
-
-Baut eine Docker Compose mit traefik und routet rocket.chat über diesen.
-
-<iframe src="http://localhost:42190?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
-
-----
-
-## Traefik SSL mit Let's Encrypt
-
-- ACME
-
----
-
-# Backup 
-
-- mongodb
-- Volumes
-
-----
-
-# Backup
-
-<iframe src="http://localhost:42200?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
-
----
-
-# Monitoring
-
-- Grafana
-- Telegraf
-- InfluxDB
-
-----
-
-# Monitoring 
-
-<iframe src="http://localhost:42210?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
-
----
-
-# ENDE PRAXISTEIL
-
----
-
-# Best practice
-
-- Konfiguration über Umgebungsvariablen
-- Logging über STDOUT
-  - Filebeat JSONLOG
-- Nur ein Prozess
-- Exit Codes (SIGTERM usw)
-
-----
-
-## Übung:
-
-- start.sh
-  - mit debug help etc
-- ENTRYPOINT auf start.sh
-- reagiert auf SIGTERM oder definiert ein STOPSIGNAL
-- Sinnvolle(tm) Exit-Codes
- (siehe --init)
-- Nutze die Health Resource im HEALTHCHECK
-
----
-
-# Security
-
-- Docker User Space
-- Dies kann man Reglementieren
-- Angreifbare - libaries im Container/Image
-- Docker Hub Security Scan
-- Docker User Space
-
-----
-
-## User Space
-
-- Docker läuft als root
-- Container laufen Default als root
-- Kein standard Zugriff auf das Host Netz
-
-----
-
-## Was tun?
-
-- Dockerfile
-  - USER
-DockerCLI
-  - *--user*
-
-
----
-
-# Docker Daemon
-
-- Configuration von Netzwerken 
-- Configuration des Logging Drivers
-
-----
-
-## Netzwerkconfiguration
-
-```json
-{
-  "bip": "10.60.3.1/24",
-  "default-address-pools":
-  [
-    {
-      "scope":"local",
-      "base":"10.60.0.0/16",
-      "size":24
-    },
-    {
-      "scope":"global",
-      "base":"10.61.0.0/16",
-      "size":24
-    }
-  ]
-}
-```
-----
-
-## Logging Configuration
-
-```json
-{
-  "log-driver": "json-file",
-  "log-opts": {
-    "max-size": "10m",
-    "max-file": "3" 
-  }
-}
-```
-
-Note:
-docker run --log-driver json-file --log-opt max-size=10m alpine echo hello world
-
----
-
-# Orchestrierung mit Swarm
-
-----
-
-## Initialisieren
-
-- docker swarm init
-
-----
-
-## Erweitern
-
-- docker join
-
-----
-
-## Swarm CLI
-
-Alles anders aber doch irgendwie gleich.
-
-- docker stack 
-- docker service 
-
-----
-
-## Skalierung und Redundanz
-
-- Storage
-  - NFS, GlusterFS
-- Datenbanken
-  - Cluster
 
 ---
 
