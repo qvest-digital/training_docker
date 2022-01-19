@@ -130,10 +130,10 @@ services:
     environment:
       - DOCKER_TLS_CERTDIR=/certs
     privileged: true
+    ports:
+      - 3000:3000
+      - 8080:8080
 
 volumes:
   docker-certs-client:
   docker-certs-ca:
-
-networks:
-  docker-subnet:

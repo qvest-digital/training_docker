@@ -88,13 +88,21 @@ Note:
 
 ----
 
+## Hardwarevirtualisierung (VM)
+
+<img src="images/arch-vm.png"/>
+
+----
+
+## Containerisierung
+
+<img src="images/arch-container.png"/>
+
+----
+
 ## Container vs. Virtualisierung
 
 <img src="images/docker-containerized-and-vm-transparent-bg.png"/>
-
-- unterschiedliche Anwendungsszenarien
-- Prozess Isolation vs Hardware Virtualisierung
-- kombinierbar
 
 Note:
 - Allgemein
@@ -165,17 +173,6 @@ docker logs <containerID>
 Note:
 https://hub.docker.com/_/wordpress/
 Ziel ist es zu erkennen, wie einfach die Instalation ist.
-
-----
-
-### Docker API
-
-
-```shell
-curl --unix-socket /var/run/docker.sock http/containers/json
-```
-
-<iframe width="100%" src="http://localhost:42011?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
 ----
 
