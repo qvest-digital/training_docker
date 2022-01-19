@@ -52,7 +52,7 @@ Regeln:
 # Überblick
 
 - Was ist Docker?
-- Container Architektur
+- Containerarchitektur
 - Container vs. Virtualisierung
 
 ----
@@ -84,12 +84,6 @@ Note:
   - Containerd
 - OCI (Open Container Initiative)
 - Docker, Kubernetes, Podman, Docker-Compose
-
-----
-
-## Architekturüberblick
-
-- add pictures here
 - MacOS Windows ist container kram anders
 
 ----
