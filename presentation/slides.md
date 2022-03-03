@@ -148,7 +148,7 @@ Docker CLI ist ein Kommandozeilen-Tool mit dem sich der Docker-Daemon kontrollie
 Einfache Anwendungsfälle von Docker CLI:
 - Container erstellen
 - Container starten
-- laufende Container anzeigen
+- Container anzeigen
 - Container stoppen
 
 Note:
@@ -299,7 +299,7 @@ Docker kann Container Ports an Hostports binden (exponieren).
 ```shell
 docker run -d -p 8081:80 wordpress
 docker run -d -p 80 wordpress
-docker run -d -p 8082:80 -p 443:8443
+docker run -d -p 8082:80 -p 443:8443 wordpress
 docker ps
 ```
 
@@ -432,7 +432,7 @@ Beispiel environment Variablen an MariaDB zeigen.
   - Umgebungsvariablen
     - POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB
 - Sorge dafür, dass das Datenverzeichnis lokal gemapped ist.
-  - /var/lib/postgresql/data) auf ein lokales - $(pwd)/volumes/db
+  - /var/lib/postgresql/data auf ein lokales - $(pwd)/volumes/db
 
 <iframe class=small width="100%" src="http://localhost:42070?u=trainer&p=trainer"> <!-- .element: class="fragment" -->
 
