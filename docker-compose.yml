@@ -132,7 +132,12 @@ services:
     privileged: true
     ports:
       - 3000:3000
+      - 3022:3022
       - 8080:8080
+      - 8081:8081
+      - 8082:8082
+      - 8443:8443
+      - 9000:9000
 
 volumes:
   docker-certs-client:
