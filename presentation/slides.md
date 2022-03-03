@@ -299,7 +299,7 @@ Docker kann Container Ports an Hostports binden (exponieren).
 ```shell
 docker run -d -p 8081:80 wordpress
 docker run -d -p 80 wordpress
-docker run -d -p 8082:80 -p 443:8443 wordpress
+docker run -d -p 8082:80 -p 8443:443 wordpress
 docker ps
 ```
 
@@ -442,7 +442,7 @@ docker run -d \
 -e POSTGRES_USER=gitea \
 -e POSTGRES_PASSWORD=gitea \
 -e POSTGRES_DB=gitea \
--v $(pwd)/postgesql-data:/var/lib/postgresql/data \
+-v $(pwd)/postgresql-data:/var/lib/postgresql/data \
 postgres
 
 ----

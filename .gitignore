@@ -1,5 +1,6 @@
 .idea/
 *.iml
+examples/mariadb/*
 node_modules
 .vscode
 
