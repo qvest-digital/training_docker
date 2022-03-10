@@ -3,7 +3,7 @@ FROM docker:latest
 ARG GATEWAY
 RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
     && apk update \
-    && apk add --no-cache curl bash vim shellinabox@testing
+    && apk add --no-cache docker-compose curl bash vim shellinabox@testing
 
 RUN echo 'export PS1="\w \$ "' >> /root/.bashrc
 RUN echo "alias dps='docker ps --format \"table {{.ID}}\\t{{.Image}}\\t{{.Status}}\\t{{.Ports}}\\t{{.Names}}\"'" >> /root/.bashrc
